@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SimpleFilter LastSave="2017-01-14T10:45:27.1504873+08:00" ExtensionVersion="2.6.1.5">
+  <Settings FiltersEnabled="true">
+    <slHosts>*toolsitemvc.com; *toolsite.com; *ibm.website.com; *office.com; *jszk.website.com; *localhost:8080; *earchives.com; *localhost; *172.16.16.222; *172.16.16.5; *202.205.136.44;</slHosts>
+    <iFilterActions>2</iFilterActions>
+    <iResponseType>0</iResponseType>
+    <bHideSvcHost>false</bHideSvcHost>
+    <bHideNonIE>false</bHideNonIE>
+    <bBreakPost>false</bBreakPost>
+    <bBreakXHR>false</bBreakXHR>
+    <bBreakQueryString>false</bBreakQueryString>
+    <bRequestURLFilter>false</bRequestURLFilter>
+    <sRequestURLFilter />
+    <bHideIfURLContains>true</bHideIfURLContains>
+    <sHideIfURLContains>REGEX:[(?insx)/[^\?/]*\.(css|ico|jpg|png|gif|bmp|wav|woff)(\?.*)?$]|(.*resources/(vendor)|(css)|(static)|(filter)|(js/directives).*)</sHideIfURLContains>
+    <bHideRedirects>false</bHideRedirects>
+    <bHideSuccess>false</bHideSuccess>
+    <bHideNon2xx>false</bHideNon2xx>
+    <bHide304>false</bHide304>
+    <bHide401>false</bHide401>
+    <bUseMinSize>false</bUseMinSize>
+    <bUseMaxSize>false</bUseMaxSize>
+    <iMinSize>0</iMinSize>
+    <iMaxSize>1000</iMaxSize>
+    <bBlockScript>false</bBlockScript>
+    <bHeatMap>false</bHeatMap>
+    <bBlockImages>false</bBlockImages>
+    <bBlockFlash>false</bBlockFlash>
+    <bBlockCSS>false</bBlockCSS>
+    <iShowOnlyZone>0</iShowOnlyZone>
+    <bBreakContentType>false</bBreakContentType>
+    <sBreakContentType />
+    <bFlagRequestHeader>false</bFlagRequestHeader>
+    <sFlagRequestHeader />
+    <bDeleteRequestHeader>false</bDeleteRequestHeader>
+    <sDeleteRequestHeader />
+    <bSetRequestHeader>false</bSetRequestHeader>
+    <sSetRequestHeader />
+    <sSetRequestHeaderValue />
+    <bFlagSetCookie>false</bFlagSetCookie>
+    <bFlagResponseHeader>false</bFlagResponseHeader>
+    <sFlagResponseHeader />
+    <bDeleteResponseHeader>false</bDeleteResponseHeader>
+    <sDeleteResponseHeader />
+    <bSetResponseHeader>false</bSetResponseHeader>
+    <sSetResponseHeader />
+    <sSetResponseHeaderValue />
+  </Settings>
+</SimpleFilter>
