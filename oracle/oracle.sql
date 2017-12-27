@@ -1,5 +1,5 @@
 -- 生成class类
-SELECT  wm_concat('
+SELECT LISTAGG('
 /**
 * ' || B.COMMENTS || '
 */
@@ -12,7 +12,7 @@ private ' ||
                                WHEN A.DATA_PRECISION > 10 AND A.DATA_SCALE = 0 THEN 'long' WHEN A.DATA_PRECISION > 10 AND A.DATA_SCALE > 0 THEN 'double' 
                                ELSE 'Integer' END
                         )
-       ELSE 'String' END || ' ' || LOWER(A.COLUMN_NAME) || ';')
+       ELSE 'String' END || ' ' || LOWER(A.COLUMN_NAME) || ';', '') WITHIN GROUP (ORDER BY A.COLUMN_ID) AS PROP
   FROM USER_TAB_COLS A
   JOIN USER_COL_COMMENTS B ON A.TABLE_NAME = B.TABLE_NAME AND A.COLUMN_NAME = B.COLUMN_NAME
  WHERE A.TABLE_NAME = UPPER('XT_YONGHU')
@@ -74,3 +74,6 @@ SELECT A.TABLE_NAME, B.Comments
   FROM USER_TAB_COLS A
   JOIN USER_TAB_COMMENTS B ON A.TABLE_NAME = B.TABLE_NAME
  WHERE UPPER(A.COLUMN_NAME) = UPPER('xuekeid')
+
+-- 修改sqlplus中日期格式
+ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD HH24:MI:SS';
