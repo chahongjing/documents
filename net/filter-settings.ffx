@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SimpleFilter LastSave="2017-01-14T10:45:27.1504873+08:00" ExtensionVersion="2.6.1.5">
+<SimpleFilter LastSave="2018-02-10T10:45:27.1504873+08:00" ExtensionVersion="2.6.1.5">
   <Settings FiltersEnabled="true">
-    <slHosts>*toolsitemvc.com; *toolsite.com; *ibm.website.com; *office.com; *jszk.website.com; *localhost:8080; *earchives.com; *localhost; *172.16.16.222; *172.16.16.5; *202.205.136.44;</slHosts>
+    <slHosts>*localhost; *toolsitemvc.com; *toolsite.com;</slHosts>
     <iFilterActions>2</iFilterActions>
     <iResponseType>0</iResponseType>
     <bHideSvcHost>false</bHideSvcHost>
