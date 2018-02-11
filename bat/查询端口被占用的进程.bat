@@ -1,0 +1,1 @@
+netstat -aon|findstr 1099
