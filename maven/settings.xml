@@ -44,4 +44,11 @@
 			</properties>  
 		</profile>   
 	</profiles>
+	<servers>
+	    <server>
+		    <id>tomcat7</id>
+		    <username>admin</username>
+		    <password>admin</password>
+		</server>
+	</servers>
 </settings>
