@@ -1,0 +1,1 @@
+打开catalina.bat文件，搜索%TITLE%，修改后面的值即可
