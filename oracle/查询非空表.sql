@@ -17,7 +17,7 @@ BEGIN
   FETCH c2 INTO v_q; 
   EXIT WHEN c2%NOTFOUND; 
   IF v_q=0 THEN 
-  DBMS_OUTPUT.PUT_LINE(v_table); 
+  DBMS_OUTPUT.PUT_LINE('alter table ' || v_table || ' allocate extent;'); 
   END IF; 
   END LOOP; 
   CLOSE c2; 
