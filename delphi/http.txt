@@ -1,7 +1,6 @@
-procedure TfrmTools.getRequest();
+procedure TfrmTools.getRequest(Url : string);
   var
    IdHttp : TIdHTTP;
-   Url : string;//请求地址
    ResponseStream : TStringStream; //返回信息
    ResponseStr : string;
   begin
@@ -10,8 +9,6 @@ procedure TfrmTools.getRequest();
    //TStringStream对象用于保存响应信息
    ResponseStream := TStringStream.Create('');
    try
-     //请求地址
-     Url := 'http://dict.youdao.com/';
      try
        IdHttp.Get(Url,ResponseStream);
      except
@@ -37,12 +34,12 @@ var
   RequestList : TStringList;     //请求信息
   RequestStream : TStringStream;
   i: integer;
+  rs : TStringStream; //返回信息
 begin
   //创建IDHTTP控件
   IdHttp := TIdHTTP.Create(nil);
   //TStringStream对象用于保存响应信息
-  ResponseStream := TStringStream.Create('');
-
+  rs := TStringStream.Create('');
   RequestStream := TStringStream.Create('');
   RequestList := TStringList.Create;
   try
@@ -50,11 +47,14 @@ begin
       //以列表的方式提交参数
       for i := 0 to param.Size - 1 do
       begin
-        key := TJSONPair(param.Get(i)).JsonString.ToString;
+        key := StringReplace(TJSONPair(param.Get(i)).JsonString.ToString, '"', '', [rfReplaceAll]);
         value := param.GetValue(key).ToString;
+        Delete(value, 1, 1);
+        Delete(value, value.length, 1);
         RequestList.Add(key + '=' + value);
       end;
-      IdHttp.Post(Url,RequestList,ResponseStream);
+      IdHttp.Post(Url, RequestList, ResponseStream);
+      // key := rs.DataString;
 
       //以流的方式提交参数
       //RequestStream.WriteString('text=love');
@@ -73,29 +73,5 @@ begin
     IdHttp.Free;
     RequestList.Free;
     RequestStream.Free;
-    ResponseStream.Free;
   end;
 end;
-
-procedure TwordOperateFrame.debugLog(log:string);
-var
-  F: TextFile;
-  filePath:string;
-begin
-  filePath := ExtractFileDir(ParamStr(0)) + '\logs\debug' + FormatDateTime('yyyy-mm-dd',Now()) + '.log';
-  if(not DirectoryExists(ExtractFilePath(filePath))) then
-  begin
-    ForceDirectories(ExtractFilePath(filePath));
-  end;
-  AssignFile(F, filePath);
-  if(not FileExists(filePath)) then
-  begin
-    rewrite(F);
-  end else begin
-    Append(F);  //打开准备追加
-  end;
-  Writeln(F, FormatDateTime('yyyy-mm-dd hh:nn:ss',Now()));
-  Writeln(F, log);
-  CloseFile(F);
-end;
-
