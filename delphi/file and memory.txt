@@ -1,0 +1,10 @@
+ms := TMemoryStream.Create();
+ms.WriteBuffer((PChar('×Ö·û´®'))^, Length(str));  
+ms.SaveToFile('d:\2.txt');
+ms.Free;
+
+// ´´½¨Ä¿Â¼
+if not DirectoryExists(ExtractFileDir(localFile)) then ForceDirectories(ExtractFileDir(localFile));
+
+if FileExists(docPath) then
+      DeleteFile(docPath);

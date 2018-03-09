@@ -98,3 +98,4 @@ begin
   Writeln(F, log);
   CloseFile(F);
 end;
+
