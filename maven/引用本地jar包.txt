@@ -1,0 +1,20 @@
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-install-plugin</artifactId>
+	<version>2.5.2</version>
+	<executions>
+		<execution>
+			<phase>initialize</phase>
+			<goals>
+				<goal>install-file</goal>
+			</goals>
+			<configuration>
+				<groupId>com.aspose</groupId>
+				<artifactId>aspose-words</artifactId>
+				<version>14.9.0</version>
+				<packaging>jar</packaging>
+				<file>${basedir}/src/main/lib/aspose-words-14.9.0-jdk16.jar</file>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
