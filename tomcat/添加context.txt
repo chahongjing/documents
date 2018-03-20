@@ -1,0 +1,4 @@
+1. 在conf文件夹下添加Catalina/localhost/你的虚拟目录名.xml, 如Catalina/localhost/MyJspWeb.xml, 里面的内容添加
+<?xml version="1.0" encoding="utf-8"?><Context docBase="C:\\Users\\zengjunyi\\workspace\\TestWeb\\WebContent" reloadable="true" />
+注意Context节点名称大小写, 
+此时可以刷新tomcat后台管理程序, 可以看到程序已启动, http://localhost:8080/MyJspWeb/MyJsp.jsp, 注意jsp路径区分大小写
