@@ -1,4 +1,5 @@
 echo off
+title delete all maven lastUpdated files
 rem maven repository directory: C:\Users\Administrator\.m2\repository
 set REPOSITORY_PATH=F:\CompanyWorkplace\maven
 echo searching lastUpdated files...
