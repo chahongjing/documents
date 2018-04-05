@@ -16,6 +16,9 @@ LISTENER =
       (ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1521))
       (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521))
     )
+	(DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 10.4.0.140)(PORT = 1522))
+    )
   )
 
 ADR_BASE_LISTENER = /home/zjy/app/zjy
