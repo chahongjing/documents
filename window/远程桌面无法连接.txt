@@ -1,0 +1,4 @@
+结束进程
+rdpclip.exe
+重新新建进程
+rdpclip.exe
