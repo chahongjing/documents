@@ -1,1 +1,6 @@
 REGEX:[(?insx)/[^\?/]*\.(css|ico|jpg|png|gif|bmp|wav|woff)(\?.*)?$]|(.*resources/(vendor)|(css)|(static)|(filter)|(js/directives).*)
+
+
+跟踪打断点，修改参数
+bpu
+bpu www.baidu.com
