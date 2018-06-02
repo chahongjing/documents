@@ -1,0 +1,5 @@
+Êý¾Ý¿â£º
+oracle 11g R2 64 linux
+http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/112010-linx8664soft-098700-zhs.html
+sql developer
+http://www.oracle.com/technetwork/cn/developer-tools/sql-developer/downloads/index.html
