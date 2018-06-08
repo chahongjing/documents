@@ -1,3 +1,9 @@
+@echo off
 title find port in use
-netstat -aon|findstr 1099
+set port=21
+echo.
+echo find processes which use port %port%
+echo.
+echo.
+netstat -aon|findstr %port%
 pause;
