@@ -1,14 +1,14 @@
 @echo off
 title redis service(install/uninstall)
-set /p type=install(1),uninstall(0):
+set /p type=install(i),uninstall(u):
 rem install
-if %type%==1 (
+if "%type%"=="i" (
 set command=redis-server --service-install redis.windows.conf --loglevel verbose
 set title=install redis service
 goto hasCommand
 )
 rem uninstall
-if %type%==0 (
+if "%type%"=="u" (
 set command=redis-server.exe --service-uninstall
 set title=uninstall redis service
 goto hasCommand
@@ -24,7 +24,7 @@ echo %command%
 goto end
 
 :errorInput
-echo error input. only 1 or 0
+echo error input. only i or u
 
 :end
 pause;

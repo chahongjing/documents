@@ -1,14 +1,14 @@
 @echo off
 title tomcat service(install/uninstall)
-set /p type=install(1),uninstall(0):
+set /p type=install(i),uninstall(u):
 rem install
-if %type%==1 (
+if "%type%"=="i" (
 set command=call service.bat install
 set title=install tomcat service
 goto hasCommand
 )
 rem uninstall
-if %type%==0 (
+if "%type%"=="u" (
 set command=call service.bat remove
 set title=uninstall tomcat service
 goto hasCommand
@@ -24,7 +24,7 @@ echo %command%
 goto end
 
 :errorInput
-echo error input. only 1 or 0
+echo error input. only i or u
 
 :end
 pause;
