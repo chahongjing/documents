@@ -7,9 +7,11 @@ set port=1521
 set instance=orcl
 set dmppath=d:\201803071715.dmp
 
+set command=imp %username%/%password%@%host%:%port%/%instance% file=%dmppath% full=y
+
 echo.
-echo imp %username%/%password%@%host%:%port%/%instance% file=%dmppath% full=y
+echo %command%
 echo.
 echo.
-imp %username%/%password%@%host%:%port%/%instance% file=%dmppath% full=y
+%command%
 pause;

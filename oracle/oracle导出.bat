@@ -7,9 +7,11 @@ set port=1521
 set instance=orcl
 set dmppath=d:\201803071715.dmp
 
+set command=exp %username%/%password%@%host%:%port%/%instance% file=%dmppath%
+
 echo.
-echo exp %username%/%password%@%host%:%port%/%instance% file=%dmppath%
+echo %command%
 echo.
 echo.
-exp %username%/%password%@%host%:%port%/%instance% file=%dmppath%
+%command%
 pause;
