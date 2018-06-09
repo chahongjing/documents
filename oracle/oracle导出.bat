@@ -7,6 +7,7 @@ set port=1521
 set instance=orcl
 set dmppath=d:\201803071715.dmp
 
+rem no data use: rows=n compress=n
 set command=exp %username%/%password%@%host%:%port%/%instance% file=%dmppath%
 
 echo.
