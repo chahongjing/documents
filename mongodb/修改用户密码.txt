@@ -1,0 +1,3 @@
+mongo.exe
+use admin
+db.changeUserPassword("biadmin","123")
