@@ -30,3 +30,20 @@ begin
   Writeln(F, log);
   CloseFile(F);
 end;
+
+²éÕÒÎÄ¼þ
+tempStr := filepath + 'ST_*';
+    findCount := FindFirst(tempStr, faAnyFile, SearchRec);
+    while findCount = 0 do
+     begin
+       if (SearchRec.Name<>'.')  and (SearchRec.Name<>'..') and (SearchRec.Attr<>faDirectory) then
+       begin
+         suffix := LowerCase(ExtractFileExt(SearchRec.Name));
+         if((suffix ='.html')) then
+         begin
+           DeleteFile(filepath + '\' + SearchRec.Name);
+         end;
+       end;
+       findCount := FindNext(SearchRec);
+     end;
+    FindClose(SearchRec);
