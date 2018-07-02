@@ -1,3 +1,6 @@
+localhost;127.0.0.1;
+
+
 REGEX:[(?insx)/[^\?/]*\.(css|ico|jpg|png|gif|bmp|wav|woff)(\?.*)?$]|(.*resources/(vendor)|(css)|(static)|(filter)|(js/directives).*)
 
 
