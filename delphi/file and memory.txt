@@ -47,3 +47,9 @@ tempStr := filepath + 'ST_*';
        findCount := FindNext(SearchRec);
      end;
     FindClose(SearchRec);
+
+文件处理
+RenameFile('Oldname', 'Newname');
+CopyFile(PChar('Oldname'), PChar('Newname'), False);
+MoveFile(PChar('Oldname'), PChar('Newname'));
+DeleteFile(文件名);
