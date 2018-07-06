@@ -8,3 +8,5 @@ next 32m maxsize 2048m
 extent management local;
 -- 删除表空间
 -- drop tablespace LIBRA_test;
+-- 查询当前用户表空间
+-- select username,default_tablespace from user_users;
