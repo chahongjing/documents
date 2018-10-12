@@ -17,4 +17,6 @@ select extract(hour from cast(SYSDATE + 2 / 24 as timestamp) - SYSDATE) AS HOUR
   from dual;
 
 -- 没有秒
-select timestamp'2017-02-12 15:18:23.365478', date'2017-02-12',trunc(sysdate,'year'), trunc(sysdate,'month'), trunc(sysdate), trunc(sysdate,'hh24'), trunc(sysdate,'mi') from dual;
+select timestamp'2017-02-12 15:18:23.365478', date'2017-02-12',
+       trunc(sysdate,'year'), trunc(sysdate,'month'), trunc(sysdate), trunc(sysdate,'hh24'),
+	   trunc(sysdate,'mi') from dual;
