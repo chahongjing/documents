@@ -1,0 +1,6 @@
+1.初始化vue项目，vue init webpack "projectName", 运行npm install安装依赖，运行npm run dev运行项目；
+2.在有package.json目录下执行命令: npm run dev运行express服务,此时的项目会自动刷新。如果端口冲突，可到config/index.js文件中找到dev节点下的Port进行修改。
+3.config/index.js下的build节点index值修改index.html文件发布地址，如d:\\webapps\\myproj\\index.html
+assetsRoot配置asset目录地址, 如d:\\webapps\\myproj\\，使用num run build命令
+4.如果文件引用地址有误，则可修改config/index.js文件下的dev或build节点下的assetsSubDirectory由"static"为"./static"
+5.svn检出检出项目，先在package.json目录下执行npm install安装依赖
