@@ -6,6 +6,7 @@ set vueDir=D:\webvue\
 set targetDir=F:\CompanyWorkplace\apache-tomcat-9.0.8_service\webapps\ToolSiteMvc4J\
 set configDir=F:\CompanyWorkplace\apache-tomcat-9.0.8_service\webapps\static\
 
+echo.
 set /p type=deploy type: all(1), java(2), vue(3):
 if "%type%"=="1" (
 goto copyJava
