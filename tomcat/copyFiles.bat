@@ -22,6 +22,9 @@ goto end
 
 :copyJava
 echo.
+echo delete ToolSiteMvc4J
+rmdir /s/q %targetDir%
+echo.
 echo copy ToolSiteMvc4J
 xcopy %javaDir%*.* %targetDir% /s/e/y
 if "%type%"=="1" (
