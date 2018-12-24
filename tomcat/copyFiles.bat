@@ -46,4 +46,3 @@ xcopy %configDir%*.* %targetDir%static\ /s/e/y
 
 :end
 echo.
-pause;
