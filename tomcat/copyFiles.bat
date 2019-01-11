@@ -1,5 +1,5 @@
 @echo off
-title deploy ToolSiteMvc4J and myvue
+title deploy ToolSiteMvc4J and webvue
 
 set javaDir=F:\Source\Java\ToolSiteMvc4J\trunk\web\target\ToolSiteMvc4J\
 set vueDir=D:\webvue\
@@ -44,7 +44,7 @@ echo.
 echo delete static
 rmdir /s/q %targetDir%static
 echo.
-echo copy myvue
+echo copy webvue
 xcopy %vueDir%*.* %targetDir% /s/e/y
 echo.
 echo copy config
