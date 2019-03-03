@@ -25,4 +25,6 @@ target
 vssver.scc
 vssver2.scc
 .claspath
-target
+.vscode
+*.suo
+*.sln
