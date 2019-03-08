@@ -1,10 +1,10 @@
 @echo off
 title deploy ToolSiteMvc4J and webvue
 
-set javaDir=F:\Source\Java\ToolSiteMvc4J\trunk\web\target\ToolSiteMvc4J\
+set javaDir=F:\MyWorkplace\JavaCode\ToolSiteMvc4J\web\target\ToolSiteMvc4J\
 set vueDir=D:\webvue\
-set targetDir=E:\devsoft\java\apache-tomcat-9.0.8_service\webapps\ToolSiteMvc4J\
-set configDir=E:\devsoft\java\apache-tomcat-9.0.8_service\static\
+set targetDir=F:\CompanyWorkplace\apache-tomcat-9.0.8_service\webapps\ToolSiteMvc4J\
+set configDir=F:\CompanyWorkplace\apache-tomcat-9.0.8_service\webapps\static\
 
 echo.
 set /p type=deploy type: all(1), java(2), vue(3):
