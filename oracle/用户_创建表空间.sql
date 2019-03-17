@@ -1,3 +1,5 @@
+-- 当前用户表空间
+select username,default_tablespace from user_users;
 -- 创建表空间
 create tablespace LIBRA_test
 logging

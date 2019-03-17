@@ -1,1 +1,0 @@
-﻿select username,default_tablespace from user_users;

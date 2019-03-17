@@ -1,4 +1,4 @@
-﻿-- 创建用户
+﻿-- 
 SELECT username,profile FROM dba_users;
 -- 查询profile信息，如profile为default
 SELECT * FROM dba_profiles WHERE profile='DEFAULT' AND resource_name='PASSWORD_LIFE_TIME';
