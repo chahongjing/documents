@@ -1,3 +1,20 @@
+- [生成class类](#生成class类)
+- [获取insert列](#获取insert列)
+- [获取update列](#获取update列)
+- [列名](#列名)
+- [查询约束](#查询约束)
+- [查询包含字段的表](#查询包含字段的表)
+- [修改sqlplus中日期格式](#修改sqlplus中日期格式)
+- [分隔字符串](#分隔字符串)
+- [备份表](#备份表)
+- [merge_into](#merge_into)
+- [递归](#递归)
+- [使用块](#使用块)
+- [日期处理](#日期处理)
+- [远程数据库](#远程数据库)
+- [生成批量sql](#生成批量sql)
+- [存储过程](#存储过程)
+### 生成class类
 ~~~ sql
 -- 生成class类
 SELECT LISTAGG('
@@ -18,8 +35,9 @@ private ' ||
   JOIN USER_COL_COMMENTS B ON A.TABLE_NAME = B.TABLE_NAME AND A.COLUMN_NAME = B.COLUMN_NAME
  WHERE A.TABLE_NAME = UPPER('XT_YONGHU')
  ORDER BY A.COLUMN_ID;
-
--- insert
+~~~
+### 获取insert列
+~~~ sql
 SELECT wm_concat(LOWER(A.COLUMN_NAME)) AS "Column", 
        wm_concat('#{' || LOWER(A.COLUMN_NAME) || ', jdbcType=' || 
        CASE a.DATA_TYPE WHEN 'CHAR' THEN 'VARCHAR' WHEN 'VARCHAR2' THEN 'VARCHAR' WHEN 'LONG' THEN 'VARCHAR' WHEN 'DATE' THEN 'DATE' WHEN 'BLOB' THEN 'VARCHAR'
@@ -35,8 +53,9 @@ SELECT wm_concat(LOWER(A.COLUMN_NAME)) AS "Column",
   JOIN USER_COL_COMMENTS B ON A.TABLE_NAME = B.TABLE_NAME AND A.COLUMN_NAME = B.COLUMN_NAME
  WHERE A.TABLE_NAME = UPPER('XT_YONGHU')
  ORDER BY A.COLUMN_ID;
-
--- update
+~~~
+### 获取update列
+~~~ sql
 SELECT wm_concat(LOWER(A.COLUMN_NAME) || ' = ' || '#{' || LOWER(A.COLUMN_NAME) || ', jdbcType=' || 
        CASE a.DATA_TYPE WHEN 'CHAR' THEN 'VARCHAR' WHEN 'VARCHAR2' THEN 'VARCHAR' WHEN 'LONG' THEN 'VARCHAR' WHEN 'DATE' THEN 'DATE' WHEN 'BLOB' THEN 'VARCHAR'
                         WHEN 'CLOB' THEN 'VARCHAR' WHEN 'RAW' THEN 'byte[]' WHEN 'NUMBER' THEN 
@@ -51,35 +70,35 @@ SELECT wm_concat(LOWER(A.COLUMN_NAME) || ' = ' || '#{' || LOWER(A.COLUMN_NAME) |
   JOIN USER_COL_COMMENTS B ON A.TABLE_NAME = B.TABLE_NAME AND A.COLUMN_NAME = B.COLUMN_NAME
  WHERE A.TABLE_NAME = UPPER('XT_YONGHU')
  ORDER BY A.COLUMN_ID;
-
--- 列名
+~~~
+### 列名
+~~~ sql
 SELECT  wm_concat(LOWER(A.COLUMN_NAME))
   FROM USER_TAB_COLS A
   JOIN USER_COL_COMMENTS B ON A.TABLE_NAME = B.TABLE_NAME AND A.COLUMN_NAME = B.COLUMN_NAME
  WHERE A.TABLE_NAME = UPPER('XT_YONGHU')
  ORDER BY A.COLUMN_ID;
-
--- 递归
-SELECT Level
-  FROM DUAL
-CONNECT BY Level < 5;
-
--- 查询约束
+~~~
+### 查询约束
+~~~ sql
 select a.constraint_name,a.constraint_type,b.column_name 
 from user_constraints a,user_cons_columns b
 where a.table_name=b.table_name
  and a.constraint_name = 'SYS_C0013673'
-
--- 查询包含字段的表
+~~~
+### 查询包含字段的表
+~~~ sql
 SELECT A.TABLE_NAME, B.Comments
   FROM USER_TAB_COLS A
   JOIN USER_TAB_COMMENTS B ON A.TABLE_NAME = B.TABLE_NAME
  WHERE UPPER(A.COLUMN_NAME) = UPPER('xuekeid')
-
--- 修改sqlplus中日期格式
+~~~
+### 修改sqlplus中日期格式
+~~~ sql
 ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD HH24:MI:SS';
-
--- 分隔字符串
+~~~
+### 分隔字符串
+~~~ sql
 select substr(inlist, instr(inlist, ',', 1, level) + 1,
        instr(inlist, ',', 1, level + 1) - instr(inlist, ',', 1, level) - 1) as value_str
   from (select ',' || 'ab,cd,efg' || ',' as inlist from dual)
@@ -88,12 +107,15 @@ connect by level <= length('ab,cd,efg') - length(replace('ab,cd,efg', ',', '')) 
 select regexp_substr('ab,cd,efg,hi', '[^,]+', 1, level) as value_str
   from dual
 connect by level <= length('ab,cd,efg.hi') - length(replace('ab,cd,efg.hi', ',', '')) + 1;
-
+~~~
+### 备份表
+~~~ sql
 -- 备份mytable表为Ϊmybaktable
 create table mybaktable as
 select id, name from mytable;
-
--- merge into
+~~~
+### merge_into
+~~~ sql
 merge into a
 using (select * from bbb) b
    on (a.id = b.id)
@@ -102,8 +124,9 @@ update set a.name = b.name
  when not matched then
  insert (name) values(b.name)
  delete where a.id = b.id
-
--- 递归
+~~~
+### 递归
+~~~ sql
 SELECT connect_by_isleaf, connect_by_root a.mingcheng as root, sys_connect_by_path(a.mingcheng, '-->'),a.mingcheng
   FROM RW_ZHENGTILANTUMINGXI a
  WHERE a.LANTUID = 91
@@ -111,7 +134,14 @@ SELECT connect_by_isleaf, connect_by_root a.mingcheng as root, sys_connect_by_pa
 CONNECT BY PRIOR a.LANTUDUIXIANGID = a.SHANGCENGID
  order siblings by a.xuhao;
 
--- 使用块，注意定义的变量不能和字段重名，否则会把所有的数据都更新了
+-- 递归
+SELECT Level
+  FROM DUAL
+CONNECT BY Level < 5;
+~~~
+### 使用块
+~~~ sql
+-- 注意定义的变量不能和字段重名，否则会把所有的数据都更新了
 declare
   myxuekeid number(19, 0);
 begin
@@ -121,10 +151,8 @@ begin
   );
 end;
 -- commit;
-
-
 ~~~
-# 日期处理
+### 日期处理
 ~~~ sql
 select Extract(year from sysdate) as year, Extract(month from sysdate) as month, Extract(day from sysdate) as day,
       Extract(hour from cast(sysdate as timestamp)) as hour, Extract(minute from cast(sysdate as timestamp)) as minute,
@@ -150,7 +178,7 @@ select timestamp'2017-02-12 15:18:23.365478', date'2017-02-12',
 	   trunc(sysdate,'mi') from dual;
 ~~~
 
-# 远程数据库
+### 远程数据库
 ~~~ sql
 drop public database link testlibra;
 create public database link testlibra
@@ -166,8 +194,7 @@ using '(DESCRIPTION =
 
 seLect * from tk_shijuan@TESTLIBRA
 ~~~
-
-# 生成批量sql
+### 生成批量sql
 ~~~ sql
 Set pagesize 0;
 set linesize 8000;
@@ -208,7 +235,7 @@ from ibm_major
 where majorcode in (select subjectcode from ibm_paper where status > 1);
 spool off;
 ~~~
-# 存储过程
+### 存储过程
 ~~~ sql
 DECLARE 
 v_table tabs.table_name%TYPE; 

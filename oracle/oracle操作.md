@@ -7,6 +7,7 @@
 - [查询表和字段](#查询表和字段)
 - [oracle查询锁](#oracle查询锁)
 - [修改数据库编码](#修改数据库编码)
+- [导出前空表处理](#导出前空表处理)
 # oracle
 ### 导出
 ~~~ bat
@@ -164,7 +165,7 @@ ALTER DATABASE CHARACTER SET INTERNAL_USE AL32UTF8;
 SHUTDOWN IMMEDIATE;
 STARTUP;
 ~~~
-# 导出前非空表处理
+# 导出前空表处理
 ~~~ sql
 set serveroutput on;
 DECLARE 
@@ -200,5 +201,4 @@ BEGIN
   EXCEPTION 
   WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Error occurred'); 
 END;
-
 ~~~
