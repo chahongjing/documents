@@ -1,0 +1,52 @@
+# 安装本地jar到本地仓库
+~~~ bat
+:: 如果bat和jar包在同一目录 -Dfile可以直接写包名，如-Dfile=ojdbc6.jar；如果写路径，注意路径中汉字，有可能会有乱码问题
+:: jar包位置一般在oracle安装目录中dbhome/jdbc/lib/ojdbc6.jar
+start "安装jar包" mvn install:install-file -Dpackaging=jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dfile=F:\MyWorkplace\JavaCode\ToolSiteMvc4J\lib\ojdbc6.jar -Dversion=11.2.0.3.0
+~~~
+# 删除过期的文件
+~~~ bat
+echo off
+title delete all maven lastUpdated files
+rem maven repository directory: C:\Users\Administrator\.m2\repository
+set REPOSITORY_PATH=F:\CompanyWorkplace\maven
+echo searching lastUpdated files...
+for /f "delims=" %%i in ('dir /b /s "%REPOSITORY_PATH%\*lastUpdated*"') do (
+    del /s /q %%i
+)
+echo done
+pause
+~~~
+# 引用本地jar包
+~~~ xml
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-install-plugin</artifactId>
+	<version>2.5.2</version>
+	<executions>
+		<execution>
+			<phase>initialize</phase>
+			<goals>
+				<goal>install-file</goal>
+			</goals>
+			<configuration>
+				<groupId>com.aspose</groupId>
+				<artifactId>aspose-words</artifactId>
+				<version>14.9.0</version>
+				<packaging>jar</packaging>
+				<file>${basedir}/src/main/lib/aspose-words-14.9.0-jdk16.jar</file>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+
+或者使用
+
+<dependency>  
+    <groupId>com.htmlparser</groupId>  
+    <artifactId>htmlparser</artifactId>  
+    <version>2.0</version>  
+    <scope>system</scope>  
+    <systemPath>${project.basedir}/lib/htmlparser.jar</systemPath>  
+</dependency>  
+~~~

@@ -1,3 +1,0 @@
-sc delete MysoftWindowServices
-
-pause

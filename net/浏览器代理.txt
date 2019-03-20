@@ -1,2 +1,0 @@
-Internet选项->连接->局域网设置->使用自动通配脚本
-http://p.getqujing.com/paths/6g6b1rd8.pac

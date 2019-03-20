@@ -1,2 +1,0 @@
-base64º”√‹£∫btoa('abcd');
-base64Ω‚√‹£∫atob('YWJjZA==');
