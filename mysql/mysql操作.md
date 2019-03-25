@@ -5,6 +5,30 @@
 - [删除用户](#删除用户)
 - [授权](#授权)
 # 数据库
+### 备份
+- 备份表
+~~~ sql
+mysqldump -u root -p 1024 user > d:/user.sql
+~~~
+- 备份库
+~~~ sql
+mysqldump -u root -p 1024 --database mydatabase > d:/mydatabase.sql
+~~~
+- 备份全库
+~~~ sql
+mysqldump -u root -p 1024 --opt --all-databases > d:/alldatabase.sql
+~~~
+### 还原
+- 还原表
+~~~ sql
+-- 将user表导到mydatabase库中
+mysql -u root -p 1024 mydatabase < d:/user.sql
+~~~
+- 还原库
+~~~ sql
+-- 备份文件中已经包括完整的库信息，则导入操作时不需要指定库名
+mysql -u root -p 1024 < d:/mydatabase.sql
+~~~
 ### 创建数据库
 ~~~ sql
 -- COLLATE utf8_general_ci不区分大小写；utf8_bin区分大小写
