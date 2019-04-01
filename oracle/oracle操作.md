@@ -202,3 +202,6 @@ BEGIN
   WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Error occurred'); 
 END;
 ~~~
+#### 日期
+- sql developer：工具-》首选项-》数据库-》NLS：日期格式（YYYY-MM-DD HH24:MI:SS）和时间戳格式（YYYY-MM-DD HH24:MI:SS.FF6）和时间戳时区格式
+- select to_char(systimestamp,'YYYY-MM-DD HH24:MI:SS.FF6') as t, to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS') as m from dual;
