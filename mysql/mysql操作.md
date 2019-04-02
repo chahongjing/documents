@@ -45,3 +45,22 @@ GRANT ALL ON *.* TO 'pig'@'%';
 - 字符串转日期：SELECT DATE_FORMAT('2017-09-20 08:30:45', '%Y-%m-%d %H:%i:%S');
 - 日期转字符串：SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S');
 [mysql日期操作](https://www.cnblogs.com/geaozhang/p/6740457.html)
+### 常用数据类型
+|类型|存储Bytes|最小|最大||
+|-|-|-|-|-|
+|bit||1|64|
+|tinyint|1|-128|127|
+|smallint|2|-32768|32767|
+|mediumint|3|-8388608|8388607|
+|int|4|-2147483648|2147483647|
+|bigint|8|||
+|DECIMAL和NUMERIC||||MySQL中视为相同|
+|float|||
+|double||
+|char||||
+|varchar|||||
+|date||
+|time|
+|datetime||
+|timestamp|
+|year|
