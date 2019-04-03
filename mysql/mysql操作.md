@@ -43,7 +43,7 @@ GRANT ALL ON *.* TO 'pig'@'%';
 - \G 的作用是将查到的结构旋转90度变成纵向
 ### 日期
 - 字符串转日期：SELECT DATE_FORMAT('2017-09-20 08:30:45', '%Y-%m-%d %H:%i:%S');
-- 日期转字符串：SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S');
+- 日期转字符串：SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S');<br>
 [mysql日期操作](https://www.cnblogs.com/geaozhang/p/6740457.html)
 ### 常用数据类型
 |类型|存储Bytes|最小|最大||

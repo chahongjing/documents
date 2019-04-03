@@ -1,6 +1,9 @@
 - [连接更新](#连接更新)
 - [创建表](#创建表)
-# 连接更新
+- [删除重复行只保留一行](#删除重复行只保留一行)
+- [多字段in](#多字段in)
+- [临时表](#临时表)
+### 连接更新
 ~~~ sql
 UPDATE T1, T2,
  INNER JOIN T1 ON T1.C1 = T2. C1
@@ -23,4 +26,30 @@ ALTER TABLE test1 MODIFY COLUMN field_name INT COMMENT '修改后的字段注释
 SELECT * FROM TABLES WHERE TABLE_SCHEMA='my_db' AND TABLE_NAME='test1';
 -- 查看字段注释的方法
 SELECT * FROM COLUMNS WHERE TABLE_SCHEMA='my_db' AND TABLE_NAME='test1';
+~~~
+### 删除重复行只保留一行
+~~~ sql
+create table test(id int, name varchar(100));
+
+insert into test values(1, 'zjy');
+insert into test values(2, 'zjy');
+insert into test values(3, 'zjy');
+insert into test values(4, 'aa');
+insert into test values(5, 'aa');
+-- 删除重复行，只保留一行
+delete 
+  from test
+ where name in (select name from (select name from test group by name having count(*) > 1) tr)
+   and id not in (select id from (select min(id) as id from test group by name having count(*) > 1) ti);
+~~~
+### 多字段in
+~~~ sql
+-- 多字段in
+select * from test where (id, name) in ((1, 'zjy'));
+~~~
+### 临时表
+~~~ sql
+-- 临时表
+create temporary table tt as select * from test;
+drop table tt;
 ~~~
