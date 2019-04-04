@@ -5,6 +5,7 @@
 - [删除用户](#删除用户)
 - [授权](#授权)
 - [其它](#其它)
+- [设置时区](#设置时区)
 # 数据库
 ### 创建数据库
 ~~~ sql
@@ -64,3 +65,7 @@ GRANT ALL ON *.* TO 'pig'@'%';
 |datetime||
 |timestamp|
 |year|
+### 设置时区
+~~~ sql
+set global time_zone='+8:00'
+~~~
