@@ -262,4 +262,92 @@ BEGIN
   EXCEPTION 
   WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Error occurred'); 
 END;
+
+-- 生成id
+create or replace PROCEDURE GenerateId
+(
+  biaoMing in varchar2,
+  lieMing in varchar2,
+  zhuTi in varchar2,
+  XuHao out int
+)
+AS
+  newXuHao int;
+BEGIN
+  SELECT XuHao INTO newXuHao FROM Xt_XuHao WHERE BiaoMing = biaoMing AND LieMing = lieMing AND XuHaoZhuTi = zhuTi;
+  
+  dbms_output.put_line('----newXuHao----');
+  dbms_output.put_line(newXuHao);
+  if(newXuHao IS null) then
+    newXuHao := 1;
+    INSERT INTO Xt_XuHao(BiaoMing, LieMing, XuHaoZhuTi, XuHao) VALUES (biaoMing, lieMing, zhuTi, newXuHao);
+  else
+    newXuHao := newXuHao + 1;
+    UPDATE Xt_XuHao SET XuHao = newXuHao WHERE BiaoMing = biaoMing AND LieMing = lieMing AND XuHaoZhuTi = zhuTi;
+  end if;
+  XuHao := newXuHao;
+  dbms_output.put_line('----newXuHao----');
+  dbms_output.put_line(newXuHao);
+end;
+/
+set serveroutput on;
+declare
+  XuHao int;
+begin
+  GenerateId('xt_yonghu', 'yonghuid', 'yh', XuHao );
+  dbms_output.put_line('----result----');
+  dbms_output.put_line(XuHao);
+end;
+~~~
+# 其它
+~~~ sql
+ALTER TABLE emp4 ADD column1 VARCHAR(10);
+ALTER TABLE emp4 ADD (column1 VARCHAR2(10),column2 NUMBER);
+ALTER TABLE emp4 MODIFY column1 VARCHAR2(20);
+ALTER TABLE emp4 MODIFY (column1 VARCHAR2(20),column2 VARCHAR2(20));
+ALTER TABLE emp4 DROP COLUMN column1;
+ALTER TABLE emp4 DROO (column1,column2);
+COMMENT on table tk_shitixiugaijilu is '试题修改记录';
+COMMENT on column tk_shitixiugaijilu.chuangjianren is '记录创建人';
+
+SELECT TRUNC(SYSDATE ,'YYYY') + 1 FROM DUAL --本年开始日期
+
+DECLARE CURSOR emp_cur IS SELECT * FROM emp;
+emp_record emp%rowtype;
+BEGIN 
+  OPEN emp_cur;
+  LOOP 
+    FETCH emp_cur INTO emp_record;
+    EXIT WHEN emp_cur%notfound;
+    dbms_output.put_line('name is:' || emp_record.ename ||' and sal is:' || emp_record.sal);
+  END LOOP;
+  CLOSE emp_cur;
+EXCEPTION
+  
+END;
+
+SELECT TRUNCE(123.456, 2)
+~~~
+### 时间
+~~~ sql
+select Extract(year from sysdate) as year, Extract(month from sysdate) as month, Extract(day from sysdate) as day,
+      Extract(hour from cast(sysdate as timestamp)) as hour, Extract(minute from cast(sysdate as timestamp)) as minute,
+      Extract(second from cast(sysdate as timestamp)) as second
+  from dual;
+
+select sysdate, add_months(sysdate, -12) as beforenextyear, sysdate + 1/24 as nexthour, sysdate - 2 * interval '3' hour as hourbefor6
+  from dual;
+-- interval 可用于年月日时分秒
+-- + - 用于天，可以用小数来处理时分秒，也可以用倍数处理天，月，年，月年还可以用add_months(sysdate,12)
+-- numtodsinterval处理时 分 秒sysdate+numtodsinterval(3,'hour'), numtoyminterval处理年月sysdate+numtoyminterval(3,'year')
+
+-- 获取两个时间之间的秒数
+select ROUND(TO_NUMBER((sysdate + 25 / (60 * 60 * 24)) - sysdate) * 24 * 60 * 60) as second from dual;
+select months_between(sysdate, date'1971-05-18') from dual;
+-- 获取时间差
+select extract(hour from cast(SYSDATE + 2 / 24 as timestamp) - SYSDATE) AS HOUR
+  from dual;
+
+-- 没有秒
+select timestamp'2017-02-12 15:18:23.365478', date'2017-02-12',trunc(sysdate,'year'), trunc(sysdate,'month'), trunc(sysdate), trunc(sysdate,'hh24'), trunc(sysdate,'mi') from dual;
 ~~~
