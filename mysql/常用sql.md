@@ -27,13 +27,11 @@ SELECT * FROM TABLES WHERE TABLE_SCHEMA='my_db' AND TABLE_NAME='test1';
 -- 查看字段注释的方法
 SELECT * FROM COLUMNS WHERE TABLE_SCHEMA='my_db' AND TABLE_NAME='test1';
 ~~~
-<<<<<<< HEAD
 ### 创建索引
 ~~~ sql
 ALTER TABLE table_name ADD INDEX index_name (column_list);
 CREATE INDEX index_name ON table_name (column_list);
 ~~~
-=======
 ### 删除重复行只保留一行
 ~~~ sql
 create table test(id int, name varchar(100));
@@ -60,4 +58,3 @@ select * from test where (id, name) in ((1, 'zjy'));
 create temporary table tt as select * from test;
 drop table tt;
 ~~~
->>>>>>> c459cd7445780c2b9127cdc5c9dccaa79fa4f1a0
