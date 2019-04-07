@@ -24,3 +24,8 @@ SELECT * FROM TABLES WHERE TABLE_SCHEMA='my_db' AND TABLE_NAME='test1';
 -- 查看字段注释的方法
 SELECT * FROM COLUMNS WHERE TABLE_SCHEMA='my_db' AND TABLE_NAME='test1';
 ~~~
+### 创建索引
+~~~ sql
+ALTER TABLE table_name ADD INDEX index_name (column_list);
+CREATE INDEX index_name ON table_name (column_list);
+~~~
