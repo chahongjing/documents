@@ -5,6 +5,7 @@
 - [删除用户](#删除用户)
 - [授权](#授权)
 - [其它](#其它)
+- [设置时区](#设置时区)
 # 数据库
 ### 备份
 - 备份表
@@ -67,7 +68,7 @@ GRANT ALL ON *.* TO 'pig'@'%';
 - \G 的作用是将查到的结构旋转90度变成纵向
 ### 日期
 - 字符串转日期：SELECT DATE_FORMAT('2017-09-20 08:30:45', '%Y-%m-%d %H:%i:%S');
-- 日期转字符串：SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S');
+- 日期转字符串：SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S');<br>
 [mysql日期操作](https://www.cnblogs.com/geaozhang/p/6740457.html)
 ### 常用数据类型
 |类型|存储Bytes|最小|最大||
@@ -88,3 +89,7 @@ GRANT ALL ON *.* TO 'pig'@'%';
 |datetime||
 |timestamp|
 |year|
+### 设置时区
+~~~ sql
+set global time_zone='+8:00'
+~~~
