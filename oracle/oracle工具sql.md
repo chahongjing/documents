@@ -351,3 +351,26 @@ select extract(hour from cast(SYSDATE + 2 / 24 as timestamp) - SYSDATE) AS HOUR
 -- 没有秒
 select timestamp'2017-02-12 15:18:23.365478', date'2017-02-12',trunc(sysdate,'year'), trunc(sysdate,'month'), trunc(sysdate), trunc(sysdate,'hh24'), trunc(sysdate,'mi') from dual;
 ~~~
+# 慢sql
+~~~ sql
+-- 1.查看总消耗时间最多的前10条SQL语句
+select *
+  from (select v.sql_id, v.child_number, v.sql_text, v.elapsed_time, v.cpu_time, v.disk_reads,
+               rank() over(order by v.elapsed_time desc) elapsed_rank
+          from v$sql v) a
+ where elapsed_rank <= 10;
+
+-- 2.查看CPU消耗时间最多的前10条SQL语句
+select *
+  from (select v.sql_id, v.child_number, v.sql_text, v.elapsed_time, v.cpu_time, v.disk_reads,
+               rank() over(order by v.cpu_time desc) elapsed_rank
+          from v$sql v) a
+ where elapsed_rank <= 10;
+
+-- 3.查看消耗磁盘读取最多的前10条SQL语句
+select *
+  from (select v.sql_id, v.child_number, v.sql_text, v.elapsed_time, v.cpu_time, v.disk_reads,
+               rank() over(order by v.disk_reads desc) elapsed_rank
+          from v$sql v) a
+ where elapsed_rank <= 10;
+~~~

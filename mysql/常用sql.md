@@ -3,6 +3,7 @@
 - [删除重复行只保留一行](#删除重复行只保留一行)
 - [多字段in](#多字段in)
 - [临时表](#临时表)
+- [排名函数](#排名函数)
 ### 连接更新
 ~~~ sql
 UPDATE T1, T2,
@@ -14,6 +15,8 @@ UPDATE T1, T2,
 SELECT * FROM table LIMIT 5,10
 -- 特殊字段
 SELECT * FROM MYTABLE WHERE `MY-ID` = 1;
+-- 插入多条记录
+insert into mytable(id, name) values (1, 'a'), (2, 'b'), (3, 'c');
 ~~~
 ### 创建表
 ~~~ sql
@@ -57,4 +60,36 @@ select * from test where (id, name) in ((1, 'zjy'));
 -- 临时表
 create temporary table tt as select * from test;
 drop table tt;
+~~~
+### 排名函数
+~~~ sql
+-- mysql8新增特性
+select pid, name, age,
+       row_number() over (order by age) as rn,
+       rank() over (order by age) as r,
+       dense_rank() over (order by age) as dr
+  from players
+ order by age;
+
+-- rownumber，序号
+SET @curRank := 0;
+SELECT pid, name, age, 
+       curRank := @curRank + 1 AS myrank
+  FROM players p, (SELECT @curRank := 0) q
+ ORDER BY age;
+
+-- rank，排名，同名序号相同，序号不连续，如1，1，3
+SELECT pid, name, age, 
+       CASE WHEN @prevRank = age THEN @curRank
+			WHEN @prevRank := age THEN @curRank := @curRank + 1 END AS myrank
+  FROM players p, (SELECT @curRank :=0, @prevRank := NULL) r
+ ORDER BY age;
+ 
+-- dense_rank，同名序号相同，序号连续，如1，1，2
+SELECT pid, name, age, myrank
+  FROM (SELECT pid, name, age, @curRank := IF(@prevRank = age, @curRank, @incRank) AS myrank,
+               @incRank := @incRank + 1, @prevRank := age
+          FROM players p, (SELECT @curRank :=0, @prevRank := NULL, @incRank := 1) r 
+		ORDER BY age) s;
+
 ~~~
