@@ -1,5 +1,5 @@
 @echo off
-title add
+title documents add
 echo.
 git add .
 git status

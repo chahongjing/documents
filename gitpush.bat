@@ -1,5 +1,5 @@
 @echo off
-title push
+title documents push
 echo.
 set /p comment=ÇëÊäÈë±¸×¢:
 git commit -m %comment%

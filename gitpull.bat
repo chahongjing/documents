@@ -1,5 +1,5 @@
 @echo off
-title pull
+title documents pull
 echo.
 git pull documents master
 git status

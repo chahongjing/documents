@@ -1,5 +1,5 @@
 @echo off
-title status
+title documents status
 echo.
 git status
 pause;
