@@ -20,6 +20,7 @@ set port=1521
 set instance=orcl
 set dmppath=d:\201803071715.dmp
 
+rem set NLS_LANG=SIMPLIFIED CHINESE_CHINA.AL32UTF8
 rem no data use: rows=n compress=n
 set command=exp %username%/%password%@%host%:%port%/%instance% file=%dmppath%
 
