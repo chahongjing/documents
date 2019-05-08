@@ -13,3 +13,6 @@ base64解密：atob('YWJjZA==');
 - http://p.getqujing.com/paths/6g6b1rd8.pac
 # 通过ip查计算机名称
 - nbtstat -a 10.4.0.140
+
+# tcp抓包
+wireshark抓tcp包
