@@ -42,6 +42,7 @@ set port=1521
 set instance=orcl
 set dmppath=d:\201803071715.dmp
 
+rem data_only默认为N，表示所有，如果只想导数据不导表结构，则设置data_only=y
 set command=imp %username%/%password%@%host%:%port%/%instance% file=%dmppath% full=y
 
 echo.

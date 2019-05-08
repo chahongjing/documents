@@ -11,13 +11,13 @@ set configDir=F:\CompanyWorkplace\apache-tomcat-9.0.8_service\webapps\static\
 echo.
 set /p type=deploy type: all(1), java(2), vue(3):
 if "%type%"=="1" (
-goto copyJava
+  goto copyJava
 )
 if "%type%"=="2" (
-goto copyJava
+  goto copyJava
 )
 if "%type%"=="3" (
-goto copyVue
+  goto copyVue
 )
 echo.
 echo wrong type
@@ -37,7 +37,7 @@ echo.
 echo start tomcat service
 net start tomcat9
 if "%type%"=="1" (
-goto copyVue
+  goto copyVue
 )
 goto end
 
@@ -62,15 +62,15 @@ title tomcat service(install/uninstall)
 set /p type=install(i),uninstall(u):
 rem install
 if "%type%"=="i" (
-set command=call service.bat install
-set title=install tomcat service
-goto hasCommand
+  set command=call service.bat install
+  set title=install tomcat service
+  goto hasCommand
 )
 rem uninstall
 if "%type%"=="u" (
-set command=call service.bat remove
-set title=uninstall tomcat service
-goto hasCommand
+  set command=call service.bat remove
+  set title=uninstall tomcat service
+  goto hasCommand
 )
 rem error
 goto errorInput

@@ -1,2 +1,0 @@
-window连接Linux服务器的ftp软件
-winscp

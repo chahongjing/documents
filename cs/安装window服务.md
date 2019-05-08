@@ -11,8 +11,8 @@ if not exist "%servicePath%" goto pathError
 
 C:
 if "%netVer%"=="4.0" (
-cd C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
-goto install
+  cd C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+  goto install
 )
 rem other 2.0
 cd C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727
@@ -20,15 +20,15 @@ cd C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727
 :install
 rem install
 if "%type%"=="i" (
-set command=InstallUtil "%servicePath%"
-set title=install your service
-goto hasCommand
+  set command=InstallUtil "%servicePath%"
+  set title=install your service
+  goto hasCommand
 )
 rem uninstall
 if "%type%"=="u" (
-set command=InstallUtil /u "%servicePath%"
-set title=uninstall your service
-goto hasCommand
+  set command=InstallUtil /u "%servicePath%"
+  set title=uninstall your service
+  goto hasCommand
 )
 rem error
 goto errorInput

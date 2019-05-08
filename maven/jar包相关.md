@@ -20,24 +20,24 @@ pause
 # 引用本地jar包
 ~~~ xml
 <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-install-plugin</artifactId>
-	<version>2.5.2</version>
-	<executions>
-		<execution>
-			<phase>initialize</phase>
-			<goals>
-				<goal>install-file</goal>
-			</goals>
-			<configuration>
-				<groupId>com.aspose</groupId>
-				<artifactId>aspose-words</artifactId>
-				<version>14.9.0</version>
-				<packaging>jar</packaging>
-				<file>${basedir}/src/main/lib/aspose-words-14.9.0-jdk16.jar</file>
-			</configuration>
-		</execution>
-	</executions>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-install-plugin</artifactId>
+    <version>2.5.2</version>
+    <executions>
+        <execution>
+            <phase>initialize</phase>
+            <goals>
+                <goal>install-file</goal>
+            </goals>
+            <configuration>
+                <groupId>com.aspose</groupId>
+                <artifactId>aspose-words</artifactId>
+                <version>14.9.0</version>
+                <packaging>jar</packaging>
+                <file>${basedir}/src/main/lib/aspose-words-14.9.0-jdk16.jar</file>
+            </configuration>
+        </execution>
+    </executions>
 </plugin>
 
 或者使用
@@ -58,52 +58,52 @@ pause
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
             http://maven.apache.org/xsd/settings-1.0.0.xsd">
     <localRepository>F:/Source/Java/maven/repository</localRepository>
-	<mirrors>
-		<mirror>
-		  <id>alimaven</id>
-		  <name>aliyun maven</name>
-		  <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-		  <mirrorOf>central</mirrorOf>        
-		</mirror>
-		<mirror>
-			<id>jboss-public-repository-group</id>
-			<mirrorOf>central</mirrorOf>
-			<name>JBoss Public Repository Group</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public</url>
-		</mirror>
-		<mirror>
-			<id>repo2</id>
-			<name>Mirror from Maven Repo2</name>
-			<url>http://repo2.maven.org/maven2/</url>
-			<mirrorOf>central</mirrorOf>
-		</mirror>
-		<mirror>
-			<id>ui</id>
-			<name>Mirror from UK</name>
-			<url>http://uk.maven.org/maven2/</url>
-			<mirrorOf>central</mirrorOf>
-		</mirror>
-	</mirrors>
-	<profiles>
-		<profile>  
-			<id>jdk-1.8</id>  
-			<activation>  
-				<activeByDefault>true</activeByDefault>  
-				<jdk>1.8</jdk>  
-			</activation>  
-			<properties>  
-				<maven.compiler.source>1.8</maven.compiler.source>  
-				<maven.compiler.target>1.8</maven.compiler.target>  
-				<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>  
-			</properties>  
-		</profile>   
-	</profiles>
-	<servers>
-	    <server>
-		    <id>tomcat7</id>
-		    <username>admin</username>
-		    <password>admin</password>
-		</server>
-	</servers>
+    <mirrors>
+        <mirror>
+          <id>alimaven</id>
+          <name>aliyun maven</name>
+          <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+          <mirrorOf>central</mirrorOf>
+        </mirror>
+        <mirror>
+            <id>jboss-public-repository-group</id>
+            <mirrorOf>central</mirrorOf>
+            <name>JBoss Public Repository Group</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public</url>
+        </mirror>
+        <mirror>
+            <id>repo2</id>
+            <name>Mirror from Maven Repo2</name>
+            <url>http://repo2.maven.org/maven2/</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+        <mirror>
+            <id>ui</id>
+            <name>Mirror from UK</name>
+            <url>http://uk.maven.org/maven2/</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+    </mirrors>
+    <profiles>
+        <profile>  
+            <id>jdk-1.8</id>  
+            <activation>  
+                <activeByDefault>true</activeByDefault>  
+                <jdk>1.8</jdk>  
+            </activation>  
+            <properties>  
+                <maven.compiler.source>1.8</maven.compiler.source>  
+                <maven.compiler.target>1.8</maven.compiler.target>  
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>  
+            </properties>  
+        </profile>
+    </profiles>
+    <servers>
+        <server>
+            <id>tomcat7</id>
+            <username>admin</username>
+            <password>admin</password>
+        </server>
+    </servers>
 </settings>
 ~~~
