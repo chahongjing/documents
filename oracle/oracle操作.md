@@ -61,12 +61,12 @@ CREATE USER zjy IDENTIFIED BY 1024  DEFAULT TABLESPACE USERS  TEMPORARY TABLESPA
 GRANT DBA TO zjy WITH ADMIN OPTION;
 GRANT CONNECT TO zjy WITH ADMIN OPTION;
 
--- 关闭用户连接(用户名大写)
-SELECT username, sid, serial# FROM v$session WHERE username = 'LIBRA';
-ALTER system kill SESSION '133,8028';
-
 -- 删除用户
 DROP USER LIBRA_PRODUCTION CASCADE;
+
+-- 关闭用户连接(用户名大写)
+SELECT username, sid, serial#, 'ALTER SYSTEM KILL SESSION ''' || to_char(sid) || ',' || to_char(serial#) || ''';' as sql FROM v$session WHERE upper(username) = upper('LIBRA');
+ALTER SYSTEM KILL SESSION '133,8028';
 ~~~
 ### 修改用户密码解锁用户
 ~~~ sql

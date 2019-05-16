@@ -374,3 +374,8 @@ select *
           from v$sql v) a
  where elapsed_rank <= 10;
 ~~~
+### 字段中包含-字符个数
+~~~ sql
+-- 字段中包含_字符个数
+SELECT LENGTHB(TRANSLATE(shitijiegouidlujing,'_'||shitijiegouidlujing,'_')) FROM tk_shitijiegou
+~~~
