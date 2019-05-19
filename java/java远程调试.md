@@ -6,7 +6,7 @@ SET CATALINA_OPTS=-server -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:trans
 ![debug](/imgs/java/remotedebug1.png)<br>
 再在idea中添加远程调试服务，配置如下。然后就可以远程调试。<br>
 ![debug](/imgs/java/remotedebug2.png)<br>
-2. Window服务启动添加方式
+2. Window服务启动添加方式<br>
 ![debug](/imgs/java/remotedebug3.png)<br>
 ~~~ bat
 -Xdebug  
