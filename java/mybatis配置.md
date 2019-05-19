@@ -92,6 +92,7 @@ public class User {
     <select id="getUser" parameterType="int" resultType="entities.User">
         select * from MyUser where UserId = #{id}
     </select>
+</mapper>
 ~~~
   - 将实体映射文件添加到mybatis配置文件mybatis-config.xml中configuration节点下添加
 ~~~ xml
