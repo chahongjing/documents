@@ -150,3 +150,29 @@ UserInfo userab = session.selectOne("services.interf.IUserService.justSql", map)
 IUserService mapper = session.getMapper(IUserService.class); 
 UserInfo user = mapper.getUserInfoById(1);  
 ~~~
+### 多数据源
+~~~ xml
+<bean id="abstractDataSource" class="com.iflytek.libra.interceptor.CryptDruidDataSource" init-method="init" destroy-method="close" abstract="true">
+    <property name="connectionProperties"><value>useUnicode=true;characterEncoding=utf-8</value></property>
+    <!-- 配置初始化大小、最小、最大 -->
+    <property name="initialSize" value="${jdbc.pool.init}" />
+    <property name="minIdle" value="${jdbc.pool.minIdle}" />
+    <property name="maxActive" value="${jdbc.pool.maxActive}"  />
+    <!-- 配置监控统计拦截的filters -->
+    <property name="filters" value="stat" />
+</bean>
+
+<bean id="master" parent="abstractDataSource">
+    <property name="driverClassName" value="${jdbc.oracle.driver}"></property>
+    <property name="url" value="${jdbc.oracle.url}"></property>
+    <property name="username" value="${jdbc.oracle.user}" />
+    <property name="password" value="${jdbc.oracle.password}" />
+</bean>
+
+<bean id="slave" parent="abstractDataSource">
+    <property name="driverClassName" value="${jdbc.oracle.driver}"></property>
+    <property name="url" value="${jdbc.oracle.url}"></property>
+    <property name="username" value="${jdbc.oracle.user}" />
+    <property name="password" value="${jdbc.oracle.password}" />
+</bean>
+~~~
