@@ -152,7 +152,7 @@ UserInfo user = mapper.getUserInfoById(1);
 ~~~
 ### 多数据源
 ~~~ xml
-<bean id="abstractDataSource" class="com.iflytek.libra.interceptor.CryptDruidDataSource" init-method="init" destroy-method="close" abstract="true">
+<bean id="abstractDataSource" abstract="true" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
     <property name="connectionProperties"><value>useUnicode=true;characterEncoding=utf-8</value></property>
     <!-- 配置初始化大小、最小、最大 -->
     <property name="initialSize" value="${jdbc.pool.init}" />
