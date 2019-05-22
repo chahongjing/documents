@@ -84,7 +84,7 @@ SELECT  wm_concat(LOWER(A.COLUMN_NAME))
 select a.constraint_name,a.constraint_type,b.column_name 
 from user_constraints a,user_cons_columns b
 where a.table_name=b.table_name
- and a.constraint_name = 'SYS_C0013673'
+ and upper(a.constraint_name) = upper('SYS_C0013673')
 ~~~
 ### 查询包含字段的表
 ~~~ sql

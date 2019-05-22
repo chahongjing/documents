@@ -192,7 +192,7 @@ BEGIN
       FETCH c2 INTO v_q; 
       EXIT WHEN c2%NOTFOUND; 
       IF v_q=0 THEN
-        sqltemp := 'alter table ' || v_table || ' allocate extent';	  
+        sqltemp := 'alter table ' || v_table || ' allocate extent';   
         DBMS_OUTPUT.PUT_LINE(sqltemp || ';');
         EXECUTE IMMEDIATE (sqltemp); 
         tabC := tabC + 1;
