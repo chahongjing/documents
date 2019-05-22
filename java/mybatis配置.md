@@ -163,16 +163,16 @@ UserInfo user = mapper.getUserInfoById(1);
 </bean>
 
 <bean id="master" parent="abstractDataSource">
-    <property name="driverClassName" value="${jdbc.oracle.driver}"></property>
-    <property name="url" value="${jdbc.oracle.url}"></property>
-    <property name="username" value="${jdbc.oracle.user}" />
-    <property name="password" value="${jdbc.oracle.password}" />
+    <property name="driverClassName" value="${jdbc.oracle.driver1}"></property>
+    <property name="url" value="${jdbc.oracle.url1}"></property>
+    <property name="username" value="${jdbc.oracle.user1}" />
+    <property name="password" value="${jdbc.oracle.password1}" />
 </bean>
 
 <bean id="slave" parent="abstractDataSource">
-    <property name="driverClassName" value="${jdbc.oracle.driver}"></property>
-    <property name="url" value="${jdbc.oracle.url}"></property>
-    <property name="username" value="${jdbc.oracle.user}" />
-    <property name="password" value="${jdbc.oracle.password}" />
+    <property name="driverClassName" value="${jdbc.oracle.driver2}"></property>
+    <property name="url" value="${jdbc.oracle.url2}"></property>
+    <property name="username" value="${jdbc.oracle.user2}" />
+    <property name="password" value="${jdbc.oracle.password2}" />
 </bean>
 ~~~
