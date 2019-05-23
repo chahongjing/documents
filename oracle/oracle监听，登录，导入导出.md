@@ -84,7 +84,7 @@ show parameter service_name;
 ### 登录sqlplus
 1. `sqlplus /nolog`进行本地登录，此时并没有真正登录，不能执行数据库相关操作。
 2. `sqlplus / as sysdba`，本地计算机模式登录，超级管理员，若登录不上可考虑进入服务端目录打命令，因为很可能是安装了客户端导致环境变量被覆盖引起。
-3. `sqlplus 用户名/密码as sysdba`；使用管理员登录，普通人员登录不需要`as sysdba`。
+3. `sqlplus 用户名/密码 as sysdba`；使用管理员登录，普通人员登录不需要`as sysdba`。
 4. `sqlplus sys/pwd@127.0.0.1:1521/orcl as sysdba`。
 5. 使用管理员创建新用户：
 ~~~ sql
@@ -97,5 +97,5 @@ GRANT CONNECT TO newusername WITH ADMIN OPTION;
 ~~~
 6. 修改用户密码。使用管理员登录后执行
 ~~~ sql
-SQL>alter user username identified by newpassword。
+SQL> alter user username identified by newpassword。
 ~~~
