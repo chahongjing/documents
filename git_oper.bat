@@ -4,21 +4,21 @@ set remotename=documents
 
 :head
 echo.
-set /p type=git type: pull(1), add(2), commit(3), push(4), status(5):
+set /p type=git type: pull(1), status(2), add(3), commit(4), push(5):
 if "%type%"=="1" (
   goto gitpull
 )
 if "%type%"=="2" (
-  goto gitadd
+  goto gitstatus
 )
 if "%type%"=="3" (
-  goto xgitcommit
+  goto gitadd
 )
 if "%type%"=="4" (
-  goto gitpush
+  goto gitcommit
 )
 if "%type%"=="5" (
-  goto gitstatus
+  goto gitpush
 )
 echo quit
 goto end
