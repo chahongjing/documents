@@ -1,3 +1,10 @@
+### 表备份和还原
+~~~ sql
+-- 要求目标表Table2必须存在，并且字段field,field2...也必须存在, 注意Table2的主键约束，如果Table2有主键而且不为空，则 field1， field2...中必须包括主键,注意语法，不要加values，和插入一条数据的sql混了
+Insert into Table2(field1,field2,...) select value1,value2,... from Table1
+-- 要求目标表Table2不存在，因为在插入时会自动创建表Table2，并将Table1中指定字段数据复制到Table2中。
+SELECT vale1, value2 into Table2 from Table1
+~~~
 # 常用操作
 ~~~ sql
 ALTER TABLE dbo.UserInfo ADD column1 NVARCHAR(20)

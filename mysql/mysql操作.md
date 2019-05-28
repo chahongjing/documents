@@ -1,6 +1,8 @@
 - [备份](#备份)
 - [还原](#还原)
+- [备份表](#备份表)
 - [创建数据库](#创建数据库)
+- [设置时区](#设置时区)
 - [修改数据库编码](#修改数据库编码)
 - [创建用户](#创建用户)
 - [修改密码](#修改密码)
@@ -9,7 +11,6 @@
 - [其它](#其它)
 - [日期](#日期)
 - [常用数据类型](#常用数据类型)
-- [设置时区](#设置时区)
 # 数据库
 ### 备份
 - 备份表
@@ -35,12 +36,23 @@ mysql -u root -p 1024 mydatabase < d:/user.sql
 -- 备份文件中已经包括完整的库信息，则导入操作时不需要指定库名
 mysql -u root -p 1024 < d:/mydatabase.sql
 ~~~
+### 备份表
+~~~ sql
+-- 要求目标表Table2不存在，因为在插入时会自动创建表Table2，并将Table1中指定字段数据复制到Table2中
+语句形式为：SELECT vale1, value2 into Table2 from Table1
+-- 要求目标表Table2必须存在，由于目标表Table2已经存在，所以我们除了插入源表Table1的字段外，还可以插入常量
+语句形式为：Insert into Table2(field1,field2,...) select value1,value2,... from Table1
+~~~
 ### 创建数据库
 ~~~ sql
 -- COLLATE utf8_general_ci不区分大小写；utf8_bin区分大小写
 CREATE DATABASE db_name DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE db_name;
 SHOW DATABASES;
+~~~
+### 设置时区
+~~~ sql
+set global time_zone='+8:00'
 ~~~
 ### 修改数据库编码
 ~~~ sql
@@ -93,7 +105,3 @@ GRANT ALL ON *.* TO 'pig'@'%';
 |datetime||
 |timestamp|
 |year|
-### 设置时区
-~~~ sql
-set global time_zone='+8:00'
-~~~
