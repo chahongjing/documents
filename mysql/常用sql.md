@@ -94,3 +94,9 @@ SELECT pid, name, age, myrank
 		ORDER BY age) s;
 
 ~~~
+### 其它
+~~~ sql
+-- 可以连接多个参数
+select CONCAT(str1, str2, str3);
+select CONCAT_WS(separator, str1, str2, str3);
+~~~

@@ -31,3 +31,4 @@ connect by prior org_id = parent_id;   level
   - `TRANSLATE(string,from_str,to_str)`
 - 前一条记录lag, 后一条记录lead, row_number()
 - 在sqlplus中使用@执行sql文件，使用spool “d:\a.txt”; your sql; spool off;
+- select 'a' || tablefield || 'c', concat(concat('a', tablefield), 'c') from mytable;// concat只能拼接两个参数
