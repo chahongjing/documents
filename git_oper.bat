@@ -2,6 +2,8 @@
 
 set remotename=documents
 
+title %remotename%
+
 :head
 echo.
 set /p type=git type: pull(1), status(2), add(3), commit(4), push(5):
