@@ -203,17 +203,14 @@
 #db.userName=zjy
 #db.password=1024
 #db.testSql=select 'x' from dual
-#db.dialect=oracle
 
 # jdbc.mysql
 #db.driverClassName=com.mysql.cj.jdbc.Driver
-#db.driverClassName=com.mysql.jdbc.Driver
+##db.driverClassName=com.mysql.jdbc.Driver
 #db.url=jdbc:mysql://127.0.0.1:3306/toolsitemvc4j?useUnicode=true&characterEncoding=utf-8&useSSL=false
-#db.url=jdbc:mysql://localhost/toolsitemvc4j?useUnicode=true&characterEncoding=utf-8
 #db.userName=root
 #db.password=root
 #db.testSql=select 'x'
-#db.dialect=mysql
 
 # jdbc.sql server
 #db.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
@@ -222,7 +219,6 @@
 #db.userName=sa
 #db.password=1024
 #db.testSql=select 'x'
-#db.dialect=sqlserver
 
 # jdbc.sqlite
 db.driverClassName=org.sqlite.JDBC
@@ -230,7 +226,6 @@ db.driverClassName=org.sqlite.JDBC
 db.url=jdbc:sqlite::resource:db/app.db
 db.phyUrl=jdbc:sqlite://F:/Source/Java/ToolSiteMvc4J/trunk/web/src/main/resources/db/app.db
 db.testSql=select 'x'
-db.dialect=SQLite
 # sqlite has no user and passord
 db.userName=
 db.password=
