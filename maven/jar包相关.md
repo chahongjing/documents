@@ -107,3 +107,32 @@ pause
     </servers>
 </settings>
 ~~~
+### 设置maven可以使用快照版本
+~~~ xml
+<!-- 在profiles节点下添加 -->
+<profile>    
+    <id>nexus</id>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Nexus</name>
+            <url>http://192.168.1.253/nexus/content/groups/public/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Nexus</name>
+            <url>http://192.168.1.253/nexus/content/groups/public/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>true</enabled> </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    </profile>
+</profiles>
+<activeProfiles>
+    <activeProfile>nexus</activeProfile>
+</activeProfiles>
+~~~
