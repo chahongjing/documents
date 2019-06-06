@@ -1,8 +1,6 @@
 @echo off
 
-set remotename=documents
-
-title %remotename%
+title documents
 
 :head
 echo.
@@ -28,7 +26,7 @@ goto end
 :gitpull
 echo.
 echo git pull
-git pull %remotename% master
+git pull
 set type=
 goto head
 
@@ -50,7 +48,7 @@ goto head
 :gitpush
 echo.
 echo git push
-git push %remotename% master
+git push
 set type=
 goto head
 
