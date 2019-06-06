@@ -97,6 +97,18 @@ pause
                 <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>  
             </properties>  
         </profile>
+
+        <profile>
+            <id>allow-snapshots</id>
+            <activation><activeByDefault>true</activeByDefault></activation>
+            <repositories>
+                <repository>
+                    <id>snapshots</id>
+                    <url>http://nexus.dmall.com:8081/nexus/content/repositories/snapshots/</url>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+            </repositories>
+        </profile>
     </profiles>
     <servers>
         <server>

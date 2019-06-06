@@ -56,6 +56,7 @@ xcopy %configDir%*.* %targetDir%static\ /s/e/y
 echo.
 ~~~
 # 安装tomcat服务
+- **注意要用管理员权限的cmd安装，然后跳转到tomcat的bin目录下再执行**
 ~~~ bat
 @echo off
 title tomcat service(install/uninstall)
