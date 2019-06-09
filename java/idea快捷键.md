@@ -1,3 +1,12 @@
+### 快捷键
+- .var
+- .null
+- .notnull 或 .nn
+- .for 或 .fori
+- .not
+- .if
+- .cast
+- .return
 ### Alt+回车 导入包,自动修正
 - Ctrl+N   查找类
 - Ctrl+Shift+N 查找文件
