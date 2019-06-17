@@ -42,6 +42,10 @@ mysql -u root -p 1024 < d:/mydatabase.sql
 语句形式为：SELECT vale1, value2 into Table2 from Table1
 -- 要求目标表Table2必须存在，由于目标表Table2已经存在，所以我们除了插入源表Table1的字段外，还可以插入常量
 语句形式为：Insert into Table2(field1,field2,...) select value1,value2,... from Table1
+-- 复制表结构和数据，不包括索引（不推荐）
+create table tabbak select * from mytable;
+-- 复制表结构包括索引
+create table tabbak like mytable;
 ~~~
 ### 创建数据库
 ~~~ sql
