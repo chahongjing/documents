@@ -55,3 +55,12 @@ for() {
     continue retyr;
 }
 ~~~
+### springboot starter提示
+~~~ xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-configuration-processor</artifactId>
+  <version>1.4.3.RELEASE</version>
+  <optional>true</optional>
+</dependency>
+~~~
