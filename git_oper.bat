@@ -41,7 +41,7 @@ goto head
 echo.
 echo git commit
 set /p commsg=commit: 
-git commit -m %commsg%
+git commit -m "%commsg%"
 set type=
 goto head
 
