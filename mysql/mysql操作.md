@@ -11,6 +11,7 @@
 - [其它](#其它)
 - [日期](#日期)
 - [常用数据类型](#常用数据类型)
+- [解除safemode](#解除safemode)
 # 数据库
 ### 备份
 - 备份表
@@ -109,3 +110,7 @@ GRANT ALL ON *.* TO 'pig'@'%';
 |datetime||
 |timestamp|
 |year|
+### 解除safemode
+~~~ sql
+SET SQL_SAFE_UPDATES = 0;
+~~~
