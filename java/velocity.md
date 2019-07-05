@@ -1,4 +1,10 @@
 # velocity
+- \#来标识脚本，如#if
+- $标识对象
+- !用来强制把不存在的变量显示为空白。
+- 用{}把变量和字符串分开。#set ($user="csy"}，${user}name，返回csyname
+- test"$var" 返回testhello，test'$var' 返回test'$var'
+- #if( $foo )，当$foo为null或为Boolean对象的false值执行.
 ~~~ java
 // 定义变量
 #set($awbpre='112')
