@@ -7,6 +7,7 @@
 - Alibaba Java Coding Guidelines
 - Key promoter X
 # 类注释
+ ![comment](/imgs/java/idea_comment.png)
 ### 变量
 - ${NAME}：类名
 - ${USER}：用户
