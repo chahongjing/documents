@@ -45,3 +45,48 @@ location / {
 proxy_pass http://mynodes; 
 ~~~
 3. 以上配置完成后nginx会监听http --> server中listen端口的请求自动转到mynodes下面的节点中的一个进行负载均衡。
+### 多域名映射多节点配置
+1. 在http节点下添加如下设置，否则无法启动，报hash错误
+~~~ ini
+server_names_hash_bucket_size 64;
+~~~
+2. 添加多个upstream节点和多个server节点，其中upstream名称可以为域名。当我们访问server_name对应的域名时会进行自动映射
+~~~ ini
+    upstream devworkorder.man.dmall.com {
+        server 127.0.0.1:21000;
+    }
+
+    upstream devpartner.dmall.com {
+        server 127.0.0.1:21001;
+    }
+
+    server {
+        listen       80;
+        server_name  devworkorder.man.dmall.com;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+            proxy_pass http://devworkorder.man.dmall.com; 
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+
+    server {
+        listen       80;
+        server_name  devpartner.dmall.com;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+            proxy_pass http://devpartner.dmall.com; 
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+~~~

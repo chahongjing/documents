@@ -6,6 +6,11 @@
 - SonarLint
 - Alibaba Java Coding Guidelines
 - Key promoter X
+- Grep Console
+- CheckStyle-IDEA
+- FindBugs-IDEA
+- Markdown Navigator
+- Git Flow Integration
 # 类注释
  ![comment](/imgs/java/idea_comment.png)
 ### 变量

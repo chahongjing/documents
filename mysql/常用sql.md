@@ -98,7 +98,17 @@ SELECT pid, name, age, myrank
                @incRank := @incRank + 1, @prevRank := age
           FROM players p, (SELECT @curRank :=0, @prevRank := NULL, @incRank := 1) r 
 		ORDER BY age) s;
+~~~
+### 插入或更新
+~~~ sql
+INSERT INTO table (a,b,c) VALUES (1,2,3)  
+  ON DUPLICATE KEY UPDATE c = c + 1;  
+-- a是唯一索引，如果已有一条值为1的数据，效果相当于如下语句
+UPDATE table SET c = c + 1 WHERE a = 1;
 
+-- 1. 如果发现表中已经有此行数据（根据主键或者唯一索引判断）则先删除此行数据，然后插入新的数据。 2. 否则，直接插入新数据。
+-- 要注意的是：插入数据的表必须有主键或者是唯一索引！否则的话，replace into 会直接插入数据，这将导致表中出现重复的数据。
+REPLACE INTO test(title,uid) VALUES ('1234657','1001');
 ~~~
 ### 其它
 ~~~ sql
