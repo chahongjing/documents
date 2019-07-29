@@ -2,6 +2,7 @@
 - Free Mybatis plugin
 - Mybatis Log Plugin
 - RestfulToolkit
+- String Manipulation
 - Maven Helper
 - SonarLint
 - Alibaba Java Coding Guidelines

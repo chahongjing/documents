@@ -34,3 +34,32 @@ $session
 // 模块化
 #parse("template/header.vm")
 ~~~
+
+velocity配置文件中的编码配置类:
+//对html文件编码的配置
+org.apache.velocity.app.event.implement.EscapeHtmlReference
+//对javascript文件编码的配置
+org.apache.velocity.app.event.implement.EscapeJavascriptReference
+//对sql文件编码的配置
+org.apache.velocity.app.event.implement.EscapeSqlReference
+//对xml文件编码的配置
+org.apache.velocity.app.event.implement.EscapeXmlReference
+1:在velocity.properties中配置全局变量转义：
+default.contentType=text/html; charset=UTF-8
+input.encoding=UTF-8
+output.encoding=UTF-8
+eventhandler.referenceinsertion.class = org.apache.velocity.app.event.implement.EscapeHtmlReference
+eventhandler.referenceinsertion.class = org.apache.velocity.app.event.implement.EscapeSqlReference
+eventhandler.escape.html.match = /msg.*/
+eventhandler.escape.sql.match = /sql.*/
+2:在velocity.properties中配置局部变量转义：
+default.contentType=text/html; charset=UTF-8
+input.encoding=UTF-8
+output.encoding=UTF-8
+eventhandler.referenceinsertion.class = org.apache.velocity.app.event.implement.EscapeHtmlReference
+eventhandler.referenceinsertion.class = org.apache.velocity.app.event.implement.EscapeSqlReference
+eventhandler.escape.html.match = /_html_*/
+eventhandler.escape.sql.match = /_sql_*/
+前台数据显示时 要转义的数据变量名定义需遵循:
+格式:_html_自定义名字
+例如：_html_title、_html_userName等等
