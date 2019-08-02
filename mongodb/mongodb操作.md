@@ -4,7 +4,7 @@ mongo.exe
 use admin
 -- 创建用户
 db.createUser({user: "libra", pwd: "libra",roles: [{role: "userAdminAnyDatabase", db: "admin"}]});
-
+role: readWrite, clusterMonitor, readAnyDatabase, root, backup, restore
 
 -- 修改用户密码
 db.changeUserPassword('libra', 'libra$20167')
