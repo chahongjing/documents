@@ -90,3 +90,8 @@ server_names_hash_bucket_size 64;
         }
     }
 ~~~
+### 请求信息大小限制（如上传）
+- 在http节点中添加
+~~~ ini
+client_max_body_size 20M;
+~~~
