@@ -56,7 +56,7 @@ server_names_hash_bucket_size 64;
         server 127.0.0.1:21000;
     }
 
-    upstream devpartner.dmall.com {
+    upstream devworkorder-partner.dmall.com {
         server 127.0.0.1:21001;
     }
 
@@ -77,12 +77,12 @@ server_names_hash_bucket_size 64;
 
     server {
         listen       80;
-        server_name  devpartner.dmall.com;
+        server_name  devworkorder-partner.dmall.com;
 
         location / {
             root   html;
             index  index.html index.htm;
-            proxy_pass http://devpartner.dmall.com; 
+            proxy_pass http://devworkorder-partner.dmall.com; 
         }
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
