@@ -29,7 +29,7 @@ mvn install:install-file -Dpackaging=jar -DgroupId=com.oracle -DartifactId=ojdbc
 1. Web程序打包
 ~~~ bat
 mvn install
-mvn clean install -DskipTests -Pdevelopment
+mvn clean install -DskipTests -P development
 ~~~
 2. Jar包程序打包，配置main函数入口和lib依赖包
   - 配置main函数入口<br>
@@ -38,10 +38,10 @@ mvn clean install -DskipTests -Pdevelopment
 ![maven](/imgs/java/maven10.png)<br>
 ### 相关命令
 ~~~ bat
-mvn clean install -DskipTests –Pdevelopment
+mvn clean install -DskipTests –P development
 clean 先清理，如target
 install安装jar包。将项目的jar包安装到本地仓库。
 –DskipTests不执行测试用例，但编译测试用例类生成相应的class文件至target/test-classes下。
 -Dmaven.test.skip=true，不执行测试用例，也不编译测试用例类。
-–Pdevelopment使用development配置文件
+–P development使用development配置文件
 ~~~
