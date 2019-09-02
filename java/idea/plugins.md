@@ -12,6 +12,11 @@
 - FindBugs-IDEA
 - Markdown Navigator
 - Git Flow Integration
+- GsonFormat
+- POJO to JSON
+- SequenceDiagram
+- Iedis
+- Translation
 # 类注释
  ![comment](/imgs/java/idea_comment.png)
 ### 变量
