@@ -38,3 +38,11 @@ public class RZSpiderServletInitializer extends SpringBootServletInitializer{
     }
 }
 ~~~
+### 启动springboot项目
+~~~ bat
+rem --server.port：指定运行时端口号
+rem --spring.profiles.active：指定启动的profile
+rem > E:/test.log &：不在控制台显示日志，日志输出到test.log文件中
+rem linux下使用：nohup java -jar xxxxxxxxx &  即可后台运行服务
+java -jar ./web/target/web-1.0.jar --server.port=8088 --spring.profiles.active=online > E:/test.log &
+~~~
