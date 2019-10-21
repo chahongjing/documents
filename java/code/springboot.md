@@ -44,5 +44,35 @@ rem --server.port：指定运行时端口号
 rem --spring.profiles.active：指定启动的profile
 rem > E:/test.log &：不在控制台显示日志，日志输出到test.log文件中
 rem linux下使用：nohup java -jar xxxxxxxxx &  即可后台运行服务
+rem 若无法识别 --spring.xx参数，则改为-Dspring.xx
 java -jar ./web/target/web-1.0.jar --server.port=8088 --spring.profiles.active=online > E:/test.log &
 ~~~
+
+## 热部署
+~~~ xml
+<!-- 添加依赖 -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <optional>true</optional>
+</dependency>
+<!-- 添加插件 -->
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>
+        <fork>true</fork>
+    </configuration>
+</plugin>
+~~~
+~~~ properties
+#热部署生效
+spring.devtools.restart.enabled: true
+#设置重启的目录
+#spring.devtools.restart.additional-paths: src/main/java
+#classpath目录下的WEB-INF文件夹内容修改不重启
+spring.devtools.restart.exclude: WEB-INF/**
+~~~
+- idea设置
+  - File --> Settings --> Compiler --> 勾选Build Project automatically
+  - ctrl + shift + alt + /, 选择Registry, 勾上 Compiler autoMake allow when app running

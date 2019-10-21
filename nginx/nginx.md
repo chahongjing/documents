@@ -46,49 +46,33 @@ proxy_pass http://mynodes;
 ~~~
 3. 以上配置完成后nginx会监听http --> server中listen端口的请求自动转到mynodes下面的节点中的一个进行负载均衡。
 ### 多域名映射多节点配置
-1. 在http节点下添加如下设置，否则无法启动，报hash错误
+1. 在http节点下添加如下设置，否则无法启动，报错误：could not build server_names_hash, you should increase server_names_hash_bucket_size: 32
 ~~~ ini
 server_names_hash_bucket_size 64;
 ~~~
-2. 添加多个upstream节点和多个server节点，其中upstream名称可以为域名。当我们访问server_name对应的域名时会进行自动映射
+2. 在配置文件nginx.conf所在目录添加domain文件夹，在nginx.conf文件中http节点下添加 include domain/*.conf;
+![1](../imgs/nginx/1.png)
+3. 进入domain文件夹下，添加对应配置文件。内容如下
+![2](../imgs/nginx/2.png)
 ~~~ ini
-    upstream devworkorder.man.dmall.com {
-        server 127.0.0.1:21000;
+upstream devworkordernw.man.dmall.com {
+    server 127.0.0.1:21002;
+}
+
+server {
+    listen       80;
+    server_name  devworkordernw.man.dmall.com;
+
+    location / {
+        root   html;
+        index  index.html index.htm;
+        proxy_pass http://devworkordernw.man.dmall.com; 
     }
-
-    upstream devworkorder-partner.dmall.com {
-        server 127.0.0.1:21001;
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
     }
-
-    server {
-        listen       80;
-        server_name  devworkorder.man.dmall.com;
-
-        location / {
-            root   html;
-            index  index.html index.htm;
-            proxy_pass http://devworkorder.man.dmall.com; 
-        }
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-    }
-
-    server {
-        listen       80;
-        server_name  devworkorder-partner.dmall.com;
-
-        location / {
-            root   html;
-            index  index.html index.htm;
-            proxy_pass http://devworkorder-partner.dmall.com; 
-        }
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-    }
+}
 ~~~
 ### 请求信息大小限制（如上传）
 - 在http节点中添加

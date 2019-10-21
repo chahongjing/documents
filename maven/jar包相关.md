@@ -6,6 +6,36 @@ start "安装jar包" mvn install:install-file -Dpackaging=jar -DgroupId=com.orac
 :: 安装jar到私服
 mvn deploy:deploy-file -DgroupId=com.dmall -DartifactId=dmall-wsnw-api -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar -Dfile=D:\comWorkspace\projects\dmall-wsnw\dmall-wsnw-api\target\dmall-wsnw-api-0.0.1-SNAPSHOT.jar -DrepositoryId=snapshots -Durl=http://nexus.dmall.com:8081/nexus/content/repositories/snapshots/
 ~~~
+### 如果是idea直接上传
+1. 在settings.xml中servvers节点下配置用户名和密码
+~~~ xml
+<server>
+    <id>snapshots</id>
+    <username>deployment</username>
+    <password>dmall2015</password>
+</server>
+~~~
+2. 在要发布的pom和父pom文件中的project节点下添加如下节点，其中id要对应上面的id
+~~~ xml
+<distributionManagement>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>Nexus Snapshot Repository</name>
+        <url>http://nexus.dmall.com:8081/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+</distributionManagement>
+~~~
+3. 在不需要上传的模块中的pom文件中project-->build-->plugins节点下添加如下节点，表示此模块不上传到私服
+~~~ xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-deploy-plugin</artifactId>
+    <version>2.8.2</version>
+    <configuration>
+        <skip>true</skip>
+    </configuration>
+</plugin>
+~~~
 # 删除过期的文件
 ~~~ bat
 echo off
