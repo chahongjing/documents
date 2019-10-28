@@ -18,8 +18,16 @@
     </exclusions>
 </dependency>
 ~~~
-- 再添加servlet依赖
+- 再添加依赖
 ~~~ xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-tomcat</artifactId>
+    <!--打包的时候可以不用包进去，别的设施会提供。事实上该依赖理论上可以参与编译，测试，运行等周期。
+        相当于compile，但是打包阶段做了exclude操作-->
+    <scope>provided</scope>
+</dependency>
+<!-- 可以不用添加？ -->
 <dependency>
     <groupId>javax.servlet</groupId>
     <artifactId>javax.servlet-api</artifactId>
@@ -31,10 +39,10 @@
 没关系，不用管
 - 更改启动类，继承SpringBootServletInitializer ，覆盖configure()，把启动类Application注册进去
 ~~~ java
-public class RZSpiderServletInitializer extends SpringBootServletInitializer{
+public class WarConfiguration extends SpringBootServletInitializer{
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
-        return application.sources(RZSpiderApplication.class);
+        return application.sources(WebApplication.class);
     }
 }
 ~~~
@@ -76,3 +84,19 @@ spring.devtools.restart.exclude: WEB-INF/**
 - idea设置
   - File --> Settings --> Compiler --> 勾选Build Project automatically
   - ctrl + shift + alt + /, 选择Registry, 勾上 Compiler autoMake allow when app running
+## 配置读取顺序
+![配置](/imgs/java/1.png)
+1. config/application.properties（项目根目录中config目录下）
+2. config/application.yml
+3. application.properties（项目根目录下）
+4. application.yml
+6. resources/config/application.yml
+7. resources/application.properties（项目的resources目录下）
+8. resources/application.yml
+- 如果同一个目录下，有application.yml也有application.properties，默认先读取application.properties；如果同一个配置属性，在多个配置文件都配置了，默认使用第1个读取到的，后面读取的不覆盖前面读取到的。
+## springboot热部署
+1. File -> Settings -> Default Settings -> Build -> Compiler 然后勾选 Build project automatically 
+2. Ctrl + Shift + Alt + / 然后进入Registry.
+3. ompiler.automake.allow.when.app.running -> 自动编译；compile.document.save.trigger.delay -> 自动更新文件；compile.automake.trigger.delay
+4. Edit Configurations->SpringBoot插件->目标项目->勾选热更新
+5. spring-boot-devtools，添加devtools配置
