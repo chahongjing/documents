@@ -90,6 +90,8 @@ GRANT ALL ON *.* TO 'pig'@'%';
 ### 日期
 - 字符串转日期：SELECT DATE_FORMAT('2017-09-20 08:30:45', '%Y-%m-%d %H:%i:%S');
 - 日期转字符串：SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S');<br>
+- 加一天：date(DATE_ADD(NOW(),INTERVAL 1 DAY)) 或adddate(now(),-1)
+- 减：date(DATE_SUB(NOW(),INTERVAL 1 DAY)) 
 [mysql日期操作](https://www.cnblogs.com/geaozhang/p/6740457.html)
 [mysql日期操作](https://www.cnblogs.com/php12-cn/p/8882221.html)
 ### 常用数据类型
