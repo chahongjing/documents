@@ -100,3 +100,19 @@ spring.devtools.restart.exclude: WEB-INF/**
 3. ompiler.automake.allow.when.app.running -> 自动编译；compile.document.save.trigger.delay -> 自动更新文件；compile.automake.trigger.delay
 4. Edit Configurations->SpringBoot插件->目标项目->勾选热更新
 5. spring-boot-devtools，添加devtools配置
+### springboot启动
+~~~ shell
+#!/bin/bash
+appName=yourapp
+PID=$(ps -ef | grep $appName | grep -v grep | awk '{ print $2 }')
+if [ -z "$PID" ]
+then
+    echo ${appName}.jar is already stopped
+else
+    echo kill $PID
+    kill $PID
+fi
+# nohup不挂断地运行命令,最后一个&表示后台运行
+# 不输出日志：nohup java -jar xxx.jar >/dev/null &
+nohup java -jar $appName.jar --server.port=8888 > catalina.out  2>&1 &
+~~~
