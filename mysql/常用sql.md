@@ -22,7 +22,7 @@ insert into mytable(id, name) values (1, 'a'), (2, 'b'), (3, 'c');
 ~~~
 ### 创建表
 ~~~ sql
-CREATE TABLE IF NOT EXISTS mytable(id INT, name VARCHAR(100)) COMMENT='表的注释';
+CREATE TABLE IF NOT EXISTS mytable(id INT, name VARCHAR(100)) char set utf8mb4 COMMENT='表的注释';
 -- 注释
 ALTER TABLE COMMENT '修改后的表的注释';
 -- 修改字段的注释

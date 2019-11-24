@@ -50,8 +50,8 @@ create table tabbak like mytable;
 ~~~
 ### 创建数据库
 ~~~ sql
--- COLLATE utf8_general_ci不区分大小写；utf8_bin区分大小写
-CREATE DATABASE db_name DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- COLLATE utf8mb4_unicode_ci不区分大小写；utf8_bin区分大小写
+CREATE DATABASE db_name DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE db_name;
 SHOW DATABASES;
 ~~~
@@ -92,6 +92,7 @@ GRANT ALL ON *.* TO 'pig'@'%';
 - 日期转字符串：SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S');<br>
 - 加一天：date(DATE_ADD(NOW(),INTERVAL 1 DAY)) 或adddate(now(),-1)
 - 减：date(DATE_SUB(NOW(),INTERVAL 1 DAY)) 
+- select date_format(date(now()), '%Y-%m-%d'), date_format(time(now()), '%H:%i:%s')
 [mysql日期操作](https://www.cnblogs.com/geaozhang/p/6740457.html)
 [mysql日期操作](https://www.cnblogs.com/php12-cn/p/8882221.html)
 ### 常用数据类型
