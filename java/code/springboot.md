@@ -94,6 +94,64 @@ spring.devtools.restart.exclude: WEB-INF/**
 7. resources/application.properties（项目的resources目录下）
 8. resources/application.yml
 - 如果同一个目录下，有application.yml也有application.properties，默认先读取application.properties；如果同一个配置属性，在多个配置文件都配置了，默认使用第1个读取到的，后面读取的不覆盖前面读取到的。
+### 属性规则
+- 在Spring Boot 2.0中对配置属性加载的时候会除了像1.x版本时候那样移除特殊字符外，还会将配置均以全小写的方式进行匹配和加载。所以，下面的4种配置方式都是等价的：推荐使用全小写配合-分隔符的方式来配置，比如：spring.jpa.database-platform=mysql
+~~~ yml
+spring:
+  jpa:
+    databaseplatform: mysql
+    database-platform: mysql
+    databasePlatform: mysql
+    database_platform: mysql
+~~~
+- List类型
+~~~ yml
+spring:
+  my-example:
+    url:
+      - http://example.com
+      - http://spring.io
+# 也支持逗号分割的方式：
+spring:
+  my-example:
+    url: http://example.com, http://spring.io
+# 在Spring Boot 2.0中对于List类型的配置必须是连续的 如下配置是不允许的
+foo[0]: a
+foo[2]: b
+# jvm指定参数
+-D"spring.my-example.url[0]=http://example.com"
+-D"spring.my-example.url[1]=http://spring.io"
+# 也可以以逗号分隔
+-Dspring.my-example.url=http://example.com,http://spring.io
+~~~
+- Map类型，使用和object一样，如果Map类型的key包含非字母数字和-的字符，需要用[]括起来，比如：
+~~~ yml
+spring:
+  my-example:
+    '[foo.baz]': bar
+~~~
+- 由于环境变量中无法使用[和]符号，所以使用_来替代。任何由下划线包围的数字都会被认为是[]的数组形式。比如：
+~~~ yml
+MY_FOO_1_: my.foo[1]
+MY_FOO_1_BAR: my.foo[1].bar
+MY_FOO_1_2_: my.foo[1][2]
+# 另外如果最后环境变量最后是以数字和下划线结尾的话，最后的下划线可以省略
+MY_FOO_1: my.foo[1]
+MY_FOO_1_2: my.foo[1][2]
+~~~
+- 属性读取
+  - 通过.分离各个元素
+  - 最后一个.将前缀与属性名称分开
+  - 必须是字母（a-z）和数字(0-9)
+  - 必须是小写字母
+  - 用连字符-来分隔单词
+  - 唯一允许的其他字符是[和]，用于List的索引
+  - 不能以数字开头
+~~~ java
+Binder binder = Binder.get(context.getEnvironment());
+// 绑定List配置
+List<String> post = binder.bind("com.didispace.post", Bindable.listOf(String.class)).get();
+~~~
 ## springboot热部署
 1. File -> Settings -> Default Settings -> Build -> Compiler 然后勾选 Build project automatically 
 2. Ctrl + Shift + Alt + / 然后进入Registry.
