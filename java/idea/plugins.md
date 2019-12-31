@@ -18,7 +18,7 @@
 - Iedis
 - Translation
 # 类注释
- ![comment](/imgs/java/idea_comment.png)
+ ![comment](../../imgs/java/idea_comment.png)
 ### 变量
 - ${NAME}：类名
 - ${USER}：用户
@@ -33,11 +33,11 @@
 - ${PROJECT_NAME}：项目名
 # 方法注释
 - 添加分组
-![idea](/imgs/java/idea_methodcomment1.png)
+![idea](../../imgs/java/idea_methodcomment1.png)
 - 添加模板
-![idea](/imgs/java/idea_methodcomment2.png)
+![idea](../../imgs/java/idea_methodcomment2.png)
 - 设置注释模板
-![idea](/imgs/java/idea_methodcomment3.png)
+![idea](../../imgs/java/idea_methodcomment3.png)
 - 注释模板
 ~~~ java
 *
@@ -53,4 +53,4 @@ $param$
 groovyScript("def result=''; def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|\\\\s]', '').split(',').toList(); for(i = 0; i < params.size(); i++) {result+=' * @param: ' + params[i] + ((i < params.size() - 1) ? '\\n' : '')}; return result", methodParameters())
 ~~~
 - 设置应用范围
-![idea](/imgs/java/idea_methodcomment4.png)
+![idea](../../imgs/java/idea_methodcomment4.png)
