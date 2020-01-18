@@ -46,11 +46,8 @@ proxy_pass http://mynodes;
 ~~~
 3. 以上配置完成后nginx会监听http --> server中listen端口的请求自动转到mynodes下面的节点中的一个进行负载均衡。
 ### 多域名映射多节点配置
-1. 在http节点下添加如下设置，否则无法启动，报错误：could not build server_names_hash, you should increase server_names_hash_bucket_size: 32
-~~~ ini
-server_names_hash_bucket_size 64;
-~~~
-2. 在配置文件nginx.conf所在目录添加domain文件夹，在nginx.conf文件中http节点下添加 include domain/*.conf;
+1. 在http节点下添加设置`server_names_hash_bucket_size 64;`注意末尾的分号。，否则无法启动，报错误：could not build server_names_hash, you should increase server_names_hash_bucket_size: 32
+2. 在配置文件nginx.conf所在目录添加domain文件夹，在nginx.conf文件中http节点下添加`include domain/*.conf;`注意末尾的分号。
 ![1](../imgs/nginx/1.png)
 3. 进入domain文件夹下，添加对应配置文件。内容如下
 ![2](../imgs/nginx/2.png)
@@ -75,7 +72,4 @@ server {
 }
 ~~~
 ### 请求信息大小限制（如上传）
-- 在http节点中添加
-~~~ ini
-client_max_body_size 20M;
-~~~
+- 在http节点中添加`client_max_body_size 20M;`注意末尾的分号。
