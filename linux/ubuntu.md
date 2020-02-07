@@ -17,7 +17,11 @@
 1. 复制启动脚本到指定目录：`sudo cp mystart.sh /etc/init.d`
 2. 修改文件名称：`mv mystart.sh myservice`
 1. 修改启动文件权限：`sudo chmod 755 myservice`
+3. 加载服务程序：`systemctl daemon-reload`
 2. 启动服务命令：`service myservice start`
 3. 添加到自启服务命令：`update-rc.d -f myservice defaults`
 4. 关闭服务命令：`service myservice stop`
 5. 删除到自启服务命令：`update-rc.d -f myservice remove`
+
+### 下载
+启动aria2服务：`aria2c --daemon --enable-rpc=true`
