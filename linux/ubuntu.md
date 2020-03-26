@@ -25,3 +25,8 @@
 
 ### 下载
 启动aria2服务：`aria2c --daemon --enable-rpc=true`
+
+### 连接到远程服务器：[命令方式见shell命令](https://github.com/chahongjing/CodeSummary/blob/master/linux/shell.md)
+``` shell
+ssh://dmadmin@10.248.224.871
+```
