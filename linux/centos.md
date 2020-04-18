@@ -7,8 +7,8 @@ After=network.target
   
 [Service]
 Type=forking
-Environment=JAVA_HOME=/usr/local/jdk
-Environment=CATALINA_HOME=/usr/local/tomcat
+Environment=JAVA_HOME=/home/zjy/opt/jdk1.8.0_231
+Environment=CATALINA_HOME=/home/zjy/opt/apache-tomcat-9.0.33
 ExecStart=/usr/local/nginx/sbin/nginx
 ExecReload=/usr/local/nginx/sbin/nginx -s reload
 ExecStop=/usr/local/nginx/sbin/nginx -s quit
