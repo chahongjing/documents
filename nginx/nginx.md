@@ -50,7 +50,7 @@ proxy_pass http://mynodes;
 2. 在配置文件nginx.conf所在目录添加domain文件夹，在nginx.conf文件中http节点下添加`include domains/*.conf;`注意末尾的分号。
 ![1](../imgs/nginx/1.png)
 3. 进入domain文件夹下，添加对应配置文件。内容如下
-![2](../imgs/nginx/2.png)
+![2](../imgs/nginx/22222.png)
 ~~~ ini
 upstream dev.your.domain.com {
     server 127.0.0.1:21002;
