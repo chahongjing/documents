@@ -52,18 +52,18 @@ proxy_pass http://mynodes;
 3. 进入domain文件夹下，添加对应配置文件。内容如下
 ![2](../imgs/nginx/2.png)
 ~~~ ini
-upstream devworkordernw.man.dmall.com {
+upstream dev.your.domain.com {
     server 127.0.0.1:21002;
 }
 
 server {
     listen       80;
-    server_name  devworkordernw.man.dmall.com;
+    server_name  dev.your.domain.com;
 
     location / {
         root   html;
         index  index.html index.htm;
-        proxy_pass http://devworkordernw.man.dmall.com; 
+        proxy_pass http://dev.your.domain.com; 
     }
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
