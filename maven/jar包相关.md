@@ -4,15 +4,15 @@
 :: jar包位置一般在oracle安装目录中dbhome/jdbc/lib/ojdbc6.jar
 start "安装jar包" mvn install:install-file -Dpackaging=jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dfile=F:\MyWorkplace\JavaCode\ToolSiteMvc4J\lib\ojdbc6.jar -Dversion=11.2.0.3.0
 :: 安装jar到私服
-mvn deploy:deploy-file -DgroupId=com.dmall -DartifactId=dmall-wsnw-api -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar -Dfile=D:\comWorkspace\projects\dmall-wsnw\dmall-wsnw-api\target\dmall-wsnw-api-0.0.1-SNAPSHOT.jar -DrepositoryId=snapshots -Durl=http://nexus.dmall.com:8081/nexus/content/repositories/snapshots/
+mvn deploy:deploy-file -DgroupId=com.zjy -DartifactId=zjy-wsnw-api -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar -Dfile=D:\comWorkspace\projects\zjy-wsnw\zjy-wsnw-api\target\zjy-wsnw-api-0.0.1-SNAPSHOT.jar -DrepositoryId=snapshots -Durl=http://nexus.zjy.com:8081/nexus/content/repositories/snapshots/
 ~~~
 ### 如果是idea直接上传
 1. 在settings.xml中servvers节点下配置用户名和密码
 ~~~ xml
 <server>
     <id>snapshots</id>
-    <username>deployment</username>
-    <password>dmall2015</password>
+    <username>yourusername</username>
+    <password>yourpassword</password>
 </server>
 ~~~
 2. 在要发布的pom和父pom文件中的project节点下添加如下节点，其中id要对应上面的id
@@ -21,7 +21,7 @@ mvn deploy:deploy-file -DgroupId=com.dmall -DartifactId=dmall-wsnw-api -Dversion
     <snapshotRepository>
         <id>snapshots</id>
         <name>Nexus Snapshot Repository</name>
-        <url>http://nexus.dmall.com:8081/nexus/content/repositories/snapshots/</url>
+        <url>http://nexus.zjy.com:8081/nexus/content/repositories/snapshots/</url>
     </snapshotRepository>
 </distributionManagement>
 ~~~
@@ -136,7 +136,7 @@ pause
             <repositories>
                 <repository>
                     <id>snapshots</id>
-                    <url>http://nexus.dmall.com:8081/nexus/content/repositories/snapshots/</url>
+                    <url>http://nexus.zjy.com:8081/nexus/content/repositories/snapshots/</url>
                     <snapshots><enabled>true</enabled></snapshots>
                 </repository>
             </repositories>
