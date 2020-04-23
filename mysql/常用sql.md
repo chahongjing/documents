@@ -36,6 +36,7 @@ SELECT * FROM COLUMNS WHERE TABLE_SCHEMA='my_db' AND TABLE_NAME='test1';
 ~~~ sql
 ALTER TABLE table_name ADD INDEX index_name (column_list);
 CREATE INDEX index_name ON table_name (column_list);
+ALTER TABLE rp_work_order_meta ADD UNIQUE uk_workordernum(work_order_num);
 ~~~
 ### 删除重复行只保留一行
 ~~~ sql

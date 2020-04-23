@@ -62,6 +62,9 @@ set global time_zone='+8:00'
 ### 修改数据库编码
 ~~~ sql
 ALTER DATABASE db_name DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- 修改字段编码
+ALTER TABLE `dmall_ws`.`rp_work_order_meta` 
+CHANGE COLUMN `content` `content` VARCHAR(5000) CHARACTER SET 'utf8mb4' NULL DEFAULT NULL COMMENT '回复内容' ;
 ~~~
 ### 创建用户
 ~~~ sql
