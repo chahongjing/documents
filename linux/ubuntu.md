@@ -30,3 +30,6 @@
 ``` shell
 ssh://dmadmin@10.248.224.871
 ```
+
+### 添加阿里云镜像
+1. 软件更新-->ubuntu software --> source code --> 填写：http://mirrors.aliyun.com/ubuntu
