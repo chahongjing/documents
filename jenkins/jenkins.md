@@ -62,3 +62,4 @@ echo "`date ` deploy  ${deployid}" >> /web/app/deploy/deploy.log
 
 ## jenkins安装
 [jenkins](https://blog.csdn.net/liuxiangke0210/article/details/106761904)
+[jenkins](https://www.linuxidc.com/Linux/2016-12/138290.htm)
