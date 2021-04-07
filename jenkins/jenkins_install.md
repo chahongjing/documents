@@ -58,9 +58,11 @@ echo "jenkins_home:${JENKINS_HOME}"
 echo "job_name:${JOB_NAME}"
 echo "java_home:${JAVA_HOME}"
 # kill java进程
-pid=$(cat /var/jenkins_pid.pid)
-kill -9 ${pid}
+#pid=$(cat /var/jenkins_pid.pid)
+#kill -9 ${pid}
+my_jar_name=testdocker
 # 找到执行的进程
+ps -aef | grep -v grep | grep java | grep "${my_jar_name}" | awk '{ print $2 }' | xargs kill -9
 # ps -aef | grep -v grep | grep java | grep "${my_jar_name}" | sed 's/[ ]*/:/g'| cut -d: -f2 | xargs kill -9
 # PID=$(ps -aef | grep -v grep | grep java | grep "${my_jar_name}" | awk '{ print $2 }')
 # 判断端口号是否占用
@@ -70,7 +72,7 @@ kill -9 ${pid}
 #这一句很重要，这样指定了，项目启动之后才不会被Jenkins杀掉。
 export BUILD_ID=dontKillMe
 nohup java -jar /var/lib/jenkins/workspace/testdocker/target/testdocker-0.0.1-SNAPSHOT.jar > /var/tmp/nohup.log 2>&1 &
-echo $! > /var/jenkins_pid.pid
+# echo $! > /var/jenkins_pid.pid
 ```
 
 ```shell script
