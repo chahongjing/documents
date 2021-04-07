@@ -41,6 +41,23 @@ NAME=root
 sudo chown -R jenkins:jenkins /opt/apache-maven-3.6.3/repository
 
 ```
+### 执行脚本
+```shell script
+
+echo "buid_id:${BUILD_ID}"
+echo "workspace:${WORKSPACE}"
+echo "jenkins_home:${JENKINS_HOME}"
+echo "job_name:${JOB_NAME}"
+echo "java_home:${JAVA_HOME}"
+# kill java进程
+pid=$(cat /var/jenkins_pid.pid)
+kill -9 ${pid}
+
+#这一句很重要，这样指定了，项目启动之后才不会被Jenkins杀掉。
+export BUILD_ID=dontKillMe
+nohup java -jar /var/lib/jenkins/workspace/testdocker/target/testdocker-0.0.1-SNAPSHOT.jar > /var/tmp/nohup.log 2>&1 &
+echo $! > /var/jenkins_pid.pid
+```
 
 ```shell script
 #!/bin/bash 
@@ -59,6 +76,11 @@ jar_name=shaw.jar
 
 #获取运行编译好的进程ID，便于我们在重新部署项目的时候先杀掉以前的进程
 pid=$(cat /var/codespace/test/shaw-test-web.pid)
+# 找到执行的进程
+# ps -aef |grep java |grep testdocker |grep -v grep | sed 's/[]*/:/g' cut -d: -f2 |xargs kill -9
+# 判断端口号是否占用
+# pr=$(/usr/sbin/lsof -i:$conn_port | awk '{print $2}')
+# if[ -n "$pr"]
 
 #进入指定的编译好的jar的位置
 cd  ${jar_path}
