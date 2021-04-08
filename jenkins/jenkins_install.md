@@ -20,6 +20,24 @@ sudo apt-get update
 sudo apt-get install jenkins
 ```
 
+### 以管理员权限运行jenins，防止处理文件没有权限
+```shell script
+sudo vim /etc/default/jenkins
+# 注意仅修改如下两个变量
+JENKINS_USER=$NAME
+JENKINS_GROUP=$NAME
+# 改成
+JENKINS_USER=root
+JENKINS_GROUP=root
+# 修改jenkins目录权限为root
+sudo chown -R root:root /var/lib//jenkins
+# 重启服务
+service jenkins restart
+
+jenkins添加到root，下面操作可以先不处理，如果报错再试试
+gpasswd -a jenkins root
+```
+
 ### 启动jenkins
 ```shell script
 # 启动服务
@@ -38,20 +56,9 @@ manage jenkins-->manage plugins-->可选插件-->Maven Integration
 # 调整maven，在具体构建项目实例里配置
 build-->高级，填写settings.xml路径
 
-
-如果不是在jenkins的工作目录，则需要把构建相关的目录权限授权jenkins，不然构建会报错
-jenkins添加到root
-gpasswd -a jenkins root
-修改配置文件sudo vim /etc/default/jenkins， 或/etc/sysconfig/jenkins
-NAME=root
-
-修改仓库目录权限组为jenkins，不然下包时会报错
-sudo chown -R jenkins:jenkins /opt/apache-maven-3.6.3/repository
-
 ```
 ### 执行脚本
 ```shell script
-
 echo "buid_id:${BUILD_ID}"
 echo "workspace:${WORKSPACE}"
 echo "jenkins_home:${JENKINS_HOME}"
@@ -79,7 +86,8 @@ fi
 
 # 这一句很重要，这样指定了，项目启动之后才不会被Jenkins杀掉。可以在jenkins中全局配置下
 # export BUILD_ID=dontKillMe
-nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
+#nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
+nohup java -jar /home/zjy/workspace/mycode/testdocker/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
 ```
 
 - 全局配置maven和jdk
