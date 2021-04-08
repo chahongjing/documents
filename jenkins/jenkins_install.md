@@ -63,6 +63,8 @@ pid=$(ps -aef | grep -v grep | grep java | grep "${my_jar_name}" | awk '{print $
 # if [ -n "$pid" ]; then
 if [ $pid ]; then
   kill -9 ${pid}
+else
+  echo "no instance"
 fi
 
 # ps -aef | grep -v grep | grep java | grep "${my_jar_name}" | awk '{print $2}' | xargs kill -9
@@ -75,8 +77,7 @@ fi
 # pr=$(/usr/sbin/lsof -i:$conn_port | awk '{print $2}')
 # if[ -n "$pr"]
 
-# cp /var/lib/jenkins/jobs/testdocker/builds/${BUILD_ID}/com.zjy$testdocker/archive/com.zjy/testdocker/0.0.1-SNAPSHOT/testdocker-0.0.1-SNAPSHOT.jar /var/tmp/testdocker.jar
-# 这一句很重要，这样指定了，项目启动之后才不会被Jenkins杀掉。
+# 这一句很重要，这样指定了，项目启动之后才不会被Jenkins杀掉。可以在jenkins中全局配置下
 # export BUILD_ID=dontKillMe
 nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
 ```
