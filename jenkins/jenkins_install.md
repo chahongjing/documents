@@ -60,6 +60,7 @@ echo "java_home:${JAVA_HOME}"
 my_jar_name=testdocker-0.0.1-SNAPSHOT
 
 pid=$(ps -aef | grep -v grep | grep java | grep "${my_jar_name}" | awk '{print $2}')
+# if [ -n "$pid" ]; then
 if [ $pid ]; then
   kill -9 ${pid}
 fi
