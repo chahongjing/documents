@@ -104,18 +104,32 @@ nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1
 # nohup java -jar /home/zjy/workspace/mycode/testdocker/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
 ```
 
+- jenkins配置
+
+![a](../imgs/jenkins/jenkins1.png)
+- 配置插件更新服务地址
+
+![a](../imgs/jenkins/jenkins2.png)
+![a](../imgs/jenkins/jenkins3.png)
 - 全局配置maven和jdk
-![a](../imgs/jenkins/jenkins_maven.png)
-![a](../imgs/jenkins/jenkins_maven2.png)
-- 填写maven信息，点击高级
-![a](../imgs/jenkins/jenkins_maven3.png)
-![a](../imgs/jenkins/jenkins_maven4.png)
+
+![a](../imgs/jenkins/jenkins4.png)
 ![a](../imgs/jenkins/jenkins5.png)
-- 本地构建
-![a](../imgs/jenkins/jenkins6.png)
+
+- 配置全局属性，此属性可以让jenkins构建结束后不自动结束部署的项目服务
 
 ![a](../imgs/jenkins/jenkins7.png)
-- github构建
+- 构建项目配置，设置job清理策略和github
+
 ![a](../imgs/jenkins/jenkins8.png)
+- 设置maven，点高级
 
 ![a](../imgs/jenkins/jenkins9.png)
+![a](../imgs/jenkins/jenkins10.png)
+- 设置执行脚本
+
+![a](../imgs/jenkins/jenkins11.png)
+- 本地代码构建，源代码选择无，且指定要执行的pom目录地址
+
+![a](../imgs/jenkins/jenkins12.png)
+![a](../imgs/jenkins/jenkins13.png)
