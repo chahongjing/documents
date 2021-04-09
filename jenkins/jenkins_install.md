@@ -29,8 +29,8 @@ JENKINS_GROUP=$NAME
 # 改成
 JENKINS_USER=root
 JENKINS_GROUP=root
-# 修改jenkins目录权限为root
-sudo chown -R root:root /var/lib//jenkins
+# 修改jenkins目录权限为root，此句可以先不执行，看报不报错
+sudo chown -R root:root /var/lib/jenkins
 # 重启服务
 service jenkins restart
 
@@ -52,6 +52,8 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ### maven插件设置
 ```shell script
+# 设置升级站点
+插件-->高级-->升级站点：https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
 manage jenkins-->manage plugins-->可选插件-->Maven Integration
 # 调整maven，在具体构建项目实例里配置
 build-->高级，填写settings.xml路径
