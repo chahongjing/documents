@@ -55,8 +55,18 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 manage jenkins-->manage plugins-->可选插件-->Maven Integration
 # 调整maven，在具体构建项目实例里配置
 build-->高级，填写settings.xml路径
-
+# 填写java_home
+jdk-->新增jdk，注意自动安装不要勾选
+# 添加全局变量，防止jenkins结束后自动关闭衍生进程，导致服务启不来
+BUILD_ID=dontKillMe
 ```
+
+### 添加maven项目
+1. 填写git项目地址，如：https://github.com/chahongjing/testdocker.git 。指定构建分支，如master
+2. 填写pom地址，如：pom.xml
+3. 勾选构建job清理策略，如仅保留7天，最多保留5个构建。
+4. 填写goals and options：clean package -Dmaven.test.skip=true
+5. 填写构建后执行脚本，选择执行execute shell，注意，不要选择错了，如果是linux环境不要选择成window shell，然后添加脚本
 ### 执行脚本
 ```shell script
 echo "buid_id:${BUILD_ID}"
@@ -85,9 +95,11 @@ fi
 # if[ -n "$pr"]
 
 # 这一句很重要，这样指定了，项目启动之后才不会被Jenkins杀掉。可以在jenkins中全局配置下
-# export BUILD_ID=dontKillMe
-#nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
-nohup java -jar /home/zjy/workspace/mycode/testdocker/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
+# BUILD_ID=dontKillMe
+# git构建
+nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
+# 本地构建，这里写死了本地的构建目录
+# nohup java -jar /home/zjy/workspace/mycode/testdocker/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
 ```
 
 - 全局配置maven和jdk
