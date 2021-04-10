@@ -70,6 +70,7 @@ BUILD_ID=dontKillMe
 4. 填写goals and options：clean package -Dmaven.test.skip=true
 5. 填写构建后执行脚本，选择执行execute shell，注意，不要选择错了，如果是linux环境不要选择成window shell，然后添加脚本
 ### 执行脚本
+- springboot
 ```shell script
 echo "==================== begin build post shell ============="
 echo "buid_id:${BUILD_ID}"
@@ -104,6 +105,42 @@ nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1
 # 本地构建，这里写死了本地的构建目录
 # nohup java -jar /home/zjy/workspace/mycode/testdocker/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
 echo "==================== shell end ============="
+```
+
+- spring mvc
+```shell script
+# war包名称
+my_war_name=ToolSiteMvc4J
+# tomcat目录
+tomcat_dir=/opt
+# tomcat目录名称
+tomcat_name=tomcattest
+# 项目模块名称
+proj_name=web
+
+# 停止服务
+pid=$(ps -aef | grep -v grep | grep java | grep "${tomcat_name}" | awk '{print $2}')
+# if [ -n "$pid" ]; then
+if [ $pid ]; then
+  kill -9 ${pid}
+else
+  echo "no instance"
+fi
+
+# 创建目录
+pro_dir=${tomcat_dir}/${tomcat_name}/webapps/${my_war_name}
+if [ ! -d $pro_dir ]; then
+   mkdir -p $pro_dir
+else
+  rm -rf $pro_dir/*
+fi
+# 进入目录
+cd $pro_dir
+# 解压文件
+jar -xvf ${WORKSPACE}/${proj_name}/target/${my_war_name}.war
+
+# 启动服务
+${tomcat_dir}/${tomcat_name}/bin/startup.sh
 ```
 
 - jenkins配置
