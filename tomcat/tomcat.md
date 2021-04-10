@@ -91,9 +91,18 @@ pause;
 ~~~
 # 设置tomcat窗口标题
 - 打开catalina.bat文件，搜索%TITLE%，修改后面的值即可
-# 添加context
+
+# 部署项目
+### 添加context
 - 1. 在conf文件夹下添加Catalina/localhost/你的虚拟目录名.xml, 如Catalina/localhost/MyJspWeb.xml, 添加如下内容。注意Context节点名称大小写, 
 此时可以刷新tomcat后台管理程序, 可以看到程序已启动, http://localhost:8080/MyJspWeb/MyJsp.jsp, 注意jsp路径区分大小写
 ~~~ xml
 <?xml version="1.0" encoding="utf-8"?><Context docBase="C:\\Users\\zengjunyi\\workspace\\TestWeb\\WebContent" reloadable="true" />
 ~~~
+### 将项目解压到webapps目录
+- 注意是包括外层目录也放进来，如tomcat/webapps/ToolSiteMvc4J/index.html，不要直接把所有项目文件全部直接解压到webapps里
+- 修改server.xml文件，在Engine-->Host-->节点下添加Context节点
+```xml
+<!--path为空表示不需要context名称，直接访问。docBase是文件夹名称-->
+<Context path="" docBase="ToolSiteMvc4J" reloadable="true" />
+```
