@@ -118,18 +118,18 @@ nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1
 
 - 配置全局属性，此属性可以让jenkins构建结束后不自动结束部署的项目服务
 
-![a](../imgs/jenkins/jenkins7.png)
+![a](../imgs/jenkins/jenkins6.png)
 - 构建项目配置，设置job清理策略和github
 
-![a](../imgs/jenkins/jenkins8.png)
+![a](../imgs/jenkins/jenkins7.png)
 - 设置maven，点高级
 
+![a](../imgs/jenkins/jenkins8.png)
 ![a](../imgs/jenkins/jenkins9.png)
-![a](../imgs/jenkins/jenkins10.png)
 - 设置执行脚本
 
-![a](../imgs/jenkins/jenkins11.png)
+![a](../imgs/jenkins/jenkins10.png)
 - 本地代码构建，源代码选择无，且指定要执行的pom目录地址
 
+![a](../imgs/jenkins/jenkins11.png)
 ![a](../imgs/jenkins/jenkins12.png)
-![a](../imgs/jenkins/jenkins13.png)
