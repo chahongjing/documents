@@ -143,6 +143,9 @@ jar -xvf ${WORKSPACE}/${proj_name}/target/${my_war_name}.war
 ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 ```
 
+- 直接使用容器插件部署war
+1. jenkins安装Deploy to container插件
+
 - jenkins配置
 
 ![a](../imgs/jenkins/jenkins1.png)
@@ -167,8 +170,21 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 ![a](../imgs/jenkins/jenkins9.png)
 - 设置执行脚本
 
-![a](../imgs/jenkins/jenkins10.png)
+![执行脚本](../imgs/jenkins/jenkins10.png)
 - 本地代码构建，源代码选择无，且指定要执行的pom目录地址
 
-![a](../imgs/jenkins/jenkins11.png)
-![a](../imgs/jenkins/jenkins12.png)
+![本地代码](../imgs/jenkins/jenkins11.png)
+![本地代码](../imgs/jenkins/jenkins12.png)
+
+- tomcat容器上传方式部署，安装deploy插件
+1. tomcat服务器 tomcat/conf/tomcat-users.xml修改
+```shell script
+<role rolename="manager-script"/>
+<role rolename="manager-gui"/>
+<user username="zjy" password="xxxx" roles="manager-script,manager-gui"/>
+```
+![tomcat](../imgs/jenkins/jenkins13.png)
+> war file：生成的war目录，前缀是${WORKSPACE}，如：/var/lib/jenkins/workspace/tomcat，不用填写，只用填写项目相关路径
+> tomcat url：要发布目标的tomcat访问地址
+
+![tomcat](../imgs/jenkins/jenkins14.png)
