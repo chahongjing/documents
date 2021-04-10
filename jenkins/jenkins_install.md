@@ -71,6 +71,7 @@ BUILD_ID=dontKillMe
 5. 填写构建后执行脚本，选择执行execute shell，注意，不要选择错了，如果是linux环境不要选择成window shell，然后添加脚本
 ### 执行脚本
 ```shell script
+echo "==================== begin build post shell ============="
 echo "buid_id:${BUILD_ID}"
 echo "workspace:${WORKSPACE}"
 echo "jenkins_home:${JENKINS_HOME}"
@@ -102,6 +103,7 @@ fi
 nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
 # 本地构建，这里写死了本地的构建目录
 # nohup java -jar /home/zjy/workspace/mycode/testdocker/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1 &
+echo "==================== shell end ============="
 ```
 
 - jenkins配置
