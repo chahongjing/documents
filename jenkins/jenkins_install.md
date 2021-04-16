@@ -160,11 +160,11 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 
 - 配置全局属性，此属性可以让jenkins构建结束后不自动结束部署的项目服务
 
-![a](../imgs/jenkins/jenkins6.png)
 - 构建项目配置，设置job清理策略和github
 
+![a](../imgs/jenkins/jenkins6.png)
 ![a](../imgs/jenkins/jenkins7.png)
-- 设置maven，点高级
+- 设置maven。如果没有全局设置maven，这里要点高级，设置settings.xml
 
 ![a](../imgs/jenkins/jenkins8.png)
 ![a](../imgs/jenkins/jenkins9.png)
@@ -186,5 +186,6 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 ![tomcat](../imgs/jenkins/jenkins13.png)
 > war file：生成的war目录，前缀是${WORKSPACE}，如：/var/lib/jenkins/workspace/tomcat，不用填写，只用填写项目相关路径
 > tomcat url：要发布目标的tomcat访问地址
+> credentials：添加tomcat访问的用户名和密码
 
 ![tomcat](../imgs/jenkins/jenkins14.png)
