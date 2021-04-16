@@ -160,6 +160,7 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 
 - 配置全局属性，此属性可以让jenkins构建结束后不自动结束部署的项目服务
 
+![a](../imgs/jenkins/jenkins15.png)
 - 构建项目配置，设置job清理策略和github
 
 ![a](../imgs/jenkins/jenkins6.png)
