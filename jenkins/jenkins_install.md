@@ -29,6 +29,8 @@ JENKINS_GROUP=$NAME
 # 改成
 JENKINS_USER=root
 JENKINS_GROUP=root
+
+
 # 修改jenkins目录权限为root，此句可以先不执行，看报不报错
 sudo chown -R root:root /var/lib/jenkins
 # 重启服务
@@ -69,8 +71,8 @@ BUILD_ID=dontKillMe
 3. 勾选构建job清理策略，如仅保留7天，最多保留5个构建。
 4. 填写goals and options：clean package -Dmaven.test.skip=true
 5. 填写构建后执行脚本，选择执行execute shell，注意，不要选择错了，如果是linux环境不要选择成window shell，然后添加脚本
-### 执行脚本
-- springboot
+### 部署项目
+1.springboot jar包部署脚本
 ```shell script
 echo "==================== begin build post shell ============="
 echo "buid_id:${BUILD_ID}"
@@ -107,7 +109,7 @@ nohup java -jar ${WORKSPACE}/target/${my_jar_name}.jar > /var/tmp/nohup.log 2>&1
 echo "==================== shell end ============="
 ```
 
-- spring mvc
+2.spring mvc war包部署脚本
 ```shell script
 # war包名称
 my_war_name=ToolSiteMvc4J
@@ -143,10 +145,25 @@ jar -xvf ${WORKSPACE}/${proj_name}/target/${my_war_name}.war
 ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 ```
 
-- 直接使用容器插件部署war
-1. jenkins安装Deploy to container插件
+3.直接使用tomcat容器上传方式部署war
+- jenkins安装Deploy to container插件
 
-- jenkins配置
+![tomcat](../imgs/jenkins/jenkins13.png)
+- tomcat服务器 tomcat/conf/tomcat-users.xml修改
+```shell script
+<role rolename="manager-script"/>
+<role rolename="manager-gui"/>
+<user username="zjy" password="xxxx" roles="manager-script,manager-gui"/>
+```
+- 配置war包路径，上传账号，密码，context等信息
+
+![tomcat](../imgs/jenkins/jenkins14.png)
+> war file：生成的war目录，前缀是${WORKSPACE}，如：/var/lib/jenkins/workspace/tomcat，不用填写，只用填写项目相关路径
+> 
+> tomcat url：要发布目标的tomcat访问地址
+>
+> credentials：添加tomcat访问的用户名和密码
+### jenkins配置
 
 ![a](../imgs/jenkins/jenkins1.png)
 - 配置插件更新服务地址
@@ -161,7 +178,8 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 - 配置全局属性，此属性可以让jenkins构建结束后不自动结束部署的项目服务
 
 ![a](../imgs/jenkins/jenkins15.png)
-- 构建项目配置，设置job清理策略和github
+### 构建项目配置
+- 设置job清理策略和github
 
 ![a](../imgs/jenkins/jenkins6.png)
 ![a](../imgs/jenkins/jenkins7.png)
@@ -176,17 +194,3 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 
 ![本地代码](../imgs/jenkins/jenkins11.png)
 ![本地代码](../imgs/jenkins/jenkins12.png)
-
-- tomcat容器上传方式部署，安装deploy插件
-1. tomcat服务器 tomcat/conf/tomcat-users.xml修改
-```shell script
-<role rolename="manager-script"/>
-<role rolename="manager-gui"/>
-<user username="zjy" password="xxxx" roles="manager-script,manager-gui"/>
-```
-![tomcat](../imgs/jenkins/jenkins13.png)
-> war file：生成的war目录，前缀是${WORKSPACE}，如：/var/lib/jenkins/workspace/tomcat，不用填写，只用填写项目相关路径
-> tomcat url：要发布目标的tomcat访问地址
-> credentials：添加tomcat访问的用户名和密码
-
-![tomcat](../imgs/jenkins/jenkins14.png)
