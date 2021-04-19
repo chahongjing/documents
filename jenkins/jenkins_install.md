@@ -166,10 +166,12 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 ### jenkins配置
 
 ![a](../imgs/jenkins/jenkins1.png)
+
 1.配置插件更新服务地址
 
 ![a](../imgs/jenkins/jenkins2.png)
 ![a](../imgs/jenkins/jenkins3.png)
+
 2.全局配置maven和jdk
 
 ![a](../imgs/jenkins/jenkins4.png)
@@ -183,13 +185,16 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 
 ![a](../imgs/jenkins/jenkins6.png)
 ![a](../imgs/jenkins/jenkins7.png)
+
 2.设置maven。如果没有全局设置maven，这里要点高级，设置settings.xml
 
 ![a](../imgs/jenkins/jenkins8.png)
 ![a](../imgs/jenkins/jenkins9.png)
+
 3.设置执行脚本
 
 ![执行脚本](../imgs/jenkins/jenkins10.png)
+
 4.本地代码构建，源代码选择无，且指定要执行的pom目录地址
 
 ![本地代码](../imgs/jenkins/jenkins11.png)
