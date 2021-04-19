@@ -26,7 +26,7 @@
 2. 配置java环境变量。
   - 确定jdk解压后的目录如/usr/java/jdk1.8.0_161。
   - 通过vi编辑器配置环境变量，使用vi打开 /etc/profile,在前面输入如下内容，然后保存退出。<br>
-![javaweb](/imgs/linux/javaweb6.png)<br>
+![javaweb](../imgs/linux/javaweb6.png)<br>
   - 保存后输入java –version，看到类似如下信息便安装成功。<br>
 ![javaweb](/imgs/linux/javaweb7.png)<br>
 3. 启动tomcat。进入tomcat的bin目录执行命令./startup.sh，关闭tomcat：./shutdown.sh。启动后可在浏览器中输入localhost:8080查看部署效果。
