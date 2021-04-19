@@ -166,31 +166,31 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 ### jenkins配置
 
 ![a](../imgs/jenkins/jenkins1.png)
-- 配置插件更新服务地址
+1.配置插件更新服务地址
 
 ![a](../imgs/jenkins/jenkins2.png)
 ![a](../imgs/jenkins/jenkins3.png)
-- 全局配置maven和jdk
+2.全局配置maven和jdk
 
 ![a](../imgs/jenkins/jenkins4.png)
 ![a](../imgs/jenkins/jenkins5.png)
 
-- 配置全局属性，此属性可以让jenkins构建结束后不自动结束部署的项目服务
+3.配置全局属性，此属性可以让jenkins构建结束后不自动结束部署的项目服务
 
 ![a](../imgs/jenkins/jenkins15.png)
 ### 构建项目配置
-- 设置job清理策略和github
+1.设置job清理策略和github
 
 ![a](../imgs/jenkins/jenkins6.png)
 ![a](../imgs/jenkins/jenkins7.png)
-- 设置maven。如果没有全局设置maven，这里要点高级，设置settings.xml
+2.设置maven。如果没有全局设置maven，这里要点高级，设置settings.xml
 
 ![a](../imgs/jenkins/jenkins8.png)
 ![a](../imgs/jenkins/jenkins9.png)
-- 设置执行脚本
+3.设置执行脚本
 
 ![执行脚本](../imgs/jenkins/jenkins10.png)
-- 本地代码构建，源代码选择无，且指定要执行的pom目录地址
+4.本地代码构建，源代码选择无，且指定要执行的pom目录地址
 
 ![本地代码](../imgs/jenkins/jenkins11.png)
 ![本地代码](../imgs/jenkins/jenkins12.png)
