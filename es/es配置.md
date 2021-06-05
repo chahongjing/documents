@@ -8,7 +8,9 @@ PUT /workorder_extend/_mapping/workorder_extend
   "properties":{
     "content":{
       "type": "text",
-      "fielddata": true
+      "fielddata": true,
+      "analyzer":"ik_max_word",
+      "search_analyzer":"ik_smart"
     }
   }
 }

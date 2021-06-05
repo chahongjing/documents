@@ -76,3 +76,30 @@ include domains/*.conf;              # 加载nginx.conf文件目录下的domains
 client_max_body_size 20M;            # 请求信息大小限制（如上传）,注意末尾的分号不能遗漏。
 server_names_hash_bucket_size 64;    # 解决启动报错误：could not build server_names_hash, you should increase server_names_hash_bucket_size: 32
 ```
+
+### 配置https转本地http
+```shell script
+如下脚本https://rd-workordernw-partner.zjy.com会转到本地21021端口服务
+upstream rd-workordernw-partner.zjy.com {
+    server 127.0.0.1:21021;
+}
+
+server {
+    listen       443 ssl;
+    server_name  rd-workordernw-partner.zjy.com;
+
+    ssl_certificate C://ssl//buduhuisi.crt;
+    ssl_certificate_key  C://ssl//buduhuisi.key;
+
+    location / {
+        root   html;
+        index  index.html index.htm;
+        proxy_pass http://rd-workordernw-partner.zjy.com; 
+    }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+}
+```
+[nginx配置https](https://www.cnblogs.com/chasewade/p/7661290.html)
