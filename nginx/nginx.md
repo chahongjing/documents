@@ -50,7 +50,7 @@ proxy_pass http://mynodes;
 ![1](../imgs/nginx/1.png)
 2. 进入domain文件夹下，添加对应配置文件。内容如下
 ![2](../imgs/nginx/22222.png)
-~~~ ini
+~~~ nginx
 upstream dev.your.domain.com {
     server 127.0.0.1:21002;
 }
@@ -70,6 +70,34 @@ server {
     }
 }
 ~~~
+同一域名转发不同服务
+```  nginx
+server { 
+        listen  80; 
+        server_name     www.zjy.com; 
+         
+        location /contextA { 
+                proxy_pass      http://www.zjy.com:8041/contextA; 
+        } 
+ 
+        location /contextB { 
+                proxy_set_header Host $host; 
+                proxy_pass      http://www.zjy.com:8695/contextB; 
+        } 
+ 
+        location /contextC/test { 
+                proxy_pass      http://192.168.0.0.2:8089/contextC/test/getExtension; 
+        } 
+ 
+        location /mst/ngs/ { 
+                add_header Access-Control-Allow-Origin *; 
+                proxy_set_header Host $host; 
+                proxy_set_header X-Forwarded-For $remote_addr; 
+                proxy_pass http://www.zjy.com/ngs/; 
+                proxy_cookie_path /ngs /; 
+        } 
+}
+```
 ### 在http节点中添加其它配置
 ``` ini
 include domains/*.conf;              # 加载nginx.conf文件目录下的domains目录下所有.conf结尾的配置文件
