@@ -33,3 +33,11 @@ ssh://dmadmin@10.248.224.871
 
 ### 添加阿里云镜像
 1. 软件更新-->ubuntu software --> source code --> 填写：http://mirrors.aliyun.com/ubuntu
+
+### 常用命令
+|命令|说明|
+|---|---|
+|ctrl + a|光标移动到命令最前面|
+|ctrl + e|光标移动到命令最后面|
+|ctrl + y|粘贴|
+|ctrl + u|删除光标前所有命令|
