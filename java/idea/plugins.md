@@ -1,6 +1,6 @@
 # 插件
 - Free Mybatis plugin
-- Mybatis Log Plugin
+- mybatis-log（Mybatis Log Plugin）
 - RestfulToolkit
 - String Manipulation
 - Maven Helper
