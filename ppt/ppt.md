@@ -62,7 +62,7 @@
 ![ppt](../imgs/ppt/ppt34.png)
 
 
-collagelt软件，wps口袋动画插件
+collagelt软件，wps口袋动画插件,gifcam,screengif
 
 [高清图片素材](https://www.piqsels.com/zh)
 [高清图片素材](https://cc0.cn/)
@@ -83,3 +83,9 @@ collagelt软件，wps口袋动画插件
 [模板库](https://www.pexels.com/zh-cn/)
 [模板库](https://iconstore.co/)
 [模板库](https://iconstore.co/)
+[动态扣图](http://www.unscreen.com)
+[纹理](https://codepen.io/Yakudoo/full/rJjOJx)
+[爆炸粒子生成器](https://wangyasai.github.io/Particles-Emission/)
+[黑客帝国文字雨](https://wangyasai.github.io/designtools.html)
+
+[动图](https://photomosh.com)
