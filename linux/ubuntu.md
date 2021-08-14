@@ -41,3 +41,6 @@ ssh://dmadmin@10.248.224.871
 |ctrl + e|光标移动到命令最后面|
 |ctrl + y|粘贴|
 |ctrl + u|删除光标前所有命令|
+
+### 安装java软件
+`apt install openjdk-8-jdk git maven nginx tomcat`
