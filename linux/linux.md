@@ -25,3 +25,10 @@ echo "argume:$@"
 ```
 执行脚本
 `chmod +x variable `，`./variable aa bb `
+
+执行sh没有权限
+1. `. test.sh`注意.和test.sh中间有个空格
+2. `source test.sh`
+3. `sh test.sh`
+4. `bash test.sh`
+5. `chmod 777 test.sh`再执行`./test.sh `
