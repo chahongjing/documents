@@ -22,6 +22,7 @@ set "JAVA_OPTS=%JAVA_OPTS% %JSSE_OPTS% -Dfile.encoding=UTF-8"
 
 ![tomcat](/imgs/java/tomcat4.png)
 ![tomcat](/imgs/java/tomcat5.png)
+
 5. 当前项目添加UTF-8的jvm参数
 ![tomcat](/imgs/java/tomcat6.png)
 ## 设置tomcat上传文件大小限制设置
