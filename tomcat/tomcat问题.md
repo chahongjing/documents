@@ -2,7 +2,8 @@
 #### 解决方法:
 1. 直接启动startup.bat运行，则需要在catalina.bat中设置
 ~~~ cmd
-set JAVA_OPTS=-Xms256m -Xmx2048m -Dfile.encoding=UTF-8
+setlocal
+set "JAVA_OPTS=%JAVA_OPTS% %JSSE_OPTS% -Dfile.encoding=UTF-8"
 ~~~
 2. windows服务运行tomcat，则需要执行tomcatw.exe进行配置，增加
 ~~~ cmd
