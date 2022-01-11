@@ -69,6 +69,38 @@ server {
         root   html;
     }
 }
+
+
+# 取名字配置
+upstream justAName {
+        server 127.0.0.1:8543;
+}
+
+server {        
+    
+        listen 80;
+        server_name jr.kefu.local.mi.com;
+
+        location / {
+            proxy_buffer_size 64k;
+            proxy_buffers   32 32k;
+            proxy_busy_buffers_size 128k;
+            proxy_pass http://justAName/;
+            proxy_set_header Host $host;
+            proxy_http_version 1.1;
+        }
+}
+
+
+# 直接配置
+server { 
+        listen  80; 
+        server_name     wou.local.kefu.mi.com;
+         
+        location / { 
+                proxy_pass      http://wou.local.kefu.mi.com:8686/;
+        } 
+}
 ~~~
 同一域名转发不同服务
 ```  nginx
