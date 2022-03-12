@@ -30,3 +30,22 @@ GET workorder_extend/_search
   }
 }
 ```
+1、match：返回所有匹配的分词。
+2、match_all：查询全部。
+3、match_phrase：短语查询，在match的基础上进一步查询词组，可以指定slop分词间隔。
+4、match_phrase_prefix：前缀查询，根据短语中最后一个词组做前缀匹配，可以应用于搜索提示，但注意和max_expanions搭配。其实默认是50.......
+5、multi_match：多字段查询，使用相当的灵活，可以完成match_phrase和match_phrase_prefix的工作。
+
+bool查询总结
+must：与关系，相当于关系型数据库中的 and。
+should：或关系，相当于关系型数据库中的 or。
+must_not：非关系，相当于关系型数据库中的 not。
+filter：过滤条件。
+range：条件筛选范围。
+gt：大于，相当于关系型数据库中的 >。
+gte：大于等于，相当于关系型数据库中的 >=。
+lt：小于，相当于关系型数据库中的 <。
+lte：小于等于，相当于关系型数据库中的 <=。
+
+term:单个精准匹配
+terms：多个精准匹配，各个匹配结果之间的并集

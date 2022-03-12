@@ -23,6 +23,39 @@
 4. 关闭服务命令：`service myservice stop`
 5. 删除到自启服务命令：`update-rc.d -f myservice remove`
 
+### 方式二
+`sudo vim /usr/lib/systemd/system/nginx.service`
+添加如下内容，注意nginx文件路径和配置文件路径
+
+```  shell
+Description=nginx - high performance web server
+After=network.target remote-fs.target nss-lookup.target
+[Service]
+Type=forking
+ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf
+ExecReload=/usr/sbin/nginx -s reload
+ExecStop=/usr/sbin/nginx -s stop
+[Install]
+WantedBy=multi-user.target
+```
+说明
+Description:描述服务
+After:依赖，当依赖的服务启动之后再启动自定义的服务
+[Service]服务运行参数的设置
+Type=forking是后台运行的形式
+ExecStart为服务的具体运行命令(需要根据路径适配)
+ExecReload为重启命令(需要根据路径适配)
+ExecStop为停止命令(需要根据路径适配)
+PrivateTmp=True表示给服务分配独立的临时空间
+注意：启动、重启、停止命令全部要求使用绝对路径
+[Install]服务安装的相关设置，可设置为多用户
+
+相关命令
+systemctl disable nginx.service 关闭开机自启
+systemctl enable nginx.service 开启开机自启
+systemctl status nginx.service 查看状态
+systemctl restart nginx.service 重启服务
+systemctl list-units --type=service 查看所有服务
 ### 下载
 启动aria2服务：`aria2c --daemon --enable-rpc=true`
 
@@ -41,6 +74,28 @@ ssh://dmadmin@10.248.224.871
 |ctrl + e|光标移动到命令最后面|
 |ctrl + y|粘贴|
 |ctrl + u|删除光标前所有命令|
+|ctrl + k|删除光标到行尾|
+|ctrl + w|删除光标到行首|
 
 ### 安装java软件
 `apt install openjdk-8-jdk git maven nginx tomcat`
+
+#### 设置截图
+系统设置——>设备——>键盘——快捷键——自定义快捷键：`gnome-screenshot -ac`
+![设置截图快捷键](../imgs/linux/screenshotcut.png)
+
+#### 修改文件默认打开方式
+1. 使用命令修改
+`sudo gedit /etc/gnome/defaults.list`
+``` java
+text/plain=gedit.desktop
+改为  
+text/plain=sublime_text.desktop
+```
+`sudo gedit /usr/share/applications/mimeinfo.cache`
+``` java
+text/plain=gedit.desktop
+改为  
+text/plain=sublime_text.desktop
+```
+2. 另外还可以右键-->属性-->打开方式
