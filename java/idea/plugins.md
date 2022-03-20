@@ -1,9 +1,9 @@
 # 插件
 - Free Mybatis plugin
 - mybatis-log（Mybatis Log Plugin）
+- Maven Helper
 - RestfulToolkit
 - String Manipulation
-- Maven Helper
 - SonarLint
 - Alibaba Java Coding Guidelines
 - Key promoter X
