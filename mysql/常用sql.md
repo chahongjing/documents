@@ -22,9 +22,9 @@ insert into mytable(id, name) values (1, 'a'), (2, 'b'), (3, 'c');
 ~~~
 ### 创建表
 ~~~ sql
-CREATE TABLE IF NOT EXISTS mytable(id INT, name VARCHAR(100)) char set utf8mb4 COMMENT='表的注释';
+CREATE TABLE IF NOT EXISTS mytable(id bigint unsigned auto_increment primary key not null comment '主键', name varchar(20) not null default '' comment '名称') ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表的注释';
 -- 注释
-ALTER TABLE COMMENT '修改后的表的注释';
+ALTER TABLE tableName COMMENT '修改后的表的注释';
 -- 修改字段的注释
 ALTER TABLE test1 MODIFY COLUMN field_name INT COMMENT '修改后的字段注释';
 -- 查看表注释

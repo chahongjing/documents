@@ -49,3 +49,113 @@ lte：小于等于，相当于关系型数据库中的 <=。
 
 term:单个精准匹配
 terms：多个精准匹配，各个匹配结果之间的并集
+
+#### 查询数据
+``` json
+// 通过字段查询
+GET /index_name/_search?q=title:小米蓝牙手柄如何与小米电视
+// 通过id查询
+GET /index_name/_doc/yourId
+// 通过条件查询
+GET /index_name/_search
+{
+  "query": {
+    "match": {
+      "title": "小米蓝牙"
+    }
+  }
+}
+// 通过条件查询
+GET /index_name/_search
+{
+  "query": {
+    "terms": {
+      "type": [4, 5]
+    }
+  }
+}
+// and和or条件 type=4 and (title like '%小米%' or title like '%红米%')
+GET /index_name/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "type": "4"
+          }
+        },
+        {
+          "bool": {
+            "should": [
+              {
+                "match": {
+                  "title": "小米"
+                }
+              },
+              {
+                "match": {
+                  "title": "红米"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+```
+#### 创建数据
+``` json
+// 创建数据
+PUT /index_name/_doc/yourId
+{
+    "title" : "测试",
+    "content" : "测试内容"
+}
+```
+#### 更新数据
+``` json
+// 更新数据，如果没有，则插入
+POST /index_name/_update/yourId
+{
+  "doc": {
+    "content": "更新后的内容"
+  },
+  "doc_as_upsert": true
+}
+// 更新数据指定字段
+POST /index_name/_update/yourId
+{
+  "doc": {
+    "content":"来吧"
+  }
+}
+
+// 如果不存在，执行upsert,如果存在执行doc中的更新
+POST /index_name/_update/yourId
+{
+  "doc": {
+    "content": "just update"
+  },
+  "upsert": {
+    "title" : "upsert title",
+    "content" : "upsert content"
+  }
+}
+```
+#### 删除数据
+``` json
+// 通过id删除数据
+DELETE /index_name/_doc/yourId
+// 通过条件删除数据
+POST /index_name/_delete_by_query
+{
+  "query": {
+    "match": {
+      "_id": "yourId"
+    }
+  }
+}
+```
