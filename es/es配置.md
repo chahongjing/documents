@@ -49,13 +49,19 @@ lte：小于等于，相当于关系型数据库中的 <=。
 
 term:单个精准匹配
 terms：多个精准匹配，各个匹配结果之间的并集
-
+#### 查看配置信息
+``` json
+// 查看索引信息
+GET /index_name
+// 查看映射
+GET /info_mixms_kbs_test/_mapping
+```
 #### 查询数据
 ``` json
 // 通过字段查询
 GET /index_name/_search?q=title:小米蓝牙手柄如何与小米电视
 // 通过id查询
-GET /index_name/_doc/yourId
+GET /index_name/_doc/yourId?pretty
 // 通过条件查询
 GET /index_name/_search
 {
@@ -155,6 +161,22 @@ POST /index_name/_delete_by_query
   "query": {
     "match": {
       "_id": "yourId"
+    }
+  }
+}
+```
+#### 判断是否有某个字段
+``` java
+// must, must_not
+GET /index_name
+{
+  "query": {
+    "bool": {
+      "must": {
+        "exists": {
+          "field": "title"
+        }
+      }
     }
   }
 }
