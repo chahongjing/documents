@@ -181,3 +181,16 @@ GET /index_name
   }
 }
 ```
+#### 查询索引总记录数count(*)
+``` java
+GET /index_name/_count
+```
+#### 查询索引全量数据
+``` java
+GET /index_name/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+```
