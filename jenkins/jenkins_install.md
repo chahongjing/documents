@@ -163,6 +163,64 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 > tomcat url：要发布目标的tomcat访问地址
 >
 > credentials：添加tomcat访问的用户名和密码
+
+springboot打包生成镜像，并推送到dockerhub，然后启动服务
+```shell script
+#!/bin/bash
+# 源jar名称，mvn打包之后，target目录下的jar包名称
+JAR_NAME=mvc-web-0.0.1-SNAPSHOT
+NEW_JAR_NAME=mvc
+
+DOCKER_IMAGE_NAME=web-mvc
+
+# jenkins下的目录
+# JENKINS_HOME=/var/jenkins_home/workspace/jenkins
+echo "=========== post build ============"
+echo "JENKINS_HOME: $JENKINS_HOME"
+echo "WORKSPACE: $WORKSPACE"
+echo "DOCKER_IMAGE_NAME: $DOCKER_IMAGE_NAME, jar name: $JAR_NAME"
+# 等待三秒
+echo sleep 3s
+sleep 1
+echo sleep 2s
+sleep 1
+echo sleep 1s
+sleep 1
+
+cd $WORKSPACE/web/target
+# 修改文件权限
+chmod 755 $JAR_NAME.jar
+# 复制dockerfile
+# cp $WORKSPACE/web/src/Dockerfile ./
+# 生成dockerfile
+echo "FROM java:8" > Dockerfile
+echo 'MAINTAINER "zjy <310510906@qq.com>"' >> Dockerfile
+echo "VOLUME /tmp" >> Dockerfile
+echo "ENV MY_PATH /home/tmp/mvc/" >> Dockerfile
+echo 'WORKDIR $MY_PATH' >> Dockerfile
+echo "ADD ${JAR_NAME}.jar ${NEW_JAR_NAME}.jar" >> Dockerfile
+echo "EXPOSE 8088" >> Dockerfile
+echo "ENTRYPOINT [\"sh\", \"-c\", \"java -Djava.security.egd=file:/dev/./urandom -jar \${MY_PATH}${NEW_JAR_NAME}.jar\"]" >> Dockerfile
+
+echo "docker version"
+docker -v
+echo "停止容器"
+# 停止容器
+docker stop $DOCKER_IMAGE_NAME
+echo "删除容器"
+# 删除容器
+docker rm $DOCKER_IMAGE_NAME
+echo "删除镜像"
+# 删除镜像
+docker rmi $DOCKER_IMAGE_NAME
+echo "打包镜像"
+# 打包镜像
+docker build -t ${DOCKER_IMAGE_NAME}:latest .
+echo "运行镜像"
+# 运行镜像
+docker run --name=${DOCKER_IMAGE_NAME} -d -p 8090:8088 ${DOCKER_IMAGE_NAME}:latest
+```
+
 ### jenkins配置
 
 ![a](../imgs/jenkins/jenkins1.png)
@@ -175,6 +233,7 @@ ${tomcat_dir}/${tomcat_name}/bin/startup.sh
 2.全局配置maven和jdk
 
 ![a](../imgs/jenkins/jenkins4.png)
+![a](../imgs/jenkins/jenkins16.png)
 ![a](../imgs/jenkins/jenkins5.png)
 
 3.配置全局属性，此属性可以让jenkins构建结束后不自动结束部署的项目服务
