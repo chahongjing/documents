@@ -99,3 +99,8 @@ text/plain=gedit.desktop
 text/plain=sublime_text.desktop
 ```
 2. 另外还可以右键-->属性-->打开方式
+
+查看占用空间较大的文件夹
+``` bash
+du -h -x --max-depth=1
+```

@@ -7,7 +7,7 @@
 - [临时表](#临时表)
 - [排名函数](#排名函数)
 ### 连接更新
-~~~ sql
+``` sql
 UPDATE T1, T2,
  INNER JOIN T1 ON T1.C1 = T2. C1
    SET T1.C2 = T2.C2, T2.C3 = expr
@@ -19,9 +19,9 @@ SELECT * FROM table LIMIT 5,10
 SELECT * FROM MYTABLE WHERE `MY-ID` = 1;
 -- 插入多条记录
 insert into mytable(id, name) values (1, 'a'), (2, 'b'), (3, 'c');
-~~~
+```
 ### 创建表
-~~~ sql
+``` sql
 CREATE TABLE IF NOT EXISTS mytable(id bigint unsigned auto_increment primary key not null comment '主键', name varchar(20) not null default '' comment '名称') ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表的注释';
 -- 注释
 ALTER TABLE tableName COMMENT '修改后的表的注释';
@@ -31,15 +31,15 @@ ALTER TABLE test1 MODIFY COLUMN field_name INT COMMENT '修改后的字段注释
 SELECT * FROM TABLES WHERE TABLE_SCHEMA='my_db' AND TABLE_NAME='test1';
 -- 查看字段注释的方法
 SELECT * FROM COLUMNS WHERE TABLE_SCHEMA='my_db' AND TABLE_NAME='test1';
-~~~
+```
 ### 创建索引
-~~~ sql
+``` sql
 ALTER TABLE table_name ADD INDEX index_name (column_list);
 CREATE INDEX index_name ON table_name (column_list);
 ALTER TABLE rp_work_order_meta ADD UNIQUE uk_workordernum(work_order_num);
-~~~
+```
 ### 删除重复行只保留一行
-~~~ sql
+``` sql
 create table test(id int, name varchar(100));
 
 insert into test values(1, 'zjy');
@@ -52,25 +52,40 @@ delete
   from test
  where name in (select name from (select name from test group by name having count(*) > 1) tr)
    and id not in (select id from (select min(id) as id from test group by name having count(*) > 1) ti);
-~~~
+```
+### json
+```sql
+create table abc(
+  id int primary key,
+  age int,
+  extra json,
+  v_n varchar(20) generated always as (json_unquote(json_extract(extra, '$.name'))),
+  v_t int generated always as (json_unquote(json_extract(extra, '$.address.t'))),
+  index idx_v_n(v_n)
+);
+
+insert into abc(id,age,extra)values(1,1,'{"name":"zjy","address":{"a":12, "t":34}}');
+
+select abc.*, extra -> '$.address.t' from abc where extra -> '$.name' = 'zjy';
+```
 ### 多字段in
-~~~ sql
+``` sql
 -- 多字段in
 select * from test where (id, name) in ((1, 'zjy'));
-~~~
+```
 ### 函数
-~~~ sql
+``` sql
 -- 查找字符串中的位置，以逗号隔开，返回值从1开始
 SELECT find_in_set(3, '1,2,3,4,5');
-~~~
+```
 ### 临时表
-~~~ sql
+``` sql
 -- 临时表
 create temporary table tt as select * from test;
 drop table tt;
-~~~
+```
 ### 排名函数
-~~~ sql
+``` sql
 -- mysql8新增特性
 select pid, name, age,
        row_number() over (order by age) as rn,
@@ -99,9 +114,9 @@ SELECT pid, name, age, myrank
                @incRank := @incRank + 1, @prevRank := age
           FROM players p, (SELECT @curRank :=0, @prevRank := NULL, @incRank := 1) r 
 		ORDER BY age) s;
-~~~
+```
 ### 插入或更新
-~~~ sql
+``` sql
 INSERT INTO table (a,b,c) VALUES (1,2,3)  
   ON DUPLICATE KEY UPDATE c = c + 1;  
 -- a是唯一索引，如果已有一条值为1的数据，效果相当于如下语句
@@ -110,10 +125,10 @@ UPDATE table SET c = c + 1 WHERE a = 1;
 -- 1. 如果发现表中已经有此行数据（根据主键或者唯一索引判断）则先删除此行数据，然后插入新的数据。 2. 否则，直接插入新数据。
 -- 要注意的是：插入数据的表必须有主键或者是唯一索引！否则的话，replace into 会直接插入数据，这将导致表中出现重复的数据。
 REPLACE INTO test(title,uid) VALUES ('1234657','1001');
-~~~
+```
 ### 其它
-~~~ sql
+``` sql
 -- 可以连接多个参数
 select CONCAT(str1, str2, str3);
 select CONCAT_WS(separator, str1, str2, str3);
-~~~
+```

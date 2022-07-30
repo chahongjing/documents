@@ -170,20 +170,18 @@ springboot打包生成镜像，并推送到dockerhub，然后启动服务
 # 源jar名称，mvn打包之后，target目录下的jar包名称
 JAR_NAME=mvc-web-0.0.1-SNAPSHOT
 NEW_JAR_NAME=mvc
-
 DOCKER_IMAGE_NAME=web-mvc
+INNER_PORT=8088
+OUTER_PORT=8090
 
 # jenkins下的目录
 # JENKINS_HOME=/var/jenkins_home/workspace/jenkins
 echo "=========== post build ============"
 echo "JENKINS_HOME: $JENKINS_HOME"
 echo "WORKSPACE: $WORKSPACE"
-echo "DOCKER_IMAGE_NAME: $DOCKER_IMAGE_NAME, jar name: $JAR_NAME"
-# 等待三秒
-echo sleep 3s
-sleep 1
-echo sleep 2s
-sleep 1
+echo "DOCKER_IMAGE_NAME: $DOCKER_IMAGE_NAME, jar name: $JAR_NAME, new jar name:${DOCKER_IMAGE_NAME}"
+echo "inner port:${INNER_PORT}. outer_port:${OUTER_PORT}"
+# 等待1秒
 echo sleep 1s
 sleep 1
 
@@ -199,26 +197,20 @@ echo "VOLUME /tmp" >> Dockerfile
 echo "ENV MY_PATH /home/tmp/mvc/" >> Dockerfile
 echo 'WORKDIR $MY_PATH' >> Dockerfile
 echo "ADD ${JAR_NAME}.jar ${NEW_JAR_NAME}.jar" >> Dockerfile
-echo "EXPOSE 8088" >> Dockerfile
+echo "EXPOSE ${INNER_PORT}" >> Dockerfile
 echo "ENTRYPOINT [\"sh\", \"-c\", \"java -Djava.security.egd=file:/dev/./urandom -jar \${MY_PATH}${NEW_JAR_NAME}.jar\"]" >> Dockerfile
 
-echo "docker version"
-docker -v
-echo "停止容器"
-# 停止容器
-docker stop $DOCKER_IMAGE_NAME
-echo "删除容器"
-# 删除容器
-docker rm $DOCKER_IMAGE_NAME
-echo "删除镜像"
-# 删除镜像
-docker rmi $DOCKER_IMAGE_NAME
-echo "打包镜像"
-# 打包镜像
-docker build -t ${DOCKER_IMAGE_NAME}:latest .
-echo "运行镜像"
-# 运行镜像
-docker run --name=${DOCKER_IMAGE_NAME} -d -p 8090:8088 ${DOCKER_IMAGE_NAME}:latest
+echo "docker版本：$(docker -v)"
+
+echo "停止容器:$(docker stop $DOCKER_IMAGE_NAME)"
+
+echo "删除容器:$(docker rm $DOCKER_IMAGE_NAME)"
+
+echo "删除镜像:$(docker rmi $DOCKER_IMAGE_NAME)"
+
+echo "打包镜像:$(docker build -t ${DOCKER_IMAGE_NAME}:latest .)"
+
+echo "启动镜像:$(docker run --name=${DOCKER_IMAGE_NAME} -d -p ${OUTER_PORT}:${INNER_PORT} ${DOCKER_IMAGE_NAME}:latest)"
 ```
 
 ### jenkins配置
