@@ -1,5 +1,5 @@
 # 插件
-- Free Mybatis plugin
+- MyBatisX
 - mybatis-log（Mybatis Log Plugin）
 - Maven Helper
 - RestfulToolkit
