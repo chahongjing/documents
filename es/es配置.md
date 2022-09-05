@@ -80,6 +80,26 @@ GET /index_name/_search
     }
   }
 }
+// 通过日期查询
+GET /index_name/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"term": {"create_miliao": {"value": 3150270580}}
+        },
+        {
+          "range": {
+            "create_time": {
+              "gte": "2022-05-23 10:30:00",
+              "time_zone": "+08:00"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
 // and和or条件 type=4 and (title like '%小米%' or title like '%红米%')
 GET /index_name/_search
 {
@@ -193,4 +213,8 @@ GET /index_name/_search
     "match_all": {}
   }
 }
+```
+#### 查看索引字段映射信息
+``` java
+GET /index_name/_mapping
 ```

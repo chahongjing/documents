@@ -56,3 +56,12 @@
 - 选中文本，按Alt+F3 ，逐个往下查找相同文本，并高亮显示。
 - Ctrl+Up/Down 光标跳转到第一行或最后一行下
 - Ctrl+B 快速打开光标处的类或方法 
+
+- ctrl+alt+t快速添加try,if
+- ctrl+shift+enter完成此行
+- ctrl+b跳到声明
+- ctrl+shift+F12隐藏所有面板
+- ctrl+F12查看类中所有方法
+- ctrl+H，对基类点击，可查看引用层次
+- ctrl+alt+U查看类uml关系图或ctrl+alt+shift+U
+- ctrl+alt+T对代码块添加if或try
