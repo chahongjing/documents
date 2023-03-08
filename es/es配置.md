@@ -218,3 +218,119 @@ GET /index_name/_search
 ``` java
 GET /index_name/_mapping
 ```
+``` json
+GET /info_kfs_wo_instance_mi-cn/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "_id": {
+              "value": "9569617c6c9849ef9d937641c1ca3a7e"
+            }
+          }
+        }
+      ], 
+      "should": [
+        {
+          "bool": {
+            "should": [
+              {
+                "match": {
+                  "answer": "空调"
+                }
+              }
+            ],
+            "filter": [
+              {
+                "bool": {
+                  "should": [
+                    {
+                      "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                    },
+                    {
+                      "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                    },
+                    {
+                      "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                    },
+                    {
+                      "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "nested": {
+            "path": "extra",
+            "inner_hits": {
+              "name": "subdoc",
+              "ignore_unmapped": false
+            },
+            "query": {
+              "bool": {
+                "should":[
+                  {
+                    "match_phrase": {
+                      "extra.value": "大家电部"
+                    }
+                  }
+                ],
+                "filter": [
+                  {
+                    "bool": {
+                      "must": [
+                        {
+                          "bool": {
+                            "should": [
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              },
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              },
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              },
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "bool": {
+                            "should": [
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              },
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "filter": [
+        {
+          "term": {
+            "region": "1"
+          }
+        }
+      ]
+    }
+  }
+}
+```

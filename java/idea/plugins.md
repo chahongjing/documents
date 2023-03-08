@@ -1,6 +1,6 @@
 # 插件
 - MyBatisX
-- mybatis-log（Mybatis Log Plugin）
+- MyBatis Log Free
 - Maven Helper
 - RestfulToolkit
 - String Manipulation
