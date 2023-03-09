@@ -1,8 +1,8 @@
 # 插件
 - MyBatisX
-- RestfulToolkit
-- Maven Helper
 - MyBatis Log Free
+- Maven Helper
+- RestfulToolkit
 - String Manipulation
 - SonarLint
 - Alibaba Java Coding Guidelines

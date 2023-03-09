@@ -3,3 +3,6 @@
 3. 两个sheet数据匹配`=VLOOKUP(A:A,Sheet2!A:B,2,0)`
 ![1](../imgs/office/1.jpg)
 ![2](../imgs/office/2.jpg)
+4. 两个列匹配
+![](../imgs/office/excel1.jpg)
+![](../imgs/office/excel2.jpg)

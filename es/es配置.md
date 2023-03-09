@@ -228,6 +228,7 @@ GET /index_name/_analyze
 ```
 #### 子文档查询
 ``` json
+GET /info_kfs_wo_instance_mi-cn/_search
 {
   "query": {
     "bool": {
@@ -275,6 +276,10 @@ GET /index_name/_analyze
         {
           "nested": {
             "path": "extra",
+            "inner_hits": {
+              "name": "subdoc",
+              "ignore_unmapped": false
+            },
             "query": {
               "bool": {
                 "should":[

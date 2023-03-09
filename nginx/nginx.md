@@ -133,7 +133,10 @@ server {
 ### 在http节点中添加其它配置
 ``` ini
 include domains/*.conf;              # 加载nginx.conf文件目录下的domains目录下所有.conf结尾的配置文件
-client_max_body_size 20m;            # 请求信息大小限制（如上传）,注意末尾的分号不能遗漏。
+client_max_body_size 20M;
+# 上传文件缓冲区大小
+client_body_buffer_size 20M;
+# 请求信息大小限制（如上传）,注意末尾的分号不能遗漏。
 server_names_hash_bucket_size 64;    # 解决启动报错误：could not build server_names_hash, you should increase server_names_hash_bucket_size: 32
 ```
 
