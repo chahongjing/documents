@@ -57,7 +57,7 @@ delete
  where name in (select name from (select name from test group by name having count(*) > 1) tr)
    and id not in (select id from (select min(id) as id from test group by name having count(*) > 1) ti);
 ```
-### json
+### json & 虚拟列
 ```sql
 create table abc(
   id int primary key,
@@ -128,7 +128,7 @@ UPDATE table SET c = c + 1 WHERE a = 1;
 
 -- 1. 如果发现表中已经有此行数据（根据主键或者唯一索引判断）则先删除此行数据，然后插入新的数据。 2. 否则，直接插入新数据。
 -- 要注意的是：插入数据的表必须有主键或者是唯一索引！否则的话，replace into 会直接插入数据，这将导致表中出现重复的数据。
-REPLACE INTO test(title,uid) VALUES ('1234657','1001');
+REPLACE INTO test(title,uid) VALUES ('1234657','1001');有可能主从切换后主键冲突。尽量使用on duplicate key update代替
 ```
 ### 其它
 ``` sql

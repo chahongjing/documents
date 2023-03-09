@@ -1,0 +1,1 @@
+[【良心门户】](https://lkssite.vip/)

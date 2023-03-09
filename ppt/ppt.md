@@ -105,6 +105,8 @@ collagelt软件，wps口袋动画插件,gifcam,screengif
 [模板库](https://pixabay.com/zh/)
 
 [模板库](https://www.pexels.com/zh-cn/)
+[ppt超级市场](https://www.pptsupermarket.com/)
+[100front](https://www.100font.com/)
 [模板库](https://iconstore.co/)
 [模板库](https://iconstore.co/)
 [动态扣图](http://www.unscreen.com)

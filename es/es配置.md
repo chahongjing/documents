@@ -218,3 +218,123 @@ GET /index_name/_search
 ``` java
 GET /index_name/_mapping
 ```
+#### 分词
+```java
+GET /index_name/_analyze
+{
+  "field": "title",
+  "text": ["南京市长江大桥"]
+}
+```
+#### 子文档查询
+``` json
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "_id": {
+              "value": "9569617c6c9849ef9d937641c1ca3a7e"
+            }
+          }
+        }
+      ], 
+      "should": [
+        {
+          "bool": {
+            "should": [
+              {
+                "match": {
+                  "answer": "空调"
+                }
+              }
+            ],
+            "filter": [
+              {
+                "bool": {
+                  "should": [
+                    {
+                      "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                    },
+                    {
+                      "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                    },
+                    {
+                      "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                    },
+                    {
+                      "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "nested": {
+            "path": "extra",
+            "query": {
+              "bool": {
+                "should":[
+                  {
+                    "match_phrase": {
+                      "extra.value": "大家电部"
+                    }
+                  }
+                ],
+                "filter": [
+                  {
+                    "bool": {
+                      "must": [
+                        {
+                          "bool": {
+                            "should": [
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              },
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              },
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              },
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "bool": {
+                            "should": [
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              },
+                              {
+                                "term": {"_id":"9569617c6c9849ef9d937641c1ca3a7e"}
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "filter": [
+        {
+          "term": {
+            "region": "1"
+          }
+        }
+      ]
+    }
+  }
+}
+```

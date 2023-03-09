@@ -1,8 +1,8 @@
 # 插件
 - MyBatisX
-- mybatis-log（Mybatis Log Plugin）
-- Maven Helper
 - RestfulToolkit
+- Maven Helper
+- MyBatis Log Free
 - String Manipulation
 - SonarLint
 - Alibaba Java Coding Guidelines
