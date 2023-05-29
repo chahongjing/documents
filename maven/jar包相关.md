@@ -89,38 +89,50 @@ pause
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
             http://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <localRepository>F:/Source/Java/maven/repository</localRepository>
+    <localRepository>D:/soft_install/apache-maven-3.8.3/repository</localRepository>
+    <servers>
+        <!-- 唯一标识一个server，该id必须与后面的仓库id一致，否则连接不上 -->
+        <server>
+            <id>tomcat7</id>
+            <username>admin</username>
+            <password>admin</password>
+        </server>
+        <server>
+            <id>mi-central</id>
+            <username>zzz</username>
+            <password>xxx</password>
+        </server>
+        <server>
+            <id>mi-snapshots</id>
+            <username>zzz</username>
+            <password>xxx</password>
+        </server>
+    </servers>
+
     <mirrors>
         <mirror>
-          <id>alimaven</id>
-          <name>aliyun maven</name>
-          <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-          <mirrorOf>central</mirrorOf>
+            <id>aliyun</id>
+            <!-- profile为aliyun的仓库都走此镜像 -->
+            <mirrorOf>aliyun</mirrorOf>
+            <url>https://maven.aliyun.com/repository/public</url>
         </mirror>
         <mirror>
-            <id>jboss-public-repository-group</id>
-            <mirrorOf>central</mirrorOf>
-            <name>JBoss Public Repository Group</name>
-            <url>http://repository.jboss.org/nexus/content/groups/public</url>
-        </mirror>
-        <mirror>
-            <id>repo2</id>
-            <name>Mirror from Maven Repo2</name>
-            <url>http://repo2.maven.org/maven2/</url>
-            <mirrorOf>central</mirrorOf>
-        </mirror>
-        <mirror>
-            <id>ui</id>
-            <name>Mirror from UK</name>
-            <url>http://uk.maven.org/maven2/</url>
-            <mirrorOf>central</mirrorOf>
+            <id>maven-default-http-blocker</id>
+            <mirrorOf>external:dont-match-anything-mate:*</mirrorOf>
+            <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+            <url>http://0.0.0.0/</url>
+            <blocked>false</blocked>
         </mirror>
     </mirrors>
+
+    <activeProfiles>
+        <activeProfile>artifactory</activeProfile>
+    </activeProfiles>
     <profiles>
         <profile>  
-            <id>jdk-1.8</id>  
+            <id>jdk8</id>  
             <activation>  
-                <activeByDefault>true</activeByDefault>  
+                <activeByDefault>false</activeByDefault>  
                 <jdk>1.8</jdk>  
             </activation>  
             <properties>  
@@ -129,54 +141,74 @@ pause
                 <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>  
             </properties>  
         </profile>
-
         <profile>
-            <id>allow-snapshots</id>
-            <activation><activeByDefault>true</activeByDefault></activation>
+            <id>aliyun</id>
             <repositories>
                 <repository>
-                    <id>snapshots</id>
-                    <url>http://nexus.zjy.com:8081/nexus/content/repositories/snapshots/</url>
-                    <snapshots><enabled>true</enabled></snapshots>
+                  <id>aliyun</id>
+                  <url>https://maven.aliyun.com/repository/public</url>
+                  <releases><enabled>true</enabled></releases>
+                  <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+                <repository>
+                  <id>aliyun-spring</id>
+                  <url>https://maven.aliyun.com/repository/spring</url>
+                  <releases><enabled>true</enabled></releases>
+                  <snapshots><enabled>true</enabled></snapshots>
                 </repository>
             </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                  <id>aliyun</id>
+                  <url>https://maven.aliyun.com/repository/spring-plugin</url>
+                  <releases><enabled>true</enabled></releases>
+                  <snapshots><enabled>true</enabled></snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <profile>
+            <id>artifactory</id>
+            <repositories>
+                <repository>
+                  <id>mi-central</id>
+                  <name>maven-release-virtual</name>
+                  <url>xxx</url>
+                  <snapshots><enabled>false</enabled></snapshots>
+                </repository>
+                <repository>
+                  <id>mi-remote</id>
+                  <name>maven-remote-virtual</name>
+                  <url>xxx</url>
+                  <snapshots><enabled>false</enabled></snapshots>
+                </repository>
+                <repository>
+                  <id>mi-snapshots</id>
+                  <name>maven-snapshot-virtual</name>
+                  <url>xxx</url>
+                  <snapshots />
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                  <id>mi-central</id>
+                  <name>maven-release-virtual</name>
+                  <url>xxx</url>
+                  <snapshots><enabled>false</enabled></snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                  <id>mi-remote</id>
+                  <name>maven-remote-virtual</name>
+                  <url>xxx</url>
+                  <snapshots><enabled>false</enabled></snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                  <id>mi-snapshots</id>
+                  <name>maven-snapshot-virtual</name>
+                  <url>xxx</url>
+                  <snapshots />
+                </pluginRepository>
+            </pluginRepositories>
         </profile>
     </profiles>
-    <servers>
-        <server>
-            <id>tomcat7</id>
-            <username>admin</username>
-            <password>admin</password>
-        </server>
-    </servers>
 </settings>
-~~~
-### 设置maven可以使用快照版本
-~~~ xml
-<!-- 在profiles节点下添加 -->
-<profile>    
-    <id>nexus</id>
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>Nexus</name>
-            <url>http://192.168.1.253/nexus/content/groups/public/</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>true</enabled></snapshots>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central</id>
-            <name>Nexus</name>
-            <url>http://192.168.1.253/nexus/content/groups/public/</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>true</enabled> </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-    </profile>
-</profiles>
-<activeProfiles>
-    <activeProfile>nexus</activeProfile>
-</activeProfiles>
 ~~~

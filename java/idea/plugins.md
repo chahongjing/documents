@@ -2,7 +2,8 @@
 - MyBatisX
 - MyBatis Log Free
 - Maven Helper
-- RestfulToolkit
+- RestfulToolkit-fix
+- arthas idea
 - String Manipulation
 - SonarLint
 - Alibaba Java Coding Guidelines

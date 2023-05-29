@@ -56,78 +56,87 @@ upstream dev.your.domain.com {
 }
 
 server {
-    listen       80;
-    server_name  dev.your.domain.com;
+    listen              80;
+    server_name         dev.your.domain.com;
 
     location / {
-        root   html;
-        index  index.html index.htm;
-        proxy_pass http://dev.your.domain.com; 
+        root            html;
+        index           index.html index.htm;
+        proxy_pass      http://dev.your.domain.com; 
     }
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
-        root   html;
+        root            html;
     }
 }
 
 
 # 取名字配置
 upstream justAName {
-        server 127.0.0.1:8543;
+    server              127.0.0.1:8543;
 }
 
 server {        
-    
-        listen 80;
-        server_name jr.kefu.local.mi.com;
+    listen 80;
+    server_name         jr.kefu.local.mi.com;
 
-        location / {
-            proxy_buffer_size 64k;
-            proxy_buffers   32 32k;
-            proxy_busy_buffers_size 128k;
-            proxy_pass http://justAName/;
-            proxy_set_header Host $host;
-            proxy_http_version 1.1;
-        }
+    location / {
+        proxy_buffer_size       64k;
+        proxy_buffers           32 32k;
+        proxy_busy_buffers_size 128k;
+        proxy_pass              http://justAName/;
+        proxy_set_header        Host $host;
+        proxy_http_version      1.1;
+    }
 }
 
 
 # 直接配置
 server { 
-        listen  80; 
-        server_name     wou.local.kefu.mi.com;
-         
-        location / { 
-                proxy_pass      http://wou.local.kefu.mi.com:8686/;
-        } 
+    listen  80; 
+    server_name         wou.local.kefu.mi.com;
+        
+    location / { 
+        proxy_pass      http://wou.local.kefu.mi.com:8686/;
+    } 
+}
+# 静态网站配置
+server { 
+    listen              80; 
+    server_name         sts.com;
+     
+    location / { 
+        root            D:/sts_page/;
+        autoindex       on;
+    } 
 }
 ~~~
 同一域名转发不同服务
 ```  nginx
 server { 
-        listen  80; 
-        server_name     www.zjy.com; 
-         
-        location /contextA { 
-                proxy_pass      http://www.zjy.com:8041/contextA; 
-        } 
- 
-        location /contextB { 
-                proxy_set_header Host $host; 
-                proxy_pass      http://www.zjy.com:8695/contextB; 
-        } 
- 
-        location /contextC/test { 
-                proxy_pass      http://192.168.0.0.2:8089/contextC/test/getExtension; 
-        } 
- 
-        location /mst/ngs/ { 
-                add_header Access-Control-Allow-Origin *; 
-                proxy_set_header Host $host; 
-                proxy_set_header X-Forwarded-For $remote_addr; 
-                proxy_pass http://www.zjy.com/ngs/; 
-                proxy_cookie_path /ngs /; 
-        } 
+    listen              80; 
+    server_name         www.zjy.com; 
+        
+    location /contextA { 
+        proxy_pass      http://www.zjy.com:8041/contextA; 
+    } 
+
+    location /contextB { 
+        proxy_set_header Host $host; 
+        proxy_pass      http://www.zjy.com:8695/contextB; 
+    } 
+
+    location /contextC/test { 
+        proxy_pass      http://192.168.0.0.2:8089/contextC/test/getExtension; 
+    } 
+
+    location /mst/ngs/ { 
+        add_header          Access-Control-Allow-Origin *; 
+        proxy_set_header    Host $host; 
+        proxy_set_header    X-Forwarded-For $remote_addr; 
+        proxy_pass          http://www.zjy.com/ngs/; 
+        proxy_cookie_path   /ngs /; 
+    } 
 }
 ```
 ### 在http节点中添加其它配置
