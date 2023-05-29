@@ -330,7 +330,7 @@ pause
         <repository>
             <id>central</id>
             <name>Nexus</name>
-            <url>http://192.168.1.253/nexus/content/groups/public/</url>
+            <url>http://your.company.repository.com/nexus/content/groups/public/</url>
             <releases><enabled>true</enabled></releases>
             <snapshots><enabled>true</enabled></snapshots>
         </repository>
@@ -339,7 +339,7 @@ pause
         <pluginRepository>
             <id>central</id>
             <name>Nexus</name>
-            <url>http://192.168.1.253/nexus/content/groups/public/</url>
+            <url>http://your.company.repository.com/nexus/content/groups/public/</url>
             <releases><enabled>true</enabled></releases>
             <snapshots><enabled>true</enabled> </snapshots>
         </pluginRepository>
