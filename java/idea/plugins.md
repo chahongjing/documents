@@ -4,6 +4,7 @@
 - Maven Helper
 - RestfulToolkit-fix
 - arthas idea
+- jclasslib bytecode viewer
 - String Manipulation
 - SonarLint
 - Alibaba Java Coding Guidelines

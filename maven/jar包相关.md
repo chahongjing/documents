@@ -212,3 +212,141 @@ pause
     </profiles>
 </settings>
 ~~~
+### 多仓库切换
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <localRepository>/Users/zjy/soft_install/apache-maven-3.8.6/repository</localRepository>
+  <servers>
+    <server>
+      <username>username</username>
+      <password>password</password>
+      <id>central</id>
+    </server>
+    <server>
+      <username>username</username>
+      <password>password</password>
+      <id>snapshots</id>
+    </server>
+  </servers>
+  <mirrors>
+    <!-- <mirror>
+      <id>nexus-aliyun</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Nexus aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </mirror> -->
+  </mirrors>
+  <profiles>
+    <profile>
+      <repositories>
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>central</id>
+          <name>maven-release-virtual</name>
+          <url>https://your.company.repository.com/artifactory/maven-release-virtual</url>
+        </repository>
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>miremote</id>
+          <name>maven-remote-virtual</name>
+          <url>https://your.company.repository.com/artifactory/maven-remote-virtual</url>
+        </repository>
+        <repository>
+          <snapshots />
+          <id>snapshots</id>
+          <name>maven-snapshot-virtual</name>
+          <url>https://your.company.repository.com/artifactory/maven-snapshot-virtual</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>central</id>
+          <name>maven-release-virtual</name>
+          <url>https://your.company.repository.com/artifactory/maven-release-virtual</url>
+        </pluginRepository>
+        <pluginRepository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>miremote</id>
+          <name>maven-remote-virtual</name>
+          <url>https://your.company.repository.com/artifactory/maven-remote-virtual</url>
+        </pluginRepository>
+        <pluginRepository>
+          <snapshots />
+          <id>snapshots</id>
+          <name>maven-snapshot-virtual</name>
+          <url>https://your.company.repository.com/artifactory/maven-snapshot-virtual</url>
+        </pluginRepository>
+      </pluginRepositories>
+      <id>artifactory</id>
+    </profile>
+
+    <profile>  
+      <id>aliyun</id>  
+      <repositories>  
+        <repository>  
+        <id>nexus</id>                                    
+        <url>http://maven.aliyun.com/nexus/content/groups/public/</url>                        
+        <releases>  
+          <enabled>true</enabled>  
+        </releases>  
+        <snapshots>  
+          <enabled>true</enabled>  
+        </snapshots>  
+        </repository>  
+      </repositories>  
+      <pluginRepositories>  
+        <pluginRepository>  
+        <id>nexus</id>  
+        <url>http://maven.aliyun.com/nexus/content/groups/public/</url>  
+        <releases>  
+          <enabled>true</enabled>  
+        </releases>  
+        <snapshots>  
+          <enabled>true</enabled>  
+        </snapshots>  
+        </pluginRepository>  
+      </pluginRepositories>  
+    </profile>
+  </profiles>
+</settings>
+```
+### 设置maven可以使用快照版本
+~~~ xml
+<!-- 在profiles节点下添加 -->
+<profile>    
+    <id>nexus</id>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Nexus</name>
+            <url>http://192.168.1.253/nexus/content/groups/public/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Nexus</name>
+            <url>http://192.168.1.253/nexus/content/groups/public/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>true</enabled> </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    </profile>
+</profiles>
+<activeProfiles>
+    <activeProfile>nexus</activeProfile>
+</activeProfiles>
+~~~
