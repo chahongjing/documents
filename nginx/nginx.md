@@ -49,7 +49,7 @@ proxy_pass http://mynodes;
 1. 在配置文件nginx.conf所在目录添加domain文件夹，在nginx.conf文件中http节点下添加`include domains/*.conf;`注意末尾的分号。
 ![1](../imgs/nginx/1.png)
 2. 进入domain文件夹下，添加对应配置文件。内容如下
-![2](../imgs/nginx/22222.png)
+![2](../imgs/nginx/2.png)
 ~~~ nginx
 upstream dev.your.domain.com {
     server 127.0.0.1:21002;
@@ -100,6 +100,7 @@ server {
         proxy_pass      http://wou.local.kefu.mi.com:8686/;
     } 
 }
+
 # 静态网站配置
 server { 
     listen              80; 
@@ -141,12 +142,15 @@ server {
 ```
 ### 在http节点中添加其它配置
 ``` ini
-include domains/*.conf;              # 加载nginx.conf文件目录下的domains目录下所有.conf结尾的配置文件
-client_max_body_size 20M;
+# 加载nginx.conf文件目录下的domains目录下所有.conf结尾的配置文件
+include domains/*.conf;
+
 # 上传文件缓冲区大小
-client_body_buffer_size 20M;
+client_max_body_size 20M;
 # 请求信息大小限制（如上传）,注意末尾的分号不能遗漏。
-server_names_hash_bucket_size 64;    # 解决启动报错误：could not build server_names_hash, you should increase server_names_hash_bucket_size: 32
+client_body_buffer_size 20M;
+# 解决启动报错误：could not build server_names_hash, you should increase server_names_hash_bucket_size: 32
+server_names_hash_bucket_size 64;
 ```
 
 ### 配置https转本地http
@@ -157,11 +161,11 @@ upstream rd-workordernw-partner.zjy.com {
 }
 
 server {
-    listen       443 ssl;
-    server_name  rd-workordernw-partner.zjy.com;
+    listen          443 ssl;
+    server_name     rd-workordernw-partner.zjy.com;
 
-    ssl_certificate C://ssl//buduhuisi.crt;
-    ssl_certificate_key  C://ssl//buduhuisi.key;
+    ssl_certificate         C://ssl//buduhuisi.crt;
+    ssl_certificate_key     C://ssl//buduhuisi.key;
 
     location / {
         root   html;
