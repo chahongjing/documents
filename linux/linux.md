@@ -1,5 +1,6 @@
 ### 目录说明
 ![dir](/imgs/linux/linux_dir.png)
+![dir](/imgs/linux/linux.jpg)
 - /usr：系统级的目录，可以理解为C:/Windows/
 - /usr/lib理解为C:/Windows/System32。
 - /usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。这里主要存放那些手动安装的软件，即不是通过apt-get安装的软件。它和/usr目录具有相类似的目录结构。让软件包管理器来管理/usr目录，而把自定义的脚本(scripts)放到/usr/local目录下面。

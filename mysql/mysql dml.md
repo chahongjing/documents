@@ -136,3 +136,14 @@ REPLACE INTO test(title,uid) VALUES ('1234657','1001');有可能主从切换后�
 select CONCAT(str1, str2, str3);
 select CONCAT_WS(separator, str1, str2, str3);
 ```
+### 表中的数据导出成sql
+```sql
+导出insert语句
+mysqldump -h$host -P$port -u$user --add-locks --no-create-info --single-transaction  --set-gtid-purged=OFF db1 t --where="a>900" --result-file=/client_tmp/t.sql
+如果你希望生成的文件中一条INSERT语句只插入一行数据的话，可以在执行mysqldump命令时，加上参数–skip-extended-insert。
+导入sql：mysql -h127.0.0.1 -P13000  -uroot db2 -e "source /client_tmp/t.sql"
+导出csv文件
+select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
+导入csv
+load data infile '/server_tmp/t.csv' into table db2.t;
+```

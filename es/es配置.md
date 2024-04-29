@@ -226,6 +226,21 @@ GET /index_name/_analyze
   "text": ["南京市长江大桥"]
 }
 ```
+``` java
+GET /my-index/_search
+{
+  "query": {
+    "terms_set": {
+      "my_field": {
+        "terms": ["Mysql", "Redis"],
+        "minium_should_match_script":{
+          "source": "Math.min(parasm.num_terms, doc['tag_count'].value)"
+        }
+      }
+    }
+  }
+}
+```
 #### 子文档查询
 ``` json
 GET /info_kfs_wo_instance_mi-cn/_search
@@ -343,3 +358,92 @@ GET /info_kfs_wo_instance_mi-cn/_search
   }
 }
 ```
+
+
+Text：用于存储文本内容，支持全文搜索、模糊搜索、正则表达式搜索等功能。
+
+Keyword：用于存储关键词，支持精确匹配和聚合操作。
+
+Date：用于存储日期时间类型的数据，支持日期范围查询、日期格式化等功能。
+
+Numeric：用于存储数值类型的数据，支持数值范围查询、聚合操作等功能。
+
+Boolean：用于存储布尔类型的数据，支持精确匹配和聚合操作。
+
+Geo-point：用于存储地理位置信息，支持距离计算、地理位置聚合等功能。
+
+Object：用于存储复杂的结构化数据，支持嵌套查询、嵌套聚合等功能。
+
+Match Query：用于匹配文本类型字段中的文本。
+Multi-match Query：用于在多个字段中匹配文本类型字段中的文本。
+Term Query：用于匹配非文本类型字段（如数字、布尔值等）中的确切值。
+Terms Query：用于匹配非文本类型字段（如数字、布尔值等）中的多个确切值。
+Range Query：用于匹配数字、日期等范围内的值。
+Exists Query：用于匹配指定字段是否存在值。
+Prefix Query：用于匹配以指定前缀开头的文本。
+Wildcard Query：用于匹配包含通配符的文本。
+Regexp Query：用于使用正则表达式匹配文本。
+Fuzzy Query：用于匹配类似但不完全匹配的文本。
+Type Query：用于匹配指定类型的文档。
+Ids Query：用于根据指定的文档 ID 匹配文档。
+Bool Query：用于组合多个查询条件，支持AND、OR、NOT等逻辑操作。
+Boosting Query：用于根据指定的查询条件调整文档的权重。
+Constant Score Query：用于为所有匹配的文档分配相同的分数。
+Function Score Query：用于根据指定的函数为匹配的文档分配自定义分数。
+Dis Max Query：用于在多个查询条件中选择最佳匹配的文档。
+More Like This Query：用于根据文档内容查找相似的文档。
+Nested Query：用于在嵌套对象中查询。
+Geo Distance Query：用于查询地理坐标范围内的地点。
+Span Term Query：用于匹配指定的单个术语。
+Span Multi Term Query：用于匹配指定的多个术语。
+Span First Query：用于匹配文档中的首个匹配项。
+Span Near Query：用于匹配多个术语之间的近似距离。
+Span Or Query：用于匹配任何指定的术语。
+Span Not Query：用于匹配不包含指定术语的文档。
+Script Query：用于根据指定的脚本匹配文档。
+06:16
+聚合类型
+
+Terms（词条聚合）：按照字段值进行分组，统计每个分组的文档数量。
+
+Sum（求和聚合）：计算指定字段的总和。
+
+Avg（平均值聚合）：计算指定字段的平均值。
+
+Min（最小值聚合）：找出指定字段的最小值。
+
+Max（最大值聚合）：找出指定字段的最大值。
+
+Stats（统计聚合）：计算指定字段的统计信息，包括最小值、最大值、总和、平均值和文档数量。
+
+Extended Stats（扩展统计聚合）：计算指定字段的扩展统计信息，包括最小值、最大值、总和、平均值、标准差和文档数量。
+
+Cardinality（基数聚合）：计算指定字段的唯一值数量。
+
+Date Histogram（日期直方图聚合）：按照时间间隔对日期字段进行分组。
+
+Range（范围聚合）：将文档按照指定范围进行分组，例如按照价格范围、年龄范围等。
+
+Nested（嵌套聚合）：在嵌套字段上执行子聚合操作。
+
+聚合参数
+
+field（字段）：指定要聚合的字段。
+
+size（大小）：限制返回的聚合桶的数量。
+
+script（脚本）：使用脚本定义聚合逻辑。
+
+min_doc_count（最小文档数量）：指定聚合桶中文档的最小数量要求。
+
+order（排序）：按照指定字段对聚合桶进行排序。
+
+include/exclude（包含/排除）：根据指定的条件包含或排除聚合桶。
+
+format（格式）：对聚合结果进行格式化。
+
+precision_threshold（精度阈值）：用于基数聚合的精度控制。
+
+interval（间隔）：用于日期直方图聚合的时间间隔设置。
+
+range（范围）：用于范围聚合的范围定义。

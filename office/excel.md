@@ -4,6 +4,7 @@
 ![1](../imgs/office/1.jpg)
 ![2](../imgs/office/2.jpg)
 4. 两个列匹配
+
 ![](../imgs/office/excel1.jpg)
 ![](../imgs/office/excel2.jpg)
 5. 单元格内容合并`=CONCATENATE(A4,";",B4,";",C4)`

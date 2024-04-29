@@ -5,6 +5,7 @@
 - RestfulToolkit-fix
 - arthas idea
 - jclasslib bytecode viewer
+- smartinput
 - String Manipulation
 - SonarLint
 - Alibaba Java Coding Guidelines
