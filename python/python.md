@@ -26,3 +26,16 @@ plt.yticks(fontsize=9)
 for x, y in zip(range(9), d.total): ax.text(x, y, '%d' % y, ha='center', va='bottom', fontsize=10, color='grey')
 plt.savefig('Python绘制的频数分布图.jpg', dpi=500, box_inches='tight')
 ```
+
+``` python
+# base64
+import json,base64
+
+data = {"header":{"method":"batchGetSummaryDetail","sign":"038A04FE3E46E4152D660CC6550D9E47","appid":"xms"},"body":"{\"region\":1,\"summaryIdList\":[280968618,280968646]}"}
+# 先转化为bytes类型数据
+data_bytes = json.dumps(data, separators=(',', ':')).encode()
+print(type(data_bytes))
+# 编码
+base_data = base64.b64encode(data_bytes)
+print(base_data)
+```

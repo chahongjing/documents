@@ -1,16 +1,29 @@
 # 插件
+- MyBatisCodeHelperPro
 - MyBatisX
 - MyBatis Log Free
+- SQL Params Setter
 - Maven Helper
 - RestfulToolkit-fix
 - arthas idea
+- SequenceDiagram
+- GsonFormatPlus
+- PlantUML
+- GenerateAllSetter
+- SequenceDiagram
 - jclasslib bytecode viewer
 - String Manipulation
+- HighlightBracketPair
+- Rainbow Brackets
+- Restful Fast Request
+- git commit template
+- Grep Console
 - SonarLint
 - Alibaba Java Coding Guidelines
 - Key promoter X
 - Grep Console
 - CheckStyle-IDEA
+- CamelCase
 - FindBugs-IDEA
 - Markdown Navigator
 - Git Flow Integration

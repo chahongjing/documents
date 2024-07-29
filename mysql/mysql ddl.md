@@ -91,11 +91,13 @@ GRANT ALL ON *.* TO 'pig'@'%';
 - \g 的作用是分号和在sql语句中写’;’是等效的 
 - \G 的作用是将查到的结构旋转90度变成纵向
 ### 日期
-- 字符串转日期：SELECT DATE_FORMAT('2017-09-20 08:30:45', '%Y-%m-%d %H:%i:%S');
-- 日期转字符串：SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S');<br>
-- 加一天：date(DATE_ADD(NOW(),INTERVAL 1 DAY)) 或adddate(now(),-1)
-- 减：date(DATE_SUB(NOW(),INTERVAL 1 DAY)) 
-- select date_format(date(now()), '%Y-%m-%d'), date_format(time(now()), '%H:%i:%s')
+- 字符串转日期：`SELECT DATE_FORMAT('2017-09-20 08:30:45', '%Y-%m-%d %H:%i:%S');`
+- 日期转字符串：`SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S')`
+- 加一天：`date(DATE_ADD(NOW(),INTERVAL 1 DAY)) 或adddate(now(),-1)`
+- 减：`date(DATE_SUB(NOW(),INTERVAL 1 DAY)) `
+- `select date_format(date(now()), '%Y-%m-%d'), date_format(time(now()), '%H:%i:%s')`
+- 时间戳转时间(秒)：`select FROM_UNIXTIME(1687330583)`
+- 时间转时间戳(秒)：`select UNIX_TIMESTAMP(NOW())`
 [mysql日期操作](https://www.cnblogs.com/geaozhang/p/6740457.html)
 [mysql日期操作](https://www.cnblogs.com/php12-cn/p/8882221.html)
 ### 常用数据类型

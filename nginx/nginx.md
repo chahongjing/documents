@@ -30,27 +30,27 @@ kill -HUP 主进程号
 ### 负载均衡节点配置
 1. 在http节点下配置服务结点，mynodes为自定义名称，在第二步中要与这个名字保持一致
 ``` ini
-upstream mynodes {
-    server              127.0.0.1:20000;
-    server              127.0.0.1:20001;
+upstream myServerName {
+    server              127.0.0.1:20000       fail_timeout=60s max_fails=2  weight=2;
+    server              127.0.0.1:20001       fail_timeout=60s max_fails=2  backup;
 }
 ```
-2. 在http --> server --> location节点下添加`proxy_pass http://mynodes;`。其中mynodes要和上面配置的节点名称一致
+2. 在http --> server --> location节点下添加`proxy_pass http://myServerName;`。其中myServerName要和上面配置的节点名称一致
 ```ini
 location / {
     root                html;
     index               index.html index.htm;
-    proxy_pass          http://mynodes; 
+    proxy_pass          http://myServerName; 
 }
 ```
-3. 以上配置完成后nginx会监听http --> server中listen端口的请求自动转到mynodes下面的节点中的一个进行负载均衡。
+3. 以上配置完成后nginx会监听http --> server中listen端口的请求自动转到myServerName下面的节点中的一个进行负载均衡。
 ### 多域名映射多节点配置
 1. 在配置文件nginx.conf所在目录添加domain文件夹，在nginx.conf文件中http节点下添加`include conf.d/*.conf;`注意末尾的分号。
 ![1](../imgs/nginx/1.jpg)
 2. 进入domain文件夹下，添加对应配置文件。内容如下
 ![2](../imgs/nginx/2.jpg)
 ``` nginx
-upstream serviceIdentifyName {
+upstream myServerName {
     server              127.0.0.1:21002;
 }
 
@@ -62,7 +62,7 @@ server {
     location / {
         root            html;
         index           index.html index.htm;
-        proxy_pass      http://serviceIdentifyName; 
+        proxy_pass      http://myServerName; 
     }
     error_page          500 502 503 504  /50x.html;
     location = /50x.html {
@@ -72,7 +72,7 @@ server {
 
 
 # 取名字配置
-upstream justAName {
+upstream myServerName {
     server              127.0.0.1:8543;
 }
 
@@ -85,7 +85,7 @@ server {
         proxy_buffer_size       64k;
         proxy_buffers           32 32k;
         proxy_busy_buffers_size 128k;
-        proxy_pass              http://justAName/;
+        proxy_pass              http://myServerName;
         proxy_set_header        Host $host;
         proxy_http_version      1.1;
     }
@@ -142,6 +142,26 @@ server {
         proxy_pass              http://www.zjy.com/ngs/; 
         proxy_cookie_path       /ngs /; 
     } 
+}
+```
+``` nginx
+# 流式输出text/event-stream，一般不用配置
+location /msg/pushMsg {
+    proxy_pass                  http://toolsitemvc.com/msg/pushMsg;
+
+    Cache-Control               no-cache;
+    X-Accel-Buffering           no;
+    proxy_cache                 off;
+    proxy_http_version          1.1;
+    proxy_set_header Connection "";
+}
+```
+
+``` nginx
+# 跨域
+location / {
+    proxy_pass  http://localhost:59200;
+    add_header Access-Control-Allow-Origin 'http://localhost:8080' always;
 }
 ```
 ### 在http节点中添加其它配置

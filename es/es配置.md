@@ -29,6 +29,45 @@ GET workorder_extend/_search
     }
   }
 }
+// 分组后，按分数求合后全排
+GET /my_test/_search
+{
+    "size": 10,
+    "query":
+    {
+        "match":
+        {
+            "query": "手机"
+        }
+    },
+    "aggs":
+    {
+        "gro":
+        {
+            "terms":
+            {
+                "field": "search_from",
+                "order":
+                {
+                    "su": "desc"
+                }
+            },
+            "aggs":
+            {
+                "su":
+                {
+                    "sum":
+                    {
+                        "script":
+                        {
+                            "source": "_score"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 ```
 1、match：返回所有匹配的分词。
 2、match_all：查询全部。
@@ -49,12 +88,108 @@ lte：小于等于，相当于关系型数据库中的 <=。
 
 term:单个精准匹配
 terms：多个精准匹配，各个匹配结果之间的并集
+
+#### should不生效
+```json
+{
+    "from": 0,
+    "size": 2,
+    "query":
+    {
+        "bool":
+        {
+            "must":
+            [
+                {
+                    "match":
+                    {
+                        "productRecommend": "1"
+                    }
+                },
+                {
+                    "match":
+                    {
+                        "location": "成都市"
+                    }
+                }
+            ],
+            "should":
+            [
+                {
+                    "match":
+                    {
+                        "shopId": "1"
+                    }
+                }
+            ]
+        }
+    }
+}
+要调整为
+{
+    "from": 0,
+    "size": 12,
+    "query":
+    {
+        "bool":
+        {
+            "must":
+            [
+                {
+                    "match":
+                    {
+                        "productRecommend": "1"
+                    }
+                },
+                {
+                    "match":
+                    {
+                        "location": "成都市"
+                    }
+                },
+                {
+                    "bool":
+                    {
+                        "should":
+                        [
+                            {
+                                "match":
+                                {
+                                    "shopId": "1"
+                                }
+                            },
+                            {
+                                "match":
+                                {
+                                    "shopId": "2"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}
+```
 #### 查看配置信息
 ``` json
 // 查看索引信息
 GET /index_name
 // 查看映射
 GET /info_mixms_kbs_test/_mapping
+// 映射添加字段，注意properties要全部的属性，因为这是覆盖式的更新，可以先执行上面的GET查询映射信息
+PUT /info_mixms_kbs_test/_mapping
+{
+  "properties": {
+    "old_field": {
+      "xxxx": "xxxxxx"
+    },
+    "your_field": {
+      "type": "keyword"
+    }
+  }
+}
 ```
 #### 查询数据
 ``` json
@@ -185,6 +320,250 @@ POST /index_name/_delete_by_query
   }
 }
 ```
+#### 删除索引
+``` json
+// 删除索引
+DELETE /kfs_kbs_query_test
+
+// 创建索引
+PUT /kfs_kbs_query_test
+{
+    "mappings":
+    {
+        "properties":
+        {
+            "create_time":
+            {
+                "type": "long"
+            },
+            "region":
+            {
+                "type": "long"
+            },
+            "search_from":
+            {
+                "type": "keyword"
+            },
+            "query":
+            {
+                "type": "text",
+                "analyzer": "ik_smart",
+                "search_analyzer": "smart_analyzer"
+            },
+            "case_id":
+            {
+                "type": "keyword"
+            },
+            "thread_id":
+            {
+                "type": "keyword"
+            },
+            "queue_id":
+            {
+                "type": "keyword"
+            },
+            "miliao":
+            {
+                "type": "long"
+            }
+        }
+    }
+}
+
+
+
+
+
+PUT /kfs_kbs_query_prod
+{
+    "settings":
+    {
+        "index":
+        {
+            "refresh_interval": "30s",
+            "indexing":
+            {
+                "slowlog":
+                {
+                    "level": "info",
+                    "threshold":
+                    {
+                        "index":
+                        {
+                            "warn": "1s",
+                            "trace": "0ms",
+                            "debug": "100ms",
+                            "info": "500ms"
+                        }
+                    },
+                    "source": "false"
+                }
+            },
+            "translog":
+            {
+                "flush_threshold_size": "1024mb",
+                "sync_interval": "60s",
+                "durability": "async"
+            },
+            "unassigned":
+            {
+                "node_left":
+                {
+                    "delayed_timeout": "5m"
+                }
+            },
+            "analysis":
+            {
+                "filter":
+                {
+                    "cn_stop":
+                    {
+                        "type": "stop",
+                        "stopwords":
+                        [
+                            "也",
+                            "了",
+                            "仍",
+                            "从",
+                            "以",
+                            "使",
+                            "则",
+                            "却",
+                            "又",
+                            "及",
+                            "对",
+                            "就",
+                            "并",
+                            "很",
+                            "或",
+                            "把",
+                            "是",
+                            "的",
+                            "着",
+                            "给",
+                            "而",
+                            "被",
+                            "让",
+                            "在",
+                            "还",
+                            "比",
+                            "等",
+                            "当",
+                            "与",
+                            "于",
+                            "但"
+                        ]
+                    },
+                    "synonymous_filter":
+                    {
+                        "type": "synonym",
+                        "expand": "true",
+                        "synonyms":
+                        [
+                            "拆机,装机,拆装机",
+                            "厨宝,小厨宝",
+                            "不能,无法",
+                            "xiaomi,小米",
+                            "redmi,红米",
+                            "book,笔记本",
+                            "xiaomibook,mibook,小米笔记本",
+                            "redmibook,红米笔记本",
+                            "watch,手表",
+                            "top20,t20",
+                            "双十一,双11",
+                            "双十二,双12",
+                            "开发者模式,开发者选项",
+                            "意外险,意外保障服务",
+                            "pad,平板"
+                        ]
+                    }
+                },
+                "analyzer":
+                {
+                    "content_analyzer":
+                    {
+                        "filter":
+                        [
+                            "lowercase",
+                            "synonymous_filter"
+                        ],
+                        "tokenizer": "ik_max_word"
+                    },
+                    "smart_analyzer":
+                    {
+                        "filter":
+                        [
+                            "lowercase",
+                            "cn_stop",
+                            "synonymous_filter"
+                        ],
+                        "tokenizer": "ik_smart"
+                    },
+                    "title_analyzer":
+                    {
+                        "filter":
+                        [
+                            "lowercase",
+                            "synonymous_filter"
+                        ],
+                        "tokenizer": "ik_max_word"
+                    }
+                }
+            }
+        }
+    },
+    "mappings":
+    {
+        "properties":
+        {
+            "create_time":
+            {
+                "type": "long"
+            },
+            "region":
+            {
+                "type": "long"
+            },
+            "search_from":
+            {
+                "type": "keyword"
+            },
+            "query":
+            {
+                "type": "text",
+                "analyzer": "ik_max_word",
+                "search_analyzer": "title_analyzer"
+            },
+            "case_id":
+            {
+                "type": "keyword"
+            },
+            "thread_id":
+            {
+                "type": "keyword"
+            },
+            "queue_id":
+            {
+                "type": "keyword"
+            },
+            "miliao":
+            {
+                "type": "long"
+            }
+        }
+    }
+}
+```
+``` java
+// 查看分词结果
+GET /kbs_baike_test/_analyze
+{
+   "analyzer": "content_analyzer",
+   "text": "我的ner"
+}
+```
+#### 多字段查询
+multi_match
 #### 判断是否有某个字段
 ``` java
 // must, must_not
@@ -342,4 +721,10 @@ GET /info_kfs_wo_instance_mi-cn/_search
     }
   }
 }
+```
+
+```es
+中华人民共和国国徽
+ik_max_word：会将文本做最细粒度的拆分。拆分为："中华人民共和国"和"国徽"
+ik_smart：会做最粗粒度的拆分，拆分为："中华人民共和国"，"中华人民"，"中华"，"华人"，"人民共和国"，"人民"，"共和国"，"共和"，"国"，"国徽"
 ```
