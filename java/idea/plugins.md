@@ -12,6 +12,7 @@
 - GenerateAllSetter
 - SequenceDiagram
 - jclasslib bytecode viewer
+- smartinput
 - String Manipulation
 - HighlightBracketPair
 - Rainbow Brackets
